@@ -60,7 +60,7 @@ jobs:
         cd agent_engine
         # The MCP servers will be started automatically by mcp_tools.py
         python -c "
-        from agents_logic.orchestrator import BlogOrchestrator
+        from agent_logic.orchestrator import BlogOrchestrator
         import asyncio
         
         orchestrator = BlogOrchestrator()
