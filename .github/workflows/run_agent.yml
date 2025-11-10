@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
@@ -52,7 +52,7 @@ jobs:
           python agent_engine/main.py --topic "${{ github.event.inputs.topic }}" --product "${{ github.event.inputs.product_name }}"
 
       - name: Upload generated blog files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: blog-output
           path: output/blogs/
