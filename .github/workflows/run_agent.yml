@@ -43,7 +43,7 @@ jobs:
 
       - name: Run Blog Agent
         run: |
-          python agent_engine/main.py --topic "${{ github.event.inputs.topic }}" --product "${{ github.event.inputs.product }}"
+          python main.py --topic "${{ github.event.inputs.topic }}" --product "${{ github.event.inputs.product }}"
 
       - name: Upload generated markdown
         uses: actions/upload-artifact@v4
