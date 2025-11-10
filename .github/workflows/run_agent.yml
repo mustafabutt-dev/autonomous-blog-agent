@@ -1,4 +1,4 @@
-name: Run Blog Agent
+name: Generate Blog Post
 
 on:
   workflow_dispatch:
@@ -6,58 +6,57 @@ on:
       topic:
         description: 'Blog topic'
         required: true
-        default: 'Convert DOCX to PDF'
+        type: string
       product:
-        description: 'Product name'
-        required: true
-        default: 'Aspose.Words for Java'
+        description: 'Product name (optional)'
+        required: false
+        type: string
+      keywords:
+        description: 'Keywords (comma-separated)'
+        required: false
+        type: string
 
 jobs:
-  run-agent:
+  generate:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.10
-
-      - name: Create virtual environment
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          python -m pip install --upgrade pip
-
-      - name: Install Agent Engine dependencies
-        run: |
-          source venv/bin/activate
-          pip install -r agent_engine/requirements.txt
-
-      - name: Install MCP Server dependencies
-        run: |
-          source venv/bin/activate
-          pip install -r mcp-servers/requirements.txt
-
-      - name: Run Blog Agent
-        env:
-          ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-          ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
-          ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-          KEYWORDS_MCP_URL: ${{ vars.KEYWORDS_MCP_URL }}
-          SEO_MCP_URL: ${{ vars.SEO_MCP_URL }}
-          FILE_GEN_MCP_URL: ${{ vars.FILE_GEN_MCP_URL }}
-        run: |
-          source venv/bin/activate
-          python agent_engine/main.py \
-            --topic "${{ github.event.inputs.topic }}" \
-            --product "${{ github.event.inputs.product }}"
-
-      - name: Upload generated blog files
-        uses: actions/upload-artifact@v4
-        with:
-          name: blogs
-          path: output/blogs/
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        bash setup.sh
+    
+    - name: Start MCP Servers
+      run: |
+        # Start MCP servers in background
+        cd mcp-servers/keyword-search
+        python server.py &
+        cd ../seo
+        python server.py &
+        cd ../file-generator
+        python server.py &
+        sleep 5  # Wait for servers to start
+    
+    - name: Generate Blog
+      env:
+        ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
+        ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
+        ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
+        SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+      run: |
+        cd agent_engine
+        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --keywords "${{ inputs.keywords }}"
+    
+    - name: Commit Generated Blog
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add mcp-servers/output/blogs/*.md
+        git commit -m "Generated blog: ${{ inputs.topic }}"
+        git push
