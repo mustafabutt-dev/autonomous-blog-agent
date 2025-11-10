@@ -30,18 +30,17 @@ jobs:
     
     - name: Install dependencies
       run: |
-        bash setup.sh
-    
-    - name: Start MCP Servers
-      run: |
-        # Start MCP servers in background
-        cd mcp-servers/keyword-search
-        python server.py &
-        cd ../seo
-        python server.py &
-        cd ../file-generator
-        python server.py &
-        sleep 5  # Wait for servers to start
+        python -m pip install --upgrade pip
+        
+        # Install agent_engine dependencies
+        cd agent_engine
+        pip install -r requirements.txt
+        cd ..
+        
+        # Install mcp-servers dependencies  
+        cd mcp-servers
+        pip install -r requirements.txt
+        cd ..
     
     - name: Generate Blog
       env:
@@ -51,12 +50,38 @@ jobs:
         SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
       run: |
         cd agent_engine
-        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --keywords "${{ inputs.keywords }}"
+        # The MCP servers will be started automatically by mcp_tools.py
+        python -c "
+        from agents_logic.orchestrator import BlogOrchestrator
+        import asyncio
+        
+        orchestrator = BlogOrchestrator()
+        result = asyncio.run(orchestrator.create_blog_autonomously(
+            topic='${{ inputs.topic }}',
+            product_name='${{ inputs.product }}'
+        ))
+        print(result)
+        "
     
-    - name: Commit Generated Blog
+    - name: Check Generated Files
+      run: |
+        ls -la mcp-servers/output/blogs/ || echo "No blogs directory yet"
+        find . -name "*.md" -type f -mmin -5  # Find MD files created in last 5 minutes
+    
+    - name: Upload Generated Blog
+      uses: actions/upload-artifact@v3
+      with:
+        name: generated-blog-${{ github.run_number }}
+        path: |
+          mcp-servers/output/blogs/*.md
+          output/**/*.md
+        if-no-files-found: warn
+    
+    - name: Commit Generated Blog (Optional)
+      if: success()
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add mcp-servers/output/blogs/*.md
-        git commit -m "Generated blog: ${{ inputs.topic }}"
-        git push
+        git add -A mcp-servers/output/blogs/*.md 2>/dev/null || true
+        git diff --staged --quiet || git commit -m "Generated blog: ${{ inputs.topic }}"
+        git push || echo "No changes to push"
