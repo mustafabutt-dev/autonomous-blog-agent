@@ -1,104 +1,116 @@
-# Blog Agent - Autonomous Blog Creation with MCP Servers
 
-AI-powered autonomous blog creation system using OpenAI Agents SDK, MCP servers, and dynamic keyword research.
+# Blog Agent Backend
+
+Autonomous blog creation engine using OpenAI Agents SDK and MCP servers.
 
 ## Features
 
-* 🤖 Autonomous agent workflow with OpenAI Agents SDK
-* 🔍 Dynamic keyword research via SerpAPI & Google Search Console
-* 📝 SEO-optimized title generation
-* 📄 Automated markdown blog generation
-* 🔌 Modular MCP server architecture (plug & play)
-
-## Prerequisites
-
-* Python 3.10+
-* SerpAPI key (free tier: 100 searches/month)
-* Aspose LLM or OpenAI-compatible LLM
+- ✅ Keyword research via MCP
+- ✅ Title via MCP
+- ✅ Aspose LLM integration
+- ✅ Autonomous agent capabilities
 
 ## Quick Start
 
-### 1. Clone & Setup
+### 1. Setup
 
 ```bash
+# Clone the repository
 git clone <repo-url>
 cd blog-agent-backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Run setup script
+chmod +x setup.sh
+./setup.sh
 ```
 
-### 2. Install Dependencies
+### 2. Configure
 
-```bash
-cd agent-engine && pip install -r requirements.txt
-cd ../mcp-servers && uv pip install fastmcp --system
+Edit `agent_engine/.env`:
+
+```env
+ASPOSE_LLM_BASE_URL=http://your-llm-server.com/v1
+ASPOSE_LLM_API_KEY=your-api-key
+KEYWORD_SEARCH_URL=http://localhost:3001
+FAQ_GENERATOR_URL=http://localhost:3002
 ```
 
-### 3. Configure Environment
+### 3. Run
 
 ```bash
-# Copy and edit .env in agent-engine/
-cp agent-engine/.env.example agent-engine/.env
-
-# Add your keys:
-# - ASPOSE_LLM_BASE_URL
-# - ASPOSE_LLM_API_KEY
-# - SERPAPI_API_KEY
-```
-
-### 4. Add Product Data
-
-```bash
-# Place your products.json in data/
-mkdir -p data
-# Copy your products JSON to data/products.json
-```
-
-### 5. Run
-
-```bash
-# Terminal 1 - Agent Engine
-cd agent-engine
-uvicorn main:app --port 8000
-
-# Access: http://localhost:8000/docs
+python main.py --topic "Convert PPTX to XML in C# Programmatically" --product "Aspose.Slides for .MET"
 ```
 
 ## Project Structure
 
 ```
 blog-agent-backend/
-├── agent-engine/          # FastAPI orchestrator
-│   ├── agent_logic/       # Agent with OpenAI SDK
-│   ├── services/          # Keyword research services (modular)
-│   └── tools/             # MCP tool definitions
-├── mcp-servers/           # MCP servers (stdio)
-│   ├── keywords/          # Keyword research
-│   ├── seo/              # SEO title generation
-│   └── file-generator/   # Markdown file creation
-├── data/                 # products.json
-└── output/blogs/         # Generated markdown files
+├── agent_engine/
+│   ├── main.py                 # FastAPI app
+│   ├── config.py               # Configuration
+│   ├── agents_logic/
+│   │   └── orchestrator.py     # Main orchestration layer
+│   ├── services/
+│   │   └── keyword_aggregator.py       # MCP client manager
+│   │   └── serpapi_keyword_service.py  # External service to fetch keywords from Google SERP       
+│   ├── tools/
+│   │   └── mcp_tools.py        # Wrapper functions for MCP tools
+│   ├── utils/
+│   │   └── helpers.py          # Contains helper functions
+│   │   └── prompts.py          # Returns prompts for LLM
+│   ├── requirements.txt
+│   └── .env
+│
+├── mcp-servers/
+│   ├── keyword-search/
+│   │   └── server.py           # Keyword research tools
+│   ├── seo/
+│   │   └── server.py           # SEO-Optimized Title tools
+│   └── requirements.txt
+│   ├── file-generator/
+│   │   └── server.py           # MD file generation tools
+│   └── requirements.txt
+│   ├── data/
+│   │   └── products.json       # Contains source products data
+│   ├── output/
+│   │   └── blogs               # Contains generated MD files of blog post
+└── setup.sh                    # Initial setup
+
 ```
 
-## API Usage
+## Deployment
 
+### Using Docker (Coming Soon)
 ```bash
-# Create blog post
-curl -X POST http://localhost:8000/api/create-blog \
-  -H "Content-Type: application/json" \
-  -d '{"topic": "Convert Word to PDF", "product_name": "Aspose.Words for .NET"}'
+docker-compose up
 ```
 
-## Adding New Keyword Services
+### Manual Deployment
 
-1. Create service in `agent-engine/services/`
-2. Extend `BaseKeywordService`
-3. Add to `KeywordAggregator` - auto-detected if configured
+**Agent Engine:** Deploy to Railway/Render/Heroku
+**MCP Servers:** Deploy as separate services
 
-## Tech Stack
+## Environment Variables
 
-* OpenAI Agents SDK (autonomous orchestration)
-* FastMCP (MCP server implementation)
-* FastAPI (API layer)
-* SerpAPI (keyword research)
-* Pydantic (configuration)
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `ASPOSE_LLM_BASE_URL` | Your LLM API endpoint | - |
+| `ASPOSE_LLM_API_KEY` | Your LLM API key | - |
+| `KEYWORD_SEARCH_URL` | Keyword MCP server URL | `http://localhost:3001` |
+| `SEO_TOOL` | FAQ MCP server URL | `http://localhost:3002` |
+
+## Troubleshooting
+
+**Port already in use:**
+```bash
+# Kill process on port 8000
+lsof -ti:8000 | xargs kill -9
+```
+
+**Virtual environment issues:**
+```bash
+rm -rf venv
+python3 -m venv venv
+source venv/bin/activate
+pip install -r agent_engine/requirements.txt
+```

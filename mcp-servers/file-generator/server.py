@@ -2,12 +2,21 @@
 File Generator MCP Server - Creates markdown files
 """
 
-from fastmcp import FastMCP
+import sys
 import os
 from datetime import datetime
+from fastmcp import FastMCP
 
+# ---------------------------------------------
+# Initialize MCP Server
+# ---------------------------------------------
+print("File Generator MCP Server starting...", file=sys.stderr, flush=True)
 mcp = FastMCP("file-generator-server")
 
+
+# ---------------------------------------------
+# Define MCP Tool
+# ---------------------------------------------
 @mcp.tool()
 def generate_markdown_file(
     title: str,
@@ -17,45 +26,45 @@ def generate_markdown_file(
     output_dir: str = "output/blogs"
 ) -> dict:
     """
-    Generate and save markdown file
+    Generate and save markdown file inside a timestamped folder
     """
-    
-    # Create output directory
+    print("generate_markdown_file yes 3 TOOL CALLED (inner)", file=sys.stderr, flush=True)
+
+    # Ensure base output directory exists
     os.makedirs(output_dir, exist_ok=True)
-    
-    # Generate filename
-    safe_title = "".join(c if c.isalnum() or c in (' ', '-') else '' for c in title)
-    safe_title = safe_title.replace(' ', '-').lower()
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"{timestamp}_{safe_title}.md"
-    filepath = os.path.join(output_dir, filename)
-    
-    # Create frontmatter
-    frontmatter = f"""---
-title: "{title}"
-date: {datetime.now().isoformat()}
-keywords: {', '.join(keywords)}
-"""
-    
-    if product_info:
-        frontmatter += f"""product: "{product_info.get('ProductName', '')}"
-category: "{product_info.get('Category', '')}"
-"""
-    
-    frontmatter += "---\n\n"
-    
-    # Write file
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(frontmatter)
+    print(f"Output directory ensured: {output_dir}", file=sys.stderr, flush=True)
+
+    # Sanitize and format title
+    safe_title = "".join(c if c.isalnum() or c in (" ", "-") else "" for c in title)
+    safe_title = safe_title.replace(" ", "-").lower()
+
+    # Create folder name: YYYY-MM-DD-title
+    folder_name = f"{datetime.now().strftime('%Y-%m-%d')}-{safe_title}"
+    folder_path = os.path.join(output_dir, folder_name)
+    os.makedirs(folder_path, exist_ok=True)
+
+    # File will always be named index.md
+    filename = "index.md"
+    filepath = os.path.join(folder_path, filename)
+
+    # Write markdown file (LLM already includes frontmatter)
+    with open(filepath, "w", encoding="utf-8") as f:
         f.write(content)
-    
+
+
+    print(f" Markdown file created at: {filepath}", file=sys.stderr, flush=True)
+
     return {
+        "folder_name": folder_name,
         "filename": filename,
         "filepath": filepath,
-        "size_bytes": os.path.getsize(filepath),
-        "status": "success"
+        "status": "success",
     }
 
+
+# ---------------------------------------------
+# Run MCP Server
+# ---------------------------------------------
 if __name__ == "__main__":
-    print(" File Generator MCP Server running on http://127.0.0.1:3004")
+    print(" Starting File Generator MCP Server...", file=sys.stderr, flush=True)
     mcp.run()
