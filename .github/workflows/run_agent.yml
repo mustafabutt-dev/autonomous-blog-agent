@@ -1,57 +1,58 @@
 name: Run Autonomous Blog Agent
 
+# This allows you to trigger the workflow manually from GitHub UI
 on:
   workflow_dispatch:
     inputs:
       topic:
-        description: "Enter the blog topic"
+        description: 'Blog topic'
         required: true
-      product:
-        description: "Enter the product name"
+        default: 'Convert DOCX to XML'
+      product_name:
+        description: 'Product name'
         required: true
+        default: 'Aspose.Words for Java'
 
 jobs:
   run-agent:
     runs-on: ubuntu-latest
 
+    env:
+      # Secrets from GitHub Actions
+      ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
+      ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
+      ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
+      SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+
+      # Environment variables
+      FILE_GEN_MCP_URL: ${{ secrets.FILE_GEN_MCP_URL }}
+      KEYWORDS_MCP_URL: ${{ secrets.KEYWORDS_MCP_URL }}
+      SEO_MCP_URL: ${{ secrets.SEO_MCP_URL }}
+
     steps:
-      - name: 🛎️ Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: 🐍 Set up Python 3.10
-        uses: actions/setup-python@v5
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.10'
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: |
-          chmod +x setup.sh
-          ./setup.sh
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r agent_engine/requirements.txt
+          pip install -r mcp-servers/requirements.txt
 
-      - name: 🔐 Load environment variables
-        env:
-          ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-          ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-          FILE_GEN_MCP_URL: ${{ vars.FILE_GEN_MCP_URL }}
-          KEYWORDS_MCP_URL: ${{ vars.KEYWORDS_MCP_URL }}
-          SEO_MCP_URL: ${{ vars.SEO_MCP_URL }}
-        run: echo "✅ Environment variables loaded successfully"
-
-      - name: 🚀 Run Blog Agent
-        working-directory: agent_engine
-        env:
-          ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-          ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-          FILE_GEN_MCP_URL: ${{ vars.FILE_GEN_MCP_URL }}
-          KEYWORDS_MCP_URL: ${{ vars.KEYWORDS_MCP_URL }}
-          SEO_MCP_URL: ${{ vars.SEO_MCP_URL }}
+      - name: Run Blog Agent
         run: |
-          source ../venv/bin/activate
-          python main.py --topic "${{ github.event.inputs.topic }}" --product "${{ github.event.inputs.product }}"
+          source venv/bin/activate
+          python agent_engine/main.py --topic "${{ github.event.inputs.topic }}" --product "${{ github.event.inputs.product_name }}"
 
-      - name: 🧾 Verify generated file
-        run: |
-          echo "Checking for generated markdown files..."
-          find output/blogs -type f -name "*.md" || echo "⚠️ No markdown files found."
+      - name: Upload generated blog files
+        uses: actions/upload-artifact@v3
+        with:
+          name: blog-output
+          path: output/blogs/
