@@ -1,6 +1,5 @@
-name: Run Autonomous Blog Agent
+name: Run Blog Agent
 
-# This allows you to trigger the workflow manually from GitHub UI
 on:
   workflow_dispatch:
     inputs:
@@ -8,7 +7,7 @@ on:
         description: 'Blog topic'
         required: true
         default: 'Convert DOCX to XML'
-      product_name:
+      product:
         description: 'Product name'
         required: true
         default: 'Aspose.Words for Java'
@@ -17,42 +16,37 @@ jobs:
   run-agent:
     runs-on: ubuntu-latest
 
-    env:
-      # Secrets from GitHub Actions
-      ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-      ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
-      ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-      SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-
-      # Environment variables
-      FILE_GEN_MCP_URL: ${{ secrets.FILE_GEN_MCP_URL }}
-      KEYWORDS_MCP_URL: ${{ secrets.KEYWORDS_MCP_URL }}
-      SEO_MCP_URL: ${{ secrets.SEO_MCP_URL }}
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Install Agent Engine dependencies
         run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r agent_engine/requirements.txt
           pip install -r mcp-servers/requirements.txt
 
+      - name: Set environment variables from secrets
+        run: |
+          echo "ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}" >> $GITHUB_ENV
+          echo "ASPOSE_LLM_API_KEY=${{ secrets.ASPOSE_LLM_API_KEY }}" >> $GITHUB_ENV
+          echo "ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}" >> $GITHUB_ENV
+          echo "SERPAPI_API_KEY=${{ secrets.SERPAPI_API_KEY }}" >> $GITHUB_ENV
+          echo "FILE_GEN_MCP_URL=${{ vars.FILE_GEN_MCP_URL }}" >> $GITHUB_ENV
+          echo "KEYWORDS_MCP_URL=${{ vars.KEYWORDS_MCP_URL }}" >> $GITHUB_ENV
+          echo "SEO_MCP_URL=${{ vars.SEO_MCP_URL }}" >> $GITHUB_ENV
+
       - name: Run Blog Agent
         run: |
-          source venv/bin/activate
-          python agent_engine/main.py --topic "${{ github.event.inputs.topic }}" --product "${{ github.event.inputs.product_name }}"
+          python agent_engine/main.py --topic "${{ github.event.inputs.topic }}" --product "${{ github.event.inputs.product }}"
 
-      - name: Upload generated blog files
+      - name: Upload generated markdown
         uses: actions/upload-artifact@v4
         with:
-          name: blog-output
+          name: blog-markdown
           path: output/blogs/
