@@ -28,14 +28,6 @@ jobs:
       with:
         python-version: '3.10'
     
-    - name: Cache pip packages
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -52,14 +44,28 @@ jobs:
     
     - name: Generate Blog
       env:
+        # Your custom env vars
         ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
         ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
         SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+        # Also set OPENAI_API_KEY if your code expects it
+        OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
       run: |
+        # Debug: Check if env vars are set (without exposing values)
+        echo "Checking environment variables..."
+        [ -z "$ASPOSE_LLM_API_KEY" ] && echo "ERROR: ASPOSE_LLM_API_KEY is not set" || echo "ASPOSE_LLM_API_KEY is set"
+        [ -z "$OPENAI_API_KEY" ] && echo "ERROR: OPENAI_API_KEY is not set" || echo "OPENAI_API_KEY is set"
+        
         cd agent_engine
-        # The MCP servers will be started automatically by mcp_tools.py
         python -c "
+        import os
+        
+        # Verify env vars in Python
+        print('Environment check:')
+        print(f'ASPOSE_LLM_API_KEY set: {bool(os.environ.get(\"ASPOSE_LLM_API_KEY\"))}')
+        print(f'OPENAI_API_KEY set: {bool(os.environ.get(\"OPENAI_API_KEY\"))}')
+        
         from agent_logic.orchestrator import BlogOrchestrator
         import asyncio
         
@@ -70,26 +76,3 @@ jobs:
         ))
         print(result)
         "
-    
-    - name: Check Generated Files
-      run: |
-        ls -la mcp-servers/output/blogs/ || echo "No blogs directory yet"
-        find . -name "*.md" -type f -mmin -5  # Find MD files created in last 5 minutes
-    
-    - name: Upload Generated Blog
-      uses: actions/upload-artifact@v4
-      with:
-        name: generated-blog-${{ github.run_number }}
-        path: |
-          mcp-servers/output/blogs/*.md
-          output/**/*.md
-        if-no-files-found: warn
-    
-    - name: Commit Generated Blog (Optional)
-      if: success()
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add -A mcp-servers/output/blogs/*.md 2>/dev/null || true
-        git diff --staged --quiet || git commit -m "Generated blog: ${{ inputs.topic }}"
-        git push || echo "No changes to push"
