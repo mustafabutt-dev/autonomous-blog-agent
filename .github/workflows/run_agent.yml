@@ -1,0 +1,57 @@
+name: Run Autonomous Blog Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Enter the blog topic"
+        required: true
+      product:
+        description: "Enter the product name"
+        required: true
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: 📦 Install dependencies
+        run: |
+          chmod +x setup.sh
+          ./setup.sh
+
+      - name: 🔐 Load environment variables
+        env:
+          ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
+          ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          FILE_GEN_MCP_URL: ${{ vars.FILE_GEN_MCP_URL }}
+          KEYWORDS_MCP_URL: ${{ vars.KEYWORDS_MCP_URL }}
+          SEO_MCP_URL: ${{ vars.SEO_MCP_URL }}
+        run: echo "✅ Environment variables loaded successfully"
+
+      - name: 🚀 Run Blog Agent
+        working-directory: agent_engine
+        env:
+          ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
+          ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          FILE_GEN_MCP_URL: ${{ vars.FILE_GEN_MCP_URL }}
+          KEYWORDS_MCP_URL: ${{ vars.KEYWORDS_MCP_URL }}
+          SEO_MCP_URL: ${{ vars.SEO_MCP_URL }}
+        run: |
+          source ../venv/bin/activate
+          python main.py --topic "${{ github.event.inputs.topic }}" --product "${{ github.event.inputs.product }}"
+
+      - name: 🧾 Verify generated file
+        run: |
+          echo "Checking for generated markdown files..."
+          find output/blogs -type f -name "*.md" || echo "⚠️ No markdown files found."
