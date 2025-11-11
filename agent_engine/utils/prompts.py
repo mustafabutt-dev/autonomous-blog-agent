@@ -112,5 +112,6 @@ def get_title_prompt(topic: str, product: str, keywords: str ) -> str:
         - Keep under 60 characters
         - Sound natural and human-written
         - Include 1–2 keywords if possible
-        - Return ONLY the title text, no commentary
+        - Do NOT use colons (:), slashes (/), pipes (|), quotes, or any special characters that might break Markdown
+        - Return ONLY the plain title text, with no commentary or formatting
         """
