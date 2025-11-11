@@ -54,18 +54,7 @@ jobs:
         SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
       run: |
         cd agent_engine
-        # The MCP servers will be started automatically by mcp_tools.py
-        python -c "
-        from agent_logic.orchestrator import BlogOrchestrator
-        import asyncio
-        
-        orchestrator = BlogOrchestrator()
-        result = asyncio.run(orchestrator.create_blog_autonomously(
-            topic='${{ inputs.topic }}',
-            product_name='${{ inputs.product }}'
-        ))
-        print(result)
-        "
+        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}"
     
     - name: Check Generated Files
       run: |
