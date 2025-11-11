@@ -2,24 +2,25 @@
 Orchestrator with OpenAI Agents SDK + Runner
 Agent autonomously decides tool sequence
 """
-from openai import OpenAI
-from agents import Agent, Runner
+from openai import AsyncOpenAI
+from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled
 from config import settings
 from tools.mcp_tools import fetch_keywords, generate_seo_title, generate_markdown_file
 from utils import prompts
 import json
+import os
 
 class BlogOrchestrator:
     def __init__(self):
-        self.client = OpenAI(
+        self.client = AsyncOpenAI(
             base_url=settings.ASPOSE_LLM_BASE_URL,
             api_key=settings.ASPOSE_LLM_API_KEY
         )
+        self.model = OpenAIChatCompletionsModel(model=settings.ASPOSE_LLM_MODEL,openai_client=self.client)
         self.products = self.load_products()
     
     def load_products(self):
         """Load products from JSON"""
-        import os
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         products_path = os.path.join(base_dir, '..', 'data', 'products.json')
         
@@ -28,7 +29,7 @@ class BlogOrchestrator:
     
     async def create_blog_autonomously(self, topic: str, product_name: str = None):
         """Let the agent autonomously create a blog"""
-
+        set_tracing_disabled(disabled=True)
         # Find product info
         product_info = None
         if product_name:
@@ -66,7 +67,7 @@ class BlogOrchestrator:
         agent = Agent(
             name="blog-writer-agent",
             instructions=prompts.get_blog_writer_prompt(res_title,f_keywords,context),     
-            model=settings.ASPOSE_LLM_MODEL,   
+            model=self.model
         )
     
         try:
