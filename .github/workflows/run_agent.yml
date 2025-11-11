@@ -8,12 +8,8 @@ on:
         required: true
         type: string
       product:
-        description: 'Product name (optional)'
-        required: false
-        type: string
-      keywords:
-        description: 'Keywords (comma-separated)'
-        required: false
+        description: 'Product name'
+        required: true
         type: string
 
 jobs:
