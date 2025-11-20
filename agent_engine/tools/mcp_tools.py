@@ -194,7 +194,7 @@ async def fetch_keywords_manual(topic: str, product_name: str = "", platform: st
                     "product": product_name,
                     "locale": "en-US",
                     "top": "12",
-                    "file_path": "../mcp-servers/keywords_manual/src/data/keywords.xlsx",
+                    "file_path": "../output/kra/keywords.xlsx",
                     "clustering_k": None,
                     "max_rows": "10",
                     "weights": {
