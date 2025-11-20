@@ -42,15 +42,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
     
-    - name: Create necessary directories
+    - name: Prepare keywords file
       run: |
-        mkdir -p output/kra
-        mkdir -p output/blogs
-        mkdir -p mcp-servers/output/blogs
-        
-        # Create empty keywords.xlsx if it doesn't exist (or copy from repo if it should be tracked)
-        # If you have a template file, you can copy it here
-        # cp template/keywords.xlsx output/kra/keywords.xlsx || touch output/kra/.gitkeep
+        cp output/kra/samples/keywords.xlsx output/kra/keywords.xlsx
     
     - name: Install dependencies
       run: |
@@ -68,6 +62,9 @@ jobs:
     
     - name: Generate Blog
       env:
+        OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
+        OPENAI_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
+        OPENAI_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
         ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
         ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
