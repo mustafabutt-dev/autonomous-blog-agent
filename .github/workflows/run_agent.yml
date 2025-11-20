@@ -42,6 +42,16 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
     
+    - name: Create necessary directories
+      run: |
+        mkdir -p output/kra
+        mkdir -p output/blogs
+        mkdir -p mcp-servers/output/blogs
+        
+        # Create empty keywords.xlsx if it doesn't exist (or copy from repo if it should be tracked)
+        # If you have a template file, you can copy it here
+        # cp template/keywords.xlsx output/kra/keywords.xlsx || touch output/kra/.gitkeep
+    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
