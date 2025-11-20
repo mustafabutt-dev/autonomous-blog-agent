@@ -62,7 +62,7 @@ jobs:
     
     - name: Generate Blog
       env:
-        OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         OPENAI_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
         OPENAI_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
         ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
