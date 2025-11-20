@@ -42,15 +42,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
     
-    - name: Create necessary directories
+    - name: Verify file structure
       run: |
-        mkdir -p output/kra
-        mkdir -p output/blogs
-        mkdir -p mcp-servers/output/blogs
-        
-        # Create empty keywords.xlsx if it doesn't exist (or copy from repo if it should be tracked)
-        # If you have a template file, you can copy it here
-        # cp template/keywords.xlsx output/kra/keywords.xlsx || touch output/kra/.gitkeep
+        echo "Current directory: $(pwd)"
+        echo "Checking for keywords.xlsx:"
+        ls -la output/kra/keywords.xlsx || echo "File not found at output/kra/keywords.xlsx"
+        echo "Full directory structure:"
+        find . -name "keywords.xlsx" -type f
     
     - name: Install dependencies
       run: |
@@ -73,7 +71,13 @@ jobs:
         ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
         SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
       run: |
+        echo "Running from directory: $(pwd)"
+        echo "Checking relative path from agent_engine:"
+        ls -la output/kra/keywords.xlsx
         cd agent_engine
+        echo "Now in: $(pwd)"
+        echo "Checking if ../output/kra/keywords.xlsx exists:"
+        ls -la ../output/kra/keywords.xlsx || echo "File not accessible from here"
         python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}"
     
     - name: Check Generated Files
