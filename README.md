@@ -31,14 +31,13 @@ Edit `agent_engine/.env`:
 ```env
 ASPOSE_LLM_BASE_URL=http://your-llm-server.com/v1
 ASPOSE_LLM_API_KEY=your-api-key
-KEYWORD_SEARCH_URL=http://localhost:3001
-FAQ_GENERATOR_URL=http://localhost:3002
 ```
+Put your OPENAI_API_KEY in `mcp-servers/keywords/.env`:
 
 ### 3. Run
 
 ```bash
-python main.py --topic "Convert PPTX to XML in C# Programmatically" --product "Aspose.Slides for .MET"
+python3 main.py --topic "Convert AI to JPEG" --product "Aspose.PSD for Java" --platform Aspose"
 ```
 
 ## Project Structure
@@ -46,12 +45,11 @@ python main.py --topic "Convert PPTX to XML in C# Programmatically" --product "A
 ```
 blog-agent-backend/
 ├── agent_engine/
-│   ├── main.py                 # FastAPI app
+│   ├── main.py                 # Main file
 │   ├── config.py               # Configuration
-│   ├── agents_logic/
+│   ├── agent_logic/
 │   │   └── orchestrator.py     # Main orchestration layer
 │   ├── services/
-│   │   └── keyword_aggregator.py       # MCP client manager
 │   │   └── serpapi_keyword_service.py  # External service to fetch keywords from Google SERP       
 │   ├── tools/
 │   │   └── mcp_tools.py        # Wrapper functions for MCP tools
@@ -62,17 +60,25 @@ blog-agent-backend/
 │   └── .env
 │
 ├── mcp-servers/
-│   ├── keyword-search/
-│   │   └── server.py           # Keyword research tools
-│   ├── seo/
-│   │   └── server.py           # SEO-Optimized Title tools
+│   ├── file-generator/   
+│   │   └── server.py           
 │   └── requirements.txt
-│   ├── file-generator/
+│   ├── keywords_auto/          # Keyword research tool using SERPAPI
 │   │   └── server.py           # MD file generation tools
+│   ├── keywords_manual/.       # Keyword research tool using Keyword.csv file
+│   │   └── server.py  
+│   ├── outline_generator/      # Generates blog post outline
+│   │   └── server.py  
+│   ├── related-topics/         # Fetch relevant articles from the relevant category  
+│   │   └── server.py  
+│   ├── title_generator/        # Generates SEO-optimized title for blog post 
+│   │   └── server.py  
 │   └── requirements.txt
-│   ├── data/
-│   │   └── products.json       # Contains source products data
-│   ├── output/
+│── data/
+│   │   └── aspose.json          # Contains source products data for aspose
+│   │   └── groupdocs.json       # Contains source products data for groupdocs
+│   │   └── conholdate.json      # Contains source products data for conholdate
+│── output/
 │   │   └── blogs               # Contains generated MD files of blog post
 └── setup.sh                    # Initial setup
 
@@ -114,3 +120,5 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r agent_engine/requirements.txt
 ```
+
+

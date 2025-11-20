@@ -1,0 +1,468 @@
+{
+  "run_id": "dc4f3fd6",
+  "brand": "aspose",
+  "product": "Aspose.Slides for Python via .NET",
+  "locale": "en-US",
+  "clusters": [
+    {
+      "cluster_id": "c4",
+      "label": "pptx to",
+      "members": [
+        {
+          "keyword": "pptx to pdf",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.375,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c2",
+      "label": "pptx to",
+      "members": [
+        {
+          "keyword": "convert pptx to pdf",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.059685,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c0",
+      "label": "pdf to",
+      "members": [
+        {
+          "keyword": "pdf to pptx",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "pdf to pptx free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.9,
+          "competition_label": "high"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 27500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.043919,
+        "avg_competition": 0.55
+      }
+    },
+    {
+      "cluster_id": "c6",
+      "label": "convert pdf",
+      "members": [
+        {
+          "keyword": "convert pdf to pptx",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 5000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.028153,
+        "avg_competition": 0.6
+      }
+    },
+    {
+      "cluster_id": "c5",
+      "label": "converter",
+      "members": [
+        {
+          "keyword": "pdf to pptx converter free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        },
+        {
+          "keyword": "pdf to pptx converter online",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.026577,
+        "avg_competition": 0.4
+      }
+    },
+    {
+      "cluster_id": "c3",
+      "label": "pptx free",
+      "members": [
+        {
+          "keyword": "convert pdf to pptx free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.9,
+          "competition_label": "high"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.9
+      }
+    },
+    {
+      "cluster_id": "c1",
+      "label": "pptx online",
+      "members": [
+        {
+          "keyword": "convert pdf to pptx online free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.6
+      }
+    },
+    {
+      "cluster_id": "c7",
+      "label": "pptx online",
+      "members": [
+        {
+          "keyword": "pdf to pptx online",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.6
+      }
+    }
+  ],
+  "topics": [
+    {
+      "cluster_id": "c4",
+      "title": "How to Convert PPTX to PDF Using Aspose.Slides for Python via .NET",
+      "angle": "Step-by-step guide to converting PPTX files to PDF format using Aspose.Slides for Python via .NET",
+      "outline": [
+        "Introduction to PPTX to PDF conversion",
+        "Overview of Aspose.Slides for Python via .NET capabilities",
+        "Setting up the environment for conversion",
+        "Code example for converting PPTX to PDF",
+        "Handling common issues and errors",
+        "Benefits of using Aspose.Slides over other tools"
+      ],
+      "target_persona": "Python developers and software engineers looking to automate PPTX to PDF conversion",
+      "primary_keyword": "pptx to pdf",
+      "supporting_keywords": [
+        "pptx to pdf conversion",
+        "Aspose.Slides pptx to pdf",
+        "convert pptx to pdf python",
+        "pptx to pdf automation",
+        "pptx to pdf .NET",
+        "pptx to pdf library"
+      ],
+      "internal_links": [
+        "/products/slides/python-net/conversion",
+        "/products/slides/python-net/getting-started",
+        "/blog/pptx-to-pdf-conversion-guide"
+      ]
+    },
+    {
+      "cluster_id": "c2",
+      "title": "Convert PPTX to PDF Easily with Aspose.Slides for Python via .NET",
+      "angle": "Inform users about the simple and efficient way to convert PPTX files to PDF using Aspose.Slides for Python via .NET",
+      "outline": [
+        "Why convert PPTX to PDF?",
+        "Features of Aspose.Slides for Python via .NET for conversion",
+        "Step-by-step conversion process",
+        "Sample code snippets",
+        "Tips for optimizing PDF output",
+        "Comparison with other conversion methods"
+      ],
+      "target_persona": "IT professionals and developers seeking reliable PPTX to PDF conversion solutions",
+      "primary_keyword": "convert pptx to pdf",
+      "supporting_keywords": [
+        "pptx to pdf conversion",
+        "pptx to pdf python",
+        "pptx to pdf converter",
+        "Aspose.Slides conversion",
+        "pptx to pdf automation",
+        "pptx to pdf .NET"
+      ],
+      "internal_links": [
+        "/products/slides/python-net/conversion",
+        "/documentation/python-net/conversion",
+        "/blog/convert-pptx-to-pdf"
+      ]
+    },
+    {
+      "cluster_id": "c0",
+      "title": "How to Convert PDF to PPTX Using Aspose.Slides for Python via .NET",
+      "angle": "Guide on converting PDF files back to editable PPTX presentations using Aspose.Slides for Python via .NET",
+      "outline": [
+        "Introduction to PDF to PPTX conversion",
+        "Use cases for converting PDF to PPTX",
+        "Setting up Aspose.Slides for Python via .NET",
+        "Step-by-step conversion process with code examples",
+        "Limitations and best practices",
+        "Free vs paid conversion options"
+      ],
+      "target_persona": "Developers and content creators needing to convert PDFs into editable presentations",
+      "primary_keyword": "pdf to pptx",
+      "supporting_keywords": [
+        "pdf to pptx free",
+        "pdf to pptx converter",
+        "convert pdf to pptx python",
+        "pdf to pptx online",
+        "Aspose.Slides pdf to pptx"
+      ],
+      "internal_links": [
+        "/products/slides/python-net/conversion",
+        "/documentation/python-net/pdf-to-pptx",
+        "/blog/pdf-to-pptx-conversion"
+      ]
+    },
+    {
+      "cluster_id": "c6",
+      "title": "Convert PDF to PPTX with Aspose.Slides for Python via .NET: A Complete Tutorial",
+      "angle": "Detailed tutorial on converting PDF documents to PPTX presentations using Aspose.Slides for Python via .NET",
+      "outline": [
+        "Why convert PDF to PPTX?",
+        "Capabilities of Aspose.Slides for PDF to PPTX conversion",
+        "Installation and setup instructions",
+        "Code walkthrough for PDF to PPTX conversion",
+        "Handling conversion errors and troubleshooting",
+        "Tips for enhancing presentation quality post-conversion"
+      ],
+      "target_persona": "Software developers and business users needing to convert PDFs into presentations",
+      "primary_keyword": "convert pdf to pptx",
+      "supporting_keywords": [
+        "pdf to pptx conversion",
+        "pdf to pptx python",
+        "pdf to pptx converter",
+        "Aspose.Slides pdf to pptx",
+        "pdf to pptx automation"
+      ],
+      "internal_links": [
+        "/products/slides/python-net/conversion",
+        "/documentation/python-net/pdf-to-pptx",
+        "/blog/pdf-to-pptx-tutorial"
+      ]
+    },
+    {
+      "cluster_id": "c5",
+      "title": "Top Free PDF to PPTX Converters: Why Aspose.Slides for Python via .NET Stands Out",
+      "angle": "Comparison of free PDF to PPTX converters with a focus on the advantages of using Aspose.Slides for Python via .NET",
+      "outline": [
+        "Overview of free PDF to PPTX converters",
+        "Limitations of free online converters",
+        "Features and benefits of Aspose.Slides",
+        "Security and privacy considerations",
+        "How to use Aspose.Slides for free trial conversion",
+        "Conclusion: Choosing the right converter"
+      ],
+      "target_persona": "Individuals and small businesses looking for reliable free PDF to PPTX conversion tools",
+      "primary_keyword": "pdf to pptx converter free",
+      "supporting_keywords": [
+        "pdf to pptx converter online",
+        "free pdf to pptx converter",
+        "pdf to pptx free",
+        "Aspose.Slides free trial",
+        "pdf to pptx conversion tools"
+      ],
+      "internal_links": [
+        "/products/slides/python-net/free-trial",
+        "/blog/free-pdf-to-pptx-converters",
+        "/products/slides/python-net/conversion"
+      ]
+    },
+    {
+      "cluster_id": "c3",
+      "title": "How to Convert PDF to PPTX for Free Using Aspose.Slides for Python via .NET",
+      "angle": "Guide on converting PDF files to PPTX presentations for free using Aspose.Slides for Python via .NET trial features",
+      "outline": [
+        "Introduction to free PDF to PPTX conversion",
+        "Using Aspose.Slides free trial for conversion",
+        "Step-by-step conversion process",
+        "Limitations of free conversion",
+        "Tips to maximize free usage",
+        "When to upgrade to paid plans"
+      ],
+      "target_persona": "Students, freelancers, and small teams needing free PDF to PPTX conversion",
+      "primary_keyword": "convert pdf to pptx free",
+      "supporting_keywords": [
+        "pdf to pptx free",
+        "free pdf to pptx converter",
+        "Aspose.Slides free trial",
+        "pdf to pptx online free",
+        "pdf to pptx converter free"
+      ],
+      "internal_links": [
+        "/products/slides/python-net/free-trial",
+        "/blog/convert-pdf-to-pptx-free",
+        "/products/slides/python-net/conversion"
+      ]
+    },
+    {
+      "cluster_id": "c1",
+      "title": "Convert PDF to PPTX Online for Free with Aspose.Slides for Python via .NET",
+      "angle": "Exploring online free PDF to PPTX conversion options and how Aspose.Slides for Python via .NET supports this workflow",
+      "outline": [
+        "Benefits of online PDF to PPTX conversion",
+        "Overview of Aspose.Slides online conversion capabilities",
+        "Step-by-step guide to online conversion",
+        "Security and privacy of online conversions",
+        "Limitations of free online tools",
+        "How to integrate online conversion into your workflow"
+      ],
+      "target_persona": "Remote workers and users preferring online tools for document conversion",
+      "primary_keyword": "convert pdf to pptx online free",
+      "supporting_keywords": [
+        "pdf to pptx online",
+        "free pdf to pptx online",
+        "online pdf to pptx converter",
+        "Aspose.Slides online",
+        "pdf to pptx converter free"
+      ],
+      "internal_links": [
+        "/products/slides/python-net/online-conversion",
+        "/blog/online-pdf-to-pptx-conversion",
+        "/products/slides/python-net/free-trial"
+      ]
+    },
+    {
+      "cluster_id": "c7",
+      "title": "PDF to PPTX Online Conversion: Using Aspose.Slides for Python via .NET",
+      "angle": "Detailed look at converting PDF files to PPTX presentations online using Aspose.Slides for Python via .NET",
+      "outline": [
+        "Introduction to online PDF to PPTX conversion",
+        "Features of Aspose.Slides online conversion",
+        "Step-by-step online conversion process",
+        "Advantages over desktop converters",
+        "Security and data privacy considerations",
+        "Tips for best results"
+      ],
+      "target_persona": "Users seeking convenient online solutions for PDF to PPTX conversion",
+      "primary_keyword": "pdf to pptx online",
+      "supporting_keywords": [
+        "pdf to pptx online free",
+        "online pdf to pptx converter",
+        "Aspose.Slides online",
+        "pdf to pptx converter",
+        "free pdf to pptx online"
+      ],
+      "internal_links": [
+        "/products/slides/python-net/online-conversion",
+        "/blog/pdf-to-pptx-online",
+        "/products/slides/python-net/free-trial"
+      ]
+    }
+  ]
+}

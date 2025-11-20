@@ -1,0 +1,18 @@
+[
+  {
+  "ProductName" : "Conholdate.Total for .NET",
+  "Category" : "Conholdate.Total Product Family",
+  "ProgrammingLanguage" : "C#",
+  "ProductURL" : "https://products.conholdate.com/total/net/",
+  "DownloadURL" : "https://releases.aspose.com/total/net/",
+  "ExternalDownloadURL" : "https://github.com/conholdate/conholdatenet",
+  "DocumentationURL" : "https://docs.aspose.com/total/net/",
+  "BlogsURL" : "https://blog.conholdate.com/categories/conholdate.total-product-family/",
+  "APIReferenceURL" : "https://reference.conholdate.com/net/",
+  "FreeAppsURL" : "https://products.conholdate.app/conversion",
+  "ForumsURL" : "https://forum.conholdate.com/c/total/5",
+  "InstallCommand" : "Install-Package Aspose.Total ",
+  "urlPrefix" : "total",
+  "license":"https://purchase.conholdate.com/temporary-license/"
+}
+]

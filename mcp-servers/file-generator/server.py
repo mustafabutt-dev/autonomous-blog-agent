@@ -10,9 +10,8 @@ from fastmcp import FastMCP
 # ---------------------------------------------
 # Initialize MCP Server
 # ---------------------------------------------
-print("File Generator MCP Server starting...", file=sys.stderr, flush=True)
-mcp = FastMCP("file-generator-server")
 
+mcp = FastMCP("file-generator-server")
 
 # ---------------------------------------------
 # Define MCP Tool
@@ -21,8 +20,6 @@ mcp = FastMCP("file-generator-server")
 def generate_markdown_file(
     title: str,
     content: str,
-    keywords: list,
-    product_info: dict = None,
     output_dir: str = "output/blogs"
 ) -> dict:
     """
@@ -35,7 +32,15 @@ def generate_markdown_file(
     print(f"Output directory ensured: {output_dir}", file=sys.stderr, flush=True)
 
     # Sanitize and format title
-    safe_title = "".join(c if c.isalnum() or c in (" ", "-") else "" for c in title)
+    title = title.replace("C#", "CSharp").replace("c#", "CSharp")
+
+    # Remove invalid characters (keep letters, numbers, spaces, hyphens)
+    safe_title = "".join(
+        c if c.isalnum() or c in (" ", "-") else "" 
+        for c in title
+    )
+
+    # Convert spaces to hyphens + lowercase
     safe_title = safe_title.replace(" ", "-").lower()
 
     # Create folder name: YYYY-MM-DD-title

@@ -1,0 +1,424 @@
+{
+  "run_id": "f47cc4ea",
+  "brand": "aspose",
+  "product": "Aspose.3D for Python",
+  "locale": "en-US",
+  "clusters": [
+    {
+      "cluster_id": "c9",
+      "label": "ai to",
+      "members": [
+        {
+          "keyword": "ai to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 5000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.375,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c3",
+      "label": "to ai",
+      "members": [
+        {
+          "keyword": "jpeg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "converting jpeg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c1",
+      "label": "to jpeg",
+      "members": [
+        {
+          "keyword": "adobe illustrator to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "ai file to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c0",
+      "label": "jpg",
+      "members": [
+        {
+          "keyword": "ai to jpg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "ai to jpg free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c2",
+      "label": "raw",
+      "members": [
+        {
+          "keyword": "topaz jpeg to raw",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.056818,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c4",
+      "label": "raw",
+      "members": [
+        {
+          "keyword": "jpeg to raw ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c5",
+      "label": "ai",
+      "members": [
+        {
+          "keyword": "akvis artifact remover ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.2
+      }
+    }
+  ],
+  "topics": [
+    {
+      "cluster_id": "c9",
+      "title": "How to Convert AI Files to JPEG Format Efficiently",
+      "angle": "A step-by-step guide to converting Adobe Illustrator (AI) files to JPEG using various tools and techniques.",
+      "outline": [
+        "Introduction to AI and JPEG file formats",
+        "Common reasons for converting AI to JPEG",
+        "Overview of popular conversion tools and software",
+        "Step-by-step process to convert AI to JPEG",
+        "Tips for maintaining image quality during conversion",
+        "Troubleshooting common issues in AI to JPEG conversion"
+      ],
+      "target_persona": "Graphic designers, digital artists, and marketing professionals needing file format conversions",
+      "primary_keyword": "ai to jpeg",
+      "supporting_keywords": [
+        "convert ai to jpeg",
+        "ai to jpeg free",
+        "adobe illustrator to jpeg",
+        "ai file to jpeg",
+        "best ai to jpeg converter"
+      ],
+      "internal_links": [
+        "/products/aspose-3d-for-python",
+        "/blog/convert-ai-to-jpeg-guide",
+        "/support/file-format-conversions"
+      ]
+    },
+    {
+      "cluster_id": "c3",
+      "title": "Converting JPEG Images to AI Format: What You Need to Know",
+      "angle": "Exploring the process and tools available for converting JPEG images into editable AI files for design purposes.",
+      "outline": [
+        "Understanding the difference between JPEG and AI formats",
+        "Why convert JPEG to AI? Use cases and benefits",
+        "Tools and software options for JPEG to AI conversion",
+        "Step-by-step guide to converting JPEG to AI",
+        "Limitations and challenges in the conversion process",
+        "Tips for optimizing AI files created from JPEG images"
+      ],
+      "target_persona": "Graphic designers, illustrators, and creative professionals working with vector graphics",
+      "primary_keyword": "jpeg to ai",
+      "supporting_keywords": [
+        "converting jpeg to ai",
+        "jpeg to ai converter",
+        "raster to vector conversion",
+        "jpeg to ai online",
+        "best jpeg to ai software"
+      ],
+      "internal_links": [
+        "/products/aspose-3d-for-python",
+        "/blog/jpeg-to-ai-conversion-tips",
+        "/resources/vector-graphics-tools"
+      ]
+    },
+    {
+      "cluster_id": "c1",
+      "title": "From Adobe Illustrator to JPEG: A Complete Conversion Guide",
+      "angle": "Detailed instructions and best practices for converting Adobe Illustrator files to JPEG format without losing quality.",
+      "outline": [
+        "Overview of Adobe Illustrator (AI) and JPEG formats",
+        "Reasons to convert AI files to JPEG",
+        "Step-by-step conversion process using Adobe Illustrator",
+        "Alternative tools for AI to JPEG conversion",
+        "How to preserve image quality and resolution",
+        "Common pitfalls and how to avoid them"
+      ],
+      "target_persona": "Designers, marketers, and content creators needing high-quality JPEG images from AI files",
+      "primary_keyword": "adobe illustrator to jpeg",
+      "supporting_keywords": [
+        "ai file to jpeg",
+        "convert ai to jpeg",
+        "export ai to jpeg",
+        "ai to jpeg high quality",
+        "adobe illustrator export options"
+      ],
+      "internal_links": [
+        "/products/aspose-3d-for-python",
+        "/blog/adobe-illustrator-export-tips",
+        "/support/image-format-conversion"
+      ]
+    },
+    {
+      "cluster_id": "c0",
+      "title": "Free and Easy Ways to Convert AI Files to JPG",
+      "angle": "Explore free tools and methods to convert AI files to JPG format quickly and efficiently.",
+      "outline": [
+        "Difference between JPG and JPEG formats",
+        "Why convert AI to JPG?",
+        "Top free tools for AI to JPG conversion",
+        "Step-by-step guide for using free converters",
+        "Tips for ensuring quality in free conversions",
+        "When to consider paid tools for better results"
+      ],
+      "target_persona": "Students, freelancers, and small business owners looking for cost-effective conversion solutions",
+      "primary_keyword": "ai to jpg free",
+      "supporting_keywords": [
+        "ai to jpg",
+        "free ai to jpg converter",
+        "convert ai to jpg online",
+        "ai to jpg high quality",
+        "best free ai to jpg tools"
+      ],
+      "internal_links": [
+        "/products/aspose-3d-for-python",
+        "/blog/free-ai-to-jpg-conversion-tools",
+        "/faq/file-conversion"
+      ]
+    },
+    {
+      "cluster_id": "c2",
+      "title": "Understanding Topaz JPEG to RAW Conversion: Is It Worth It?",
+      "angle": "An informational overview of converting JPEG images to RAW format using Topaz software and its practical applications.",
+      "outline": [
+        "What are JPEG and RAW image formats?",
+        "Benefits and drawbacks of converting JPEG to RAW",
+        "Introduction to Topaz JPEG to RAW conversion tool",
+        "Step-by-step guide to using Topaz for conversion",
+        "Use cases where JPEG to RAW conversion is beneficial",
+        "Alternatives to Topaz for JPEG to RAW conversion"
+      ],
+      "target_persona": "Photographers and imaging professionals interested in advanced image editing",
+      "primary_keyword": "topaz jpeg to raw",
+      "supporting_keywords": [
+        "jpeg to raw conversion",
+        "topaz jpeg to raw tutorial",
+        "jpeg to raw ai",
+        "image format conversion",
+        "photo editing software"
+      ],
+      "internal_links": [
+        "/products/aspose-3d-for-python",
+        "/blog/jpeg-to-raw-conversion-guide",
+        "/resources/photo-editing-tips"
+      ]
+    },
+    {
+      "cluster_id": "c4",
+      "title": "Exploring JPEG to RAW AI Conversion Techniques",
+      "angle": "A deep dive into AI-powered methods for converting JPEG images to RAW format and their effectiveness.",
+      "outline": [
+        "Overview of AI in image format conversion",
+        "Challenges in converting JPEG to RAW",
+        "Current AI tools and software for JPEG to RAW conversion",
+        "Step-by-step process of AI-based conversion",
+        "Evaluating the quality of AI-converted RAW images",
+        "Future trends in AI image format conversion"
+      ],
+      "target_persona": "Tech-savvy photographers and AI enthusiasts interested in image processing innovations",
+      "primary_keyword": "jpeg to raw ai",
+      "supporting_keywords": [
+        "ai jpeg to raw conversion",
+        "jpeg to raw converter",
+        "ai image processing",
+        "photo editing ai tools",
+        "jpeg to raw software"
+      ],
+      "internal_links": [
+        "/products/aspose-3d-for-python",
+        "/blog/ai-image-conversion-techniques",
+        "/resources/ai-in-photography"
+      ]
+    },
+    {
+      "cluster_id": "c5",
+      "title": "Using Akvis Artifact Remover AI to Enhance JPEG Images",
+      "angle": "An introduction to Akvis Artifact Remover AI and how it helps improve JPEG image quality by removing compression artifacts.",
+      "outline": [
+        "What are compression artifacts in JPEG images?",
+        "Overview of Akvis Artifact Remover AI software",
+        "How AI enhances image restoration",
+        "Step-by-step guide to using Akvis Artifact Remover",
+        "Comparing Akvis with other artifact removal tools",
+        "Tips for best results when enhancing JPEG images"
+      ],
+      "target_persona": "Photographers, graphic designers, and digital artists focused on image quality enhancement",
+      "primary_keyword": "akvis artifact remover ai",
+      "supporting_keywords": [
+        "jpeg artifact remover",
+        "ai image enhancement",
+        "remove jpeg artifacts",
+        "akvis software review",
+        "photo restoration ai"
+      ],
+      "internal_links": [
+        "/products/aspose-3d-for-python",
+        "/blog/image-quality-enhancement",
+        "/resources/photo-restoration-tools"
+      ]
+    }
+  ]
+}

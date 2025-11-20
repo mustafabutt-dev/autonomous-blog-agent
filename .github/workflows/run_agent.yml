@@ -11,6 +11,16 @@ on:
         description: 'Product name'
         required: true
         type: string
+      platform:
+        description: 'Platform (e.g., aspose)'
+        required: true
+        type: string
+        default: 'aspose'
+      keyword_source:
+        description: 'Keyword source (e.g., manual, auto)'
+        required: true
+        type: string
+        default: 'manual'
 
 jobs:
   generate:
@@ -54,7 +64,7 @@ jobs:
         SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
       run: |
         cd agent_engine
-        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}"
+        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}"
     
     - name: Check Generated Files
       run: |

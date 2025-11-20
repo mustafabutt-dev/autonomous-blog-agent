@@ -1,0 +1,648 @@
+{
+  "run_id": "c495e23c",
+  "brand": "Aspose",
+  "product": "Aspose.PSD",
+  "locale": "en-US",
+  "clusters": [
+    {
+      "cluster_id": "c6",
+      "label": "ai to",
+      "members": [
+        {
+          "keyword": "ai to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 5000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.375,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c7",
+      "label": "to jpg",
+      "members": [
+        {
+          "keyword": "ai to jpg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "ai to jpg free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c4",
+      "label": "to ai",
+      "members": [
+        {
+          "keyword": "jpeg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "converting jpeg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jepg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jpeg to ai format",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jpeg to ai free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jpeg to ai vector",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2600.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.205303,
+        "avg_competition": 0.26666666666666666
+      }
+    },
+    {
+      "cluster_id": "c3",
+      "label": "ai file",
+      "members": [
+        {
+          "keyword": "ai file to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "converting jpeg to ai file",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jpeg to ai file",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.162879,
+        "avg_competition": 0.20000000000000004
+      }
+    },
+    {
+      "cluster_id": "c2",
+      "label": "raw",
+      "members": [
+        {
+          "keyword": "jpeg to raw ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "topaz jpeg to raw",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jpeg to raw ai download",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jpeg to raw topaz",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "topaz jpeg to raw ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "topaz jpeg to raw ai 2.2 1",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "topaz jpeg to raw ai download",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "topaz jpeg to raw won t open",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": null,
+          "competition_label": null
+        },
+        {
+          "keyword": "topaz jpg to raw",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "topaz labs jpeg to raw",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 185.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "transactional",
+        "score": 0.109545,
+        "avg_competition": 0.24444444444444446
+      }
+    },
+    {
+      "cluster_id": "c8",
+      "label": "illustrator to",
+      "members": [
+        {
+          "keyword": "adobe illustrator to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "illustrator to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.056818,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c0",
+      "label": "converting",
+      "members": [
+        {
+          "keyword": "converting jpg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.056818,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c5",
+      "label": "illustrator",
+      "members": [
+        {
+          "keyword": "jpeg to illustrator",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.056818,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c1",
+      "label": "ai",
+      "members": [
+        {
+          "keyword": "akvis artifact remover ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jpeg ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 275.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.040909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c9",
+      "label": "ai online",
+      "members": [
+        {
+          "keyword": "jpeg to ai online",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "jpg to ai online",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.2
+      }
+    }
+  ],
+  "topics": [
+    {
+      "cluster_id": "c7",
+      "title": "How to Convert AI to JPG for Free",
+      "angle": "Step-by-step guide on converting AI files to JPG format using free tools and software",
+      "outline": [
+        "Introduction to AI and JPG file formats",
+        "Why convert AI to JPG?",
+        "Top free tools for AI to JPG conversion",
+        "Step-by-step conversion process",
+        "Tips for maintaining image quality",
+        "Common issues and how to fix them"
+      ],
+      "target_persona": "Graphic designers and digital artists looking for free conversion options",
+      "primary_keyword": "ai to jpg free",
+      "supporting_keywords": [
+        "ai to jpg",
+        "convert ai to jpg free",
+        "free ai to jpg converter",
+        "ai file to jpg",
+        "ai to jpeg free"
+      ],
+      "internal_links": [
+        "/products/aspose-psd/conversion",
+        "/blog/convert-ai-to-jpg"
+      ]
+    },
+    {
+      "cluster_id": "c4",
+      "title": "Converting JPEG to AI Format: A Complete Guide",
+      "angle": "Exploring methods and tools to convert JPEG images into AI vector format effectively",
+      "outline": [
+        "Understanding JPEG and AI file formats",
+        "Benefits of converting JPEG to AI",
+        "Popular software and online tools for conversion",
+        "Step-by-step conversion tutorial",
+        "Free vs paid options for JPEG to AI conversion",
+        "How to edit AI files after conversion"
+      ],
+      "target_persona": "Designers and illustrators needing vector versions of JPEG images",
+      "primary_keyword": "jpeg to ai",
+      "supporting_keywords": [
+        "converting jpeg to ai",
+        "jpeg to ai format",
+        "jpeg to ai free",
+        "jpeg to ai vector",
+        "jpeg to ai file"
+      ],
+      "internal_links": [
+        "/products/aspose-psd/vector-conversion",
+        "/blog/jpeg-to-ai-conversion"
+      ]
+    },
+    {
+      "cluster_id": "c6",
+      "title": "Understanding AI to JPEG Conversion",
+      "angle": "Informational overview of AI to JPEG conversion processes and best practices",
+      "outline": [
+        "What is AI to JPEG conversion?",
+        "Common use cases for converting AI files to JPEG",
+        "Tools and software options",
+        "Quality considerations during conversion",
+        "Step-by-step guide for beginners",
+        "Troubleshooting common problems"
+      ],
+      "target_persona": "Beginners and hobbyists interested in file format conversions",
+      "primary_keyword": "ai to jpeg",
+      "supporting_keywords": [
+        "ai to jpg",
+        "ai file to jpeg",
+        "convert ai to jpeg",
+        "ai to jpeg converter"
+      ],
+      "internal_links": [
+        "/products/aspose-psd/conversion",
+        "/blog/ai-to-jpeg-overview"
+      ]
+    },
+    {
+      "cluster_id": "c9",
+      "title": "Best Online Tools for JPEG to AI Conversion",
+      "angle": "Review and comparison of online platforms that convert JPEG images to AI format",
+      "outline": [
+        "Why use online converters?",
+        "Top online tools for JPEG to AI conversion",
+        "Features and limitations of each tool",
+        "How to use these tools effectively",
+        "Security and privacy considerations",
+        "Tips for optimizing conversion results"
+      ],
+      "target_persona": "Users seeking quick and easy online conversion solutions",
+      "primary_keyword": "jpeg to ai online",
+      "supporting_keywords": [
+        "jpg to ai online",
+        "online jpeg to ai converter",
+        "convert jpeg to ai online",
+        "free online jpeg to ai"
+      ],
+      "internal_links": [
+        "/products/aspose-psd/online-conversion",
+        "/blog/online-jpeg-to-ai-tools"
+      ]
+    },
+    {
+      "cluster_id": "c2",
+      "title": "Exploring JPEG to Raw AI Conversion with Topaz Labs",
+      "angle": "Detailed guide on converting JPEG images to raw AI format using Topaz Labs software",
+      "outline": [
+        "Introduction to raw AI format and its benefits",
+        "Overview of Topaz Labs JPEG to Raw AI tool",
+        "Installation and setup instructions",
+        "Step-by-step conversion process",
+        "Troubleshooting common issues",
+        "Comparison with other conversion tools"
+      ],
+      "target_persona": "Professional photographers and digital artists looking for high-quality AI conversions",
+      "primary_keyword": "jpeg to raw ai",
+      "supporting_keywords": [
+        "topaz jpeg to raw",
+        "jpeg to raw ai download",
+        "topaz jpeg to raw ai 2.2 1",
+        "topaz jpeg to raw won't open",
+        "topaz jpg to raw"
+      ],
+      "internal_links": [
+        "/products/aspose-psd/raw-conversion",
+        "/blog/jpeg-to-raw-ai-topaz"
+      ]
+    }
+  ]
+}

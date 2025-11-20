@@ -1,9 +1,144 @@
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+from typing import Dict, Optional
 import json
+import os
 
-# Define tools as decorated functions
-async def fetch_keywords(topic: str, product_name: str = "") -> str:
+async def fetch_category_related_articles(
+    topic: str,
+    product_name: str,
+    category_url: str,
+    required_count: int = 3
+) -> Dict:
+   
+    server_params = StdioServerParameters(
+        command="python",
+        args=["../mcp-servers/related-topics/server.py"]
+    )
+
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            
+            result = await session.call_tool(
+                "get_category_related_posts",
+                arguments={
+                    "topic": topic,
+                    "product_name": product_name,
+                    "category_url": category_url,
+                    "required_count": required_count,
+                    "tier1_limit": 50
+                }
+            )
+       
+            if hasattr(result, 'content'):
+                if isinstance(result.content, list) and len(result.content) > 0:
+                    content = result.content[0]
+                    if hasattr(content, 'text'):
+                        return json.loads(content.text)
+                    elif hasattr(content, 'data'):
+                        return content.data
+            return {"error": "Failed to get response", "related_posts": []}
+
+async def generate_read_more_section(
+    topic: str,
+    product_name: str,
+    category_url: str = None
+) -> str:
+    """
+    Generate Read More section for a blog post
+    
+    Args:
+        topic: Blog topic being written
+        product_name: Like "Aspose.PDF for Java"
+        category_url: Category page URL (if not provided, uses default)
+    
+    Returns:
+        Formatted Read More markdown section
+    """
+    
+    # Default category URLs for common products (you can expand this)
+    default_categories = {
+        "aspose.pdf": "https://blog.aspose.com/pdf/",
+        "aspose.cells": "https://blog.aspose.com/cells/",
+        "aspose.words": "https://blog.aspose.com/words/",
+        "aspose.slides": "https://blog.aspose.com/slides/",
+    }
+    
+    # If no category URL provided, try to determine from product name
+    if not category_url:
+        product_lower = product_name.lower()
+        for key, url in default_categories.items():
+            if key in product_lower:
+                category_url = url
+                break
+    
+    if not category_url:
+        return "\n## Read More\n\n- Visit our [blog](https://blog.aspose.com) for more articles\n"
+    
+    try:
+        result = await fetch_category_related_articles(
+            topic=topic,
+            product_name=product_name,
+            category_url=category_url,
+            required_count=3
+        )
+        
+        if result.get("error"):
+            print(f"Error: {result['error']}")
+            return ""
+        
+        articles = result.get("related_posts", [])
+        target_language = result.get("target_language", "")
+        
+        if not articles:
+            return ""
+        
+        # Build Read More section
+        read_more = "\n## Read More\n\n"
+        
+        # Add language-specific heading if detected
+        if target_language:
+            lang_display = target_language.upper() if target_language == "java" else target_language.title()
+            read_more += f"### More {lang_display} Examples\n\n"
+        
+        for article in articles:
+            tier_info = ""
+            if article.get("is_fallback"):
+                tier_info = " *"  # Mark fallback articles
+            read_more += f"- [{article['title']}]({article['url']}){tier_info}\n"
+        
+        # Add note if fallback articles included
+        if any(a.get('is_fallback') for a in articles):
+            read_more += "\n*_General articles from this category_\n"
+        
+        return read_more
+        
+    except Exception as e:
+        print(f"Error generating read more section: {e}")
+        return ""
+
+# Integration function for your orchestrator
+async def enhance_blog_with_category_articles(
+    blog_content: str,
+    topic: str,
+    product_name: str,
+    category_url: Optional[str] = None
+) -> str:
+    """
+    Add Read More section to blog content based on category
+    
+    Example:
+        product_name = "Aspose.PDF for Java"
+        category_url = "https://blog.aspose.com/pdf/"
+    """
+    read_more = await generate_read_more_section(topic, product_name, category_url)
+    if read_more:
+        return blog_content + read_more
+    return blog_content
+
+
+async def fetch_keywords_auto(topic: str, product_name: str = "") -> str:
     """Fetch high-ranking SEO keywords for a topic"""
 
     print(f" fetch_keywords TOOL CALLED! upper")
@@ -11,7 +146,7 @@ async def fetch_keywords(topic: str, product_name: str = "") -> str:
     try:
         params = StdioServerParameters(
             command="python",
-            args=["../mcp-servers/keywords/server.py"]
+            args=["../mcp-servers/keywords_auto/server.py"]
         )
         
         print(f" Connecting to MCP server fetch_keywords...")
@@ -31,65 +166,66 @@ async def fetch_keywords(topic: str, product_name: str = "") -> str:
         traceback.print_exc()
         return '{"error": "failed"}'
 
-async def generate_seo_title(topic: str, keywords_json: str, product_name: str = "") -> str:
-    """
-    Generate an SEO-optimized blog title
-    
-    Args:
-        topic: The blog topic
-        keywords_json: JSON string containing keywords data
-        product_name: Optional product name
-    """
-    print(f" generate_seo_title TOOL CALLED! upper {keywords_json}", flush=True)
-    keywords_data = json.loads(keywords_json)
-    keywords = keywords_data.get('keywords', {}).get('primary', [topic])
-    
-    params = StdioServerParameters(
-        command="python",
-        args=["../mcp-servers/seo/server.py"]
-    )
-    print(f" Connecting to MCP server generate_seo_title...")
-    async with stdio_client(params) as (read, write):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
-            result = await session.call_tool("generate_seo_title", {
-                "topic": topic,
-                "keywords": keywords,
-                "product_name": product_name
-            })
-            parsed = json.loads(result.content[0].text)
-            title = parsed.get("title")
-            return title
 
-async def generate_markdown_file(title, content, keywords_json) -> dict:
+async def fetch_keywords_manual(topic: str, product_name: str = "", platform: str = "") -> str:
+    """Fetch high-ranking SEO keywords for a topic"""
+
+    MCP_KRA_PATH = os.path.abspath("../mcp-servers/keywords_manual/src")
+    try:
+        params = StdioServerParameters(
+            command="python",
+            args=["-m", "agents.kra.runner",],
+            env={
+                "PYTHONPATH": MCP_KRA_PATH + ":" + os.environ.get("PYTHONPATH", "")
+            }
+        )
+
+        print("🔌 Connecting to KRA MCP server (run_kra)...")
+
+        async with stdio_client(params) as (read, write):
+            async with ClientSession(read, write) as session:
+
+                # handshake
+                await session.initialize()
+
+                # call the actual tool
+                result = await session.call_tool("run_kra", {
+                    "brand": platform,
+                    "product": product_name,
+                    "locale": "en-US",
+                    "top": "12",
+                    "file_path": "../mcp-servers/keywords_manual/src/data/keywords.xlsx",
+                    "clustering_k": None,
+                    "max_rows": "10",
+                    "weights": {
+                        "intent_weight": 0.45,
+                        "brand_fit_weight": 0.35,
+                        "search_volume_weight": 0.20,
+                    }
+                })
+
+                raw = result.content[0].text
+                parsed = json.loads(raw)
+
+                if parsed.get("status") == "error":
+                    print("keywords tool returned an error:")
+                    print(parsed.get("error"))
+                    print(parsed.get("traceback"))
+                    return None
+            topic_info = extract_first_topic(parsed)
+            return topic_info
+                
+    except Exception as e:
+        print(f" ERROR in fetch_keywords: {e}")
+        import traceback
+        traceback.print_exc()
+        return '{"error": "failed"}'
+    
+
+async def generate_markdown_file(title, content) -> dict:
     """
     Save blog content as a markdown file.
     """
-    import json
-    from mcp import ClientSession, StdioServerParameters
-    from mcp.client.stdio import stdio_client
-
-    print(" generate_markdown_file TOOL CALLED (wrapper)", flush=True)
-
-    # Parse keywords safely
-    if isinstance(keywords_json, str):
-        try:
-            keywords_data = json.loads(keywords_json)
-            if isinstance(keywords_data, dict):
-                keywords = (
-                    keywords_data.get("primary", []) +
-                    keywords_data.get("secondary", []) +
-                    keywords_data.get("long_tail", [])
-                )
-            elif isinstance(keywords_data, list):
-                keywords = keywords_data
-            else:
-                keywords = []
-        except Exception as e:
-            print(f" Parse error: {e}", flush=True)
-            keywords = [keywords_json]
-    else:
-        keywords = keywords_json or []
 
     print(" Connecting to MCP server generate_markdown_file...", flush=True)
 
@@ -104,7 +240,6 @@ async def generate_markdown_file(title, content, keywords_json) -> dict:
             result = await session.call_tool("generate_markdown_file", {
                 "title": title,
                 "content": content,
-                "keywords": keywords,
                 "output_dir": "../output/blogs"
             })
 
@@ -121,3 +256,70 @@ async def generate_markdown_file(title, content, keywords_json) -> dict:
                 "output": data,
                 "status": "success"
             }
+
+def extract_first_topic(response: dict) -> dict:
+    
+    # Ensure 'topics' exists and has at least one item
+    topics = response.get("summary", {}).get("topics", [])
+    if not topics:
+        return {}
+    
+    first_topic = topics[0]
+    
+    # Extract data
+    topic_title = first_topic.get("title", "")
+    primary_keywords = [first_topic.get("primary_keyword", "")] if first_topic.get("primary_keyword") else []
+    secondary_keywords = first_topic.get("supporting_keywords", [])
+    topic_outline = first_topic.get("outline", [])
+    
+    return {
+        "topic": topic_title,
+        "keywords": {
+            "primary": primary_keywords,
+            "secondary": secondary_keywords
+        },
+        "outline":topic_outline
+    }
+
+
+async def generate_blog_outline(topic: str, keywords) -> str:
+    print(f"i am in outline - {topic}")
+    
+    params = StdioServerParameters(
+        command="python",
+        args=["../mcp-servers/outline_generator/server.py"]
+    )
+    print(f" Connecting to MCP server generate_blog_outline...")
+    async with stdio_client(params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            result = await session.call_tool("generate_outline", {
+                "title": topic,
+                "keywords": keywords
+            })
+            parsed = json.loads(result.content[0].text)
+            outline = parsed.get("outline")
+            return outline
+        
+async def generate_seo_title(topic: str, keywords_json: str, product_name: str = "") -> str:
+  
+    print(f" generate_seo_title TOOL CALLED! {keywords_json}", flush=True)
+    keywords_data = json.loads(keywords_json)
+    keywords = keywords_data.get('keywords', {}).get('primary', [topic])
+    
+    params = StdioServerParameters(
+        command="python",
+        args=["../mcp-servers/title_generator/server.py"]
+    )
+    print(f" Connecting to MCP server generate_seo_title...")
+    async with stdio_client(params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            result = await session.call_tool("generate_seo_title", {
+                "topic": topic,
+                "keywords": keywords,
+                "product_name": product_name
+            })
+            parsed = json.loads(result.content[0].text)
+            title = parsed.get("title")
+            return title

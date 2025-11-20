@@ -1,0 +1,427 @@
+{
+  "run_id": "ba17efd9",
+  "brand": "aspose",
+  "product": "Aspose.PSD for Java",
+  "locale": "en-US",
+  "clusters": [
+    {
+      "cluster_id": "c9",
+      "label": "ai to",
+      "members": [
+        {
+          "keyword": "ai to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 5000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.375,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c3",
+      "label": "to ai",
+      "members": [
+        {
+          "keyword": "jpeg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "converting jpeg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c1",
+      "label": "to jpeg",
+      "members": [
+        {
+          "keyword": "adobe illustrator to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "ai file to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c0",
+      "label": "jpg",
+      "members": [
+        {
+          "keyword": "ai to jpg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "ai to jpg free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c2",
+      "label": "raw",
+      "members": [
+        {
+          "keyword": "topaz jpeg to raw",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.056818,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c4",
+      "label": "raw",
+      "members": [
+        {
+          "keyword": "jpeg to raw ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c5",
+      "label": "ai",
+      "members": [
+        {
+          "keyword": "akvis artifact remover ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.2
+      }
+    }
+  ],
+  "topics": [
+    {
+      "cluster_id": "c9",
+      "title": "How to Convert AI Files to JPEG Using Aspose.PSD for Java",
+      "angle": "Step-by-step guide to converting Adobe Illustrator (AI) files to JPEG format using Aspose.PSD for Java",
+      "outline": [
+        "Introduction to AI and JPEG file formats",
+        "Overview of Aspose.PSD for Java capabilities",
+        "Setting up Aspose.PSD for Java in your development environment",
+        "Code example: Converting AI to JPEG",
+        "Tips for optimizing JPEG output quality",
+        "Common issues and troubleshooting"
+      ],
+      "target_persona": "Java developers and software engineers working with graphic file conversions",
+      "primary_keyword": "ai to jpeg",
+      "supporting_keywords": [
+        "convert ai to jpeg java",
+        "ai to jpeg conversion",
+        "Aspose.PSD ai to jpeg",
+        "java convert ai file",
+        "ai to jpeg free",
+        "ai to jpg",
+        "ai file to jpeg"
+      ],
+      "internal_links": [
+        "/products/psd/java/conversion",
+        "/docs/psd/java/convert-ai-to-jpeg",
+        "/blog/convert-ai-to-jpeg-using-aspose-psd-java"
+      ]
+    },
+    {
+      "cluster_id": "c3",
+      "title": "Converting JPEG to AI Format: What You Need to Know",
+      "angle": "Exploring the challenges and solutions for converting JPEG images to AI format, and how Aspose.PSD for Java can assist",
+      "outline": [
+        "Understanding JPEG and AI file formats",
+        "Why converting JPEG to AI is complex",
+        "Capabilities of Aspose.PSD for Java regarding JPEG and AI files",
+        "Workarounds and best practices for conversion",
+        "Sample code snippets and usage tips",
+        "Alternatives and complementary tools"
+      ],
+      "target_persona": "Graphic designers and developers interested in image format conversions",
+      "primary_keyword": "jpeg to ai",
+      "supporting_keywords": [
+        "converting jpeg to ai",
+        "jpeg to ai conversion",
+        "jpeg to ai file",
+        "convert jpeg to ai java",
+        "ai file from jpeg",
+        "jpeg to illustrator"
+      ],
+      "internal_links": [
+        "/products/psd/java/conversion",
+        "/docs/psd/java/jpeg-to-ai",
+        "/blog/jpeg-to-ai-conversion-guide"
+      ]
+    },
+    {
+      "cluster_id": "c1",
+      "title": "How to Convert Adobe Illustrator Files to JPEG Using Aspose.PSD for Java",
+      "angle": "A practical tutorial on converting AI files to JPEG format with Aspose.PSD for Java for high-quality image output",
+      "outline": [
+        "Introduction to Adobe Illustrator (AI) and JPEG formats",
+        "Setting up Aspose.PSD for Java for file conversion",
+        "Step-by-step code example for AI to JPEG conversion",
+        "Adjusting image quality and resolution settings",
+        "Handling common errors during conversion",
+        "Best practices for batch processing AI files"
+      ],
+      "target_persona": "Java developers and graphic designers needing automated AI to JPEG conversion",
+      "primary_keyword": "adobe illustrator to jpeg",
+      "supporting_keywords": [
+        "ai file to jpeg",
+        "convert ai to jpeg",
+        "illustrator to jpeg java",
+        "ai to jpg conversion",
+        "adobe illustrator export jpeg"
+      ],
+      "internal_links": [
+        "/products/psd/java/conversion",
+        "/docs/psd/java/ai-to-jpeg",
+        "/blog/illustrator-to-jpeg-conversion"
+      ]
+    },
+    {
+      "cluster_id": "c0",
+      "title": "Free and Easy Ways to Convert AI to JPG with Aspose.PSD for Java",
+      "angle": "Guide to converting AI files to JPG format using free features of Aspose.PSD for Java",
+      "outline": [
+        "Difference between JPG and JPEG formats",
+        "Using Aspose.PSD for Java for free AI to JPG conversion",
+        "Sample code for AI to JPG conversion",
+        "Quality settings and optimization tips",
+        "Limitations of free conversion options",
+        "Where to find additional resources and support"
+      ],
+      "target_persona": "Developers and hobbyists looking for cost-effective AI to JPG conversion solutions",
+      "primary_keyword": "ai to jpg free",
+      "supporting_keywords": [
+        "ai to jpg",
+        "free ai to jpg converter",
+        "convert ai to jpg java",
+        "ai to jpg online",
+        "ai to jpg converter free"
+      ],
+      "internal_links": [
+        "/products/psd/java/conversion",
+        "/docs/psd/java/free-ai-to-jpg",
+        "/blog/free-ai-to-jpg-conversion"
+      ]
+    },
+    {
+      "cluster_id": "c2",
+      "title": "Understanding the Conversion from Topaz JPEG to RAW Format",
+      "angle": "Informational overview about converting Topaz JPEG images to RAW format and related tools",
+      "outline": [
+        "What is Topaz JPEG and RAW image format",
+        "Challenges in converting JPEG to RAW",
+        "Available software and tools for conversion",
+        "Is Aspose.PSD for Java suitable for this conversion?",
+        "Best practices for image quality preservation",
+        "Use cases for converting JPEG to RAW"
+      ],
+      "target_persona": "Photographers and imaging professionals interested in advanced image format conversions",
+      "primary_keyword": "topaz jpeg to raw",
+      "supporting_keywords": [
+        "jpeg to raw conversion",
+        "topaz jpeg raw converter",
+        "convert jpeg to raw",
+        "image format conversion",
+        "raw image processing"
+      ],
+      "internal_links": [
+        "/products/psd/java/image-processing",
+        "/docs/psd/java/image-format-support",
+        "/blog/jpeg-to-raw-conversion"
+      ]
+    },
+    {
+      "cluster_id": "c4",
+      "title": "Exploring JPEG to RAW AI Conversion Techniques",
+      "angle": "Insights into converting JPEG images to RAW format using AI technologies and related software",
+      "outline": [
+        "Overview of JPEG and RAW formats",
+        "Role of AI in image format conversion",
+        "Current tools supporting JPEG to RAW AI conversion",
+        "Limitations and challenges",
+        "Potential of Aspose.PSD for Java in this area",
+        "Future trends in AI-based image conversion"
+      ],
+      "target_persona": "Tech enthusiasts and developers exploring AI-powered image conversions",
+      "primary_keyword": "jpeg to raw ai",
+      "supporting_keywords": [
+        "jpeg to raw conversion ai",
+        "ai image conversion",
+        "jpeg to raw software",
+        "ai based image processing",
+        "raw format conversion"
+      ],
+      "internal_links": [
+        "/products/psd/java/ai-features",
+        "/docs/psd/java/image-conversion",
+        "/blog/ai-image-conversion-trends"
+      ]
+    },
+    {
+      "cluster_id": "c5",
+      "title": "Using Akvis Artifact Remover AI for Image Enhancement",
+      "angle": "An overview of Akvis Artifact Remover AI and how it can improve image quality by removing artifacts",
+      "outline": [
+        "Introduction to Akvis Artifact Remover AI",
+        "Common image artifacts and their impact",
+        "How AI enhances artifact removal",
+        "Comparison with other image enhancement tools",
+        "Integration possibilities with Aspose.PSD for Java",
+        "Practical tips for best results"
+      ],
+      "target_persona": "Photographers, graphic designers, and developers focused on image quality enhancement",
+      "primary_keyword": "akvis artifact remover ai",
+      "supporting_keywords": [
+        "artifact removal ai",
+        "image enhancement ai",
+        "akvis ai tools",
+        "remove image artifacts",
+        "ai photo restoration"
+      ],
+      "internal_links": [
+        "/products/psd/java/image-enhancement",
+        "/docs/psd/java/integration",
+        "/blog/image-enhancement-ai-tools"
+      ]
+    }
+  ]
+}

@@ -3,12 +3,11 @@ SerpAPI Keyword Service
 Fetches keyword suggestions from Google search results
 """
 
-from .base_keyword_service import BaseKeywordService
 from typing import Dict, List
 import os
 import httpx
 
-class SerpAPIKeywordService(BaseKeywordService):
+class SerpAPIKeywordService:
     """
     Fetch keywords using SerpAPI
     Free tier: 100 searches/month
@@ -26,14 +25,6 @@ class SerpAPIKeywordService(BaseKeywordService):
         return available
     
     async def fetch_keywords(self, topic: str, product_name: str = None) -> Dict:
-        """
-        Fetch keywords from SerpAPI
-        
-        Gets:
-        - Related searches
-        - People also ask questions
-        - Auto-complete suggestions
-        """
         
         if not self.is_available():
             return self._empty_result()
@@ -61,19 +52,11 @@ class SerpAPIKeywordService(BaseKeywordService):
                 data = response.json()
             
 
-            print(f"SerpAPI Response Keys: {data.keys()}")
-            print(f" Organic Results: {len(data.get('organic_results', []))}")
-            print(f" Related Searches: {data.get('related_searches', [])}")
-            print(f" People Also Ask: {len(data.get('related_questions', []))}")
-
             # Extract keywords from different sections
             primary = self._extract_primary_keywords(data, topic)
             secondary = self._extract_related_searches(data)
             long_tail = self._extract_people_also_ask(data)
-            
-            print(f" Extracted Primary: {primary}")
-            print(f" Extracted Secondary: {secondary}")
-            print(f" Extracted Long-tail: {long_tail}")
+    
 
             return {
                 "source": "SerpAPI",

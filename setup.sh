@@ -1,11 +1,16 @@
 #!/bin/bash
 
-# Check Python version
-PYTHON_VERSION=$(python3 --version 2>&1 | awk '{print $2}')
-REQUIRED_VERSION="3.10"
+# ===============================================
+# Blog Agent Backend Setup Script
+# ===============================================
 
-if [[ "$PYTHON_VERSION" < "$REQUIRED_VERSION" ]]; then
-    echo "Python 3.10 or higher is required. Please install it first."
+# Required Python version
+REQUIRED_VERSION="3.11"
+
+# Check current Python version
+PYTHON_VERSION=$(python3 --version 2>&1 | awk '{print $2}')
+if [[ "$(printf '%s\n' "$REQUIRED_VERSION" "$PYTHON_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]]; then
+    echo "❌ Python $REQUIRED_VERSION or higher is required. Current version: $PYTHON_VERSION"
     exit 1
 fi
 
@@ -16,27 +21,42 @@ echo "🔧 Setting up Blog Agent Backend..."
 # Install uv if needed
 if ! command -v uv &> /dev/null; then
     echo "📦 Installing uv..."
-    pip3 install uv --user
+    python3 -m pip install --user uv
 fi
 
 # Create virtual environment
-echo "📦 Creating virtual environment..."
-python3.10 -m venv venv
+if [ -d "venv" ]; then
+    echo "⚠️  Removing existing venv..."
+    rm -rf venv
+fi
 
-# Activate virtual environment
+echo "📦 Creating virtual environment..."
+python3 -m venv venv
+
+# Activate venv (only works if script is sourced)
 source venv/bin/activate
 
-# Install agent engine dependencies
+# Upgrade pip inside venv
+python -m pip install --upgrade pip
+
+# Install agent_engine dependencies
 echo "📦 Installing Agent Engine dependencies..."
-cd agent_engine
-pip install -r requirements.txt
+cd agent_engine || { echo "❌ agent_engine folder not found"; exit 1; }
+python -m pip install -r requirements.txt
 cd ..
 
-# Install MCP server dependencies using uv
-echo "📦 Installing MCP Server dependencies with uv..."
-cd mcp-servers
-pip install -r requirements.txt
+# Install MCP server dependencies
+echo "📦 Installing MCP Server dependencies..."
+cd mcp-servers || { echo "❌ mcp-servers folder not found"; exit 1; }
+python -m pip install -r requirements.txt
 cd ..
+
 echo "✅ Setup complete!"
-source venv/bin/activate  
-cd agent_engine
+
+# Instructions for the user
+echo "-----------------------------------------"
+echo "To start working:"
+echo "1. Activate virtual environment: source venv/bin/activate"
+echo "2. Navigate to agent_engine: cd agent_engine"
+echo "3. Run your scripts normally."
+echo "-----------------------------------------"

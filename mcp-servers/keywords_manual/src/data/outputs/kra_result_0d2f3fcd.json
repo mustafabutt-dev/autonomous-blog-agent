@@ -1,0 +1,361 @@
+{
+  "run_id": "0d2f3fcd",
+  "brand": "aspose",
+  "product": "Aspose.PSD for .NET",
+  "locale": "en-US",
+  "clusters": [
+    {
+      "cluster_id": "c9",
+      "label": "ai to",
+      "members": [
+        {
+          "keyword": "ai to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 5000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.375,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c3",
+      "label": "to ai",
+      "members": [
+        {
+          "keyword": "jpeg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "converting jpeg to ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c1",
+      "label": "to jpeg",
+      "members": [
+        {
+          "keyword": "adobe illustrator to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "ai file to jpeg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c0",
+      "label": "jpg",
+      "members": [
+        {
+          "keyword": "ai to jpg",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "ai to jpg free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.215909,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c2",
+      "label": "raw",
+      "members": [
+        {
+          "keyword": "topaz jpeg to raw",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.056818,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c4",
+      "label": "raw",
+      "members": [
+        {
+          "keyword": "jpeg to raw ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c5",
+      "label": "ai",
+      "members": [
+        {
+          "keyword": "akvis artifact remover ai",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.2
+      }
+    }
+  ],
+  "topics": [
+    {
+      "cluster_id": "c9",
+      "title": "How to Convert AI Files to JPEG Using Aspose.PSD for .NET",
+      "angle": "Step-by-step guide to converting Adobe Illustrator (AI) files to JPEG format with Aspose.PSD for .NET",
+      "outline": [
+        "Introduction to AI and JPEG file formats",
+        "Overview of Aspose.PSD for .NET capabilities",
+        "Step-by-step code example for AI to JPEG conversion",
+        "Tips for optimizing JPEG output quality",
+        "Common issues and troubleshooting"
+      ],
+      "target_persona": "Software developers and graphic designers looking to automate AI to JPEG conversion",
+      "primary_keyword": "ai to jpeg",
+      "supporting_keywords": [
+        "ai to jpg",
+        "ai to jpg free",
+        "adobe illustrator to jpeg",
+        "ai file to jpeg"
+      ],
+      "internal_links": [
+        "/products/psd/net/conversion",
+        "/documentation/psd/net/conversion/ai-to-jpeg",
+        "/blog/convert-ai-to-jpeg-with-aspose-psd"
+      ]
+    },
+    {
+      "cluster_id": "c3",
+      "title": "Converting JPEG to AI: What You Need to Know",
+      "angle": "Informational overview on converting JPEG images to AI format and how Aspose.PSD for .NET supports related workflows",
+      "outline": [
+        "Understanding JPEG and AI file formats",
+        "Challenges in converting JPEG to AI",
+        "Possible approaches and tools for conversion",
+        "How Aspose.PSD for .NET fits into the conversion process",
+        "Best practices and tips for quality preservation"
+      ],
+      "target_persona": "Graphic designers and developers interested in image format conversions",
+      "primary_keyword": "jpeg to ai",
+      "supporting_keywords": [
+        "converting jpeg to ai",
+        "jpeg to raw ai",
+        "akvis artifact remover ai"
+      ],
+      "internal_links": [
+        "/products/psd/net/conversion",
+        "/documentation/psd/net/conversion/jpeg-to-ai",
+        "/blog/jpeg-to-ai-conversion-guide"
+      ]
+    },
+    {
+      "cluster_id": "c1",
+      "title": "From Adobe Illustrator to JPEG: A Developer’s Guide with Aspose.PSD for .NET",
+      "angle": "Detailed tutorial on converting Adobe Illustrator files to JPEG format programmatically using Aspose.PSD for .NET",
+      "outline": [
+        "Introduction to Adobe Illustrator and JPEG formats",
+        "Why convert AI files to JPEG?",
+        "Using Aspose.PSD for .NET for conversion",
+        "Sample code walkthrough",
+        "Handling different AI file versions",
+        "Optimizing JPEG output settings"
+      ],
+      "target_persona": "Developers and designers automating image format conversions",
+      "primary_keyword": "adobe illustrator to jpeg",
+      "supporting_keywords": [
+        "ai file to jpeg",
+        "ai to jpeg",
+        "ai to jpg",
+        "ai to jpg free"
+      ],
+      "internal_links": [
+        "/products/psd/net/conversion",
+        "/documentation/psd/net/conversion/ai-to-jpeg",
+        "/blog/adobe-illustrator-to-jpeg-conversion"
+      ]
+    },
+    {
+      "cluster_id": "c0",
+      "title": "Free and Easy Ways to Convert AI to JPG with Aspose.PSD for .NET",
+      "angle": "Exploring free methods and tools, including Aspose.PSD for .NET, to convert AI files to JPG format efficiently",
+      "outline": [
+        "Overview of AI and JPG formats",
+        "Free tools vs paid solutions for AI to JPG conversion",
+        "Using Aspose.PSD for .NET for free AI to JPG conversion",
+        "Step-by-step conversion process",
+        "Tips for maintaining image quality",
+        "Comparing output results"
+      ],
+      "target_persona": "Budget-conscious developers and designers needing AI to JPG conversion",
+      "primary_keyword": "ai to jpg free",
+      "supporting_keywords": [
+        "ai to jpg",
+        "ai to jpeg",
+        "adobe illustrator to jpeg",
+        "ai file to jpeg"
+      ],
+      "internal_links": [
+        "/products/psd/net/conversion",
+        "/documentation/psd/net/conversion/ai-to-jpg",
+        "/blog/free-ai-to-jpg-conversion-methods"
+      ]
+    },
+    {
+      "cluster_id": "c2",
+      "title": "Understanding Topaz JPEG to RAW Conversion and Its Relevance to Aspose.PSD",
+      "angle": "Exploring the concept of JPEG to RAW conversion with Topaz and how Aspose.PSD for .NET complements image processing workflows",
+      "outline": [
+        "What is JPEG to RAW conversion?",
+        "Overview of Topaz JPEG to RAW technology",
+        "Limitations and benefits of JPEG to RAW conversion",
+        "How Aspose.PSD for .NET supports RAW image formats",
+        "Integrating Aspose.PSD with Topaz workflows",
+        "Use cases and best practices"
+      ],
+      "target_persona": "Photographers and developers interested in advanced image processing",
+      "primary_keyword": "topaz jpeg to raw",
+      "supporting_keywords": [
+        "jpeg to raw ai",
+        "akvis artifact remover ai",
+        "raw image processing"
+      ],
+      "internal_links": [
+        "/products/psd/net/raw-image-support",
+        "/documentation/psd/net/image-processing",
+        "/blog/jpeg-to-raw-conversion-explained"
+      ]
+    }
+  ]
+}
