@@ -78,44 +78,38 @@ jobs:
         cd agent_engine
         python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}"
 
-    - name: Collect generated blogs with folder structure
+    - name: Find generated blog folder
+      id: find_blog
       run: |
-        mkdir -p staging_blogs
+        echo "=== Searching for generated blog folder ==="
         
-        # Find MD files created in the last 10 minutes
-        echo "=== Finding recently generated MD files ==="
-        find . -name "*.md" -type f -mmin -10 | while read mdfile; do
-          echo "Found: $mdfile"
-          
-          # Get the directory containing the MD file
-          md_dir=$(dirname "$mdfile")
-          md_basename=$(basename "$mdfile")
-          
-          # Create the same directory structure in staging
-          target_dir="staging_blogs/$(basename "$md_dir")"
-          mkdir -p "$target_dir"
-          
-          # Copy the entire directory (including any associated files/folders)
-          cp -r "$md_dir"/* "$target_dir/" 2>/dev/null || true
-          
-          echo "Copied $md_dir to $target_dir"
-        done
+        # Search for folders matching the pattern YYYY-MM-DD-*
+        blog_folder=$(find . -type d -name "20??-??-??-*" -mmin -10 | head -1)
         
-        echo ""
-        echo "=== Staging directory structure ==="
-        tree staging_blogs/ 2>/dev/null || find staging_blogs/ -type f
-        
-        # Check if we have any files
-        if [ -z "$(ls -A staging_blogs/)" ]; then
-          echo "❌ No blog files were generated!"
+        if [ -z "$blog_folder" ]; then
+          echo "❌ No blog folder found with pattern YYYY-MM-DD-*"
           exit 1
         fi
+        
+        echo "Found blog folder: $blog_folder"
+        blog_folder_name=$(basename "$blog_folder")
+        echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
+        echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+        
+        # Verify index.md exists
+        if [ ! -f "$blog_folder/index.md" ]; then
+          echo "❌ index.md not found in $blog_folder"
+          exit 1
+        fi
+        
+        echo "✅ Found: $blog_folder_name with index.md"
+        ls -la "$blog_folder"
 
     - name: Upload Generated Blog as Artifact
       uses: actions/upload-artifact@v4
       with:
         name: generated-blog-${{ github.run_number }}
-        path: staging_blogs/
+        path: ${{ steps.find_blog.outputs.blog_folder_path }}
         if-no-files-found: error
 
     ####################################################################
@@ -123,6 +117,9 @@ jobs:
     ####################################################################
     - name: Push generated blog to ganji repo
       if: success()
+      env:
+        BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
+        BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
       run: |
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
@@ -138,31 +135,30 @@ jobs:
           exit 1
         }
 
-        echo "Copying generated blog folders (excluding README and existing files)..."
+        echo "Copying blog folder: $BLOG_FOLDER_NAME"
         
-        # Copy only the newly generated content from staging_blogs
-        cp -r staging_blogs/* ganji/ || {
-          echo "❌ Failed to copy files from staging_blogs/"
+        # Copy only the specific blog folder
+        cp -r "$BLOG_FOLDER_PATH" ganji/ || {
+          echo "❌ Failed to copy folder $BLOG_FOLDER_PATH"
           exit 1
         }
 
         cd ganji
         
-        # Only add the new files/folders (not README.md or other existing files)
-        git add staging_blogs/* 2>/dev/null || git add . --ignore-errors
+        # Add only the new blog folder
+        git add "$BLOG_FOLDER_NAME"
         
         # Check what's being committed
         echo "=== Files to be committed ==="
         git status --short
         
-        # Commit only if there are changes
         if git diff --staged --quiet; then
           echo "⚠️ No new files to commit"
         else
           git commit -m "Add generated blog: ${{ inputs.topic }} (Run ${{ github.run_number }})"
           git push || {
-            echo "❌ Authentication failed when pushing — invalid PAT or insufficient permissions."
+            echo "❌ Authentication failed when pushing."
             exit 1
           }
-          echo "✅ Successfully pushed blog to ganji repo"
+          echo "✅ Successfully pushed $BLOG_FOLDER_NAME to ganji repo"
         fi
