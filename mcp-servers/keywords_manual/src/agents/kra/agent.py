@@ -5,12 +5,6 @@ import sys, os
 from typing import List
 from openai import OpenAI
 
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-ASPOSE_LLM_API_KEY = os.getenv('ASPOSE_LLM_API_KEY')
-ASPOSE_LLM_BASE_URL = os.getenv('ASPOSE_LLM_BASE_URL')
-ASPOSE_LLM_MODEL = os.getenv('ASPOSE_LLM_MODEL')
-print(f"testing -- OPENAI_API_KEY: {OPENAI_API_KEY[:10] if OPENAI_API_KEY else 'NOT SET'}", flush=True, file=sys.stderr)
-
 current_file = Path(__file__).resolve()
 # Go up to the blog-agent-backend root
 repo_root = current_file.parent.parent.parent.parent.parent.parent
