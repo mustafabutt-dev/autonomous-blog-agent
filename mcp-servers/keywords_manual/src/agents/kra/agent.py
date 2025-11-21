@@ -4,8 +4,13 @@ from pathlib import Path
 import sys
 from typing import List
 from openai import OpenAI
-agent_engine_path = Path(__file__).parent.parent.parent.parent.parent.parent / 'agent_engine'
-sys.path.append(str(agent_engine_path))
+current_file = Path(__file__).resolve()
+# Go up to the blog-agent-backend root
+repo_root = current_file.parent.parent.parent.parent.parent.parent
+agent_engine_path = repo_root / 'agent_engine'
+
+# Add to path
+sys.path.insert(0, str(agent_engine_path))
 from config import settings
 print(f"testing -- {settings} - {agent_engine_path}", flush=True, file=sys.stderr)
 from .schemas import Cluster, TopicIdea
