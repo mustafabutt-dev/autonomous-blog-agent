@@ -26,6 +26,16 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     
+    # Set environment variables at the JOB level so they're available to ALL steps
+    env:
+      OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
+      OPENAI_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
+      OPENAI_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
+      ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
+      ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
+      ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
+      SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+    
     steps:
     - uses: actions/checkout@v4
     
@@ -61,14 +71,6 @@ jobs:
         cd ..
     
     - name: Generate Blog
-      env:
-        OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
-        OPENAI_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-        OPENAI_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-        ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
-        ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-        ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-        SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
       run: |
         cd agent_engine
         python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}"
