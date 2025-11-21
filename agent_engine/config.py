@@ -5,7 +5,6 @@ Configuration for Blog Agent
 import os
 from typing import List
 from pydantic_settings import BaseSettings
-from pathlib import Path
 
 class Settings(BaseSettings):
     ASPOSE_LLM_BASE_URL: str = "http://your-llm-server.com/v1"
@@ -45,21 +44,10 @@ class Settings(BaseSettings):
     KRA_DATA_DIR: str = "./src/data/samples"
     KRA_OUTPUT_DIR: str = "./src/data/outputs"
     DEBUG: bool = False
-    
     class Config:
         env_file = ".env"
-        env_file_encoding = 'utf-8'
-        # This allows pydantic to continue even if .env file doesn't exist
-        # It will still read from environment variables
-        extra = 'ignore'
         
     def get_allowed_origins(self) -> List[str]:
         return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
 
-# Check if .env exists, if not, load from environment variables only
-env_path = Path(__file__).parent / ".env"
-if env_path.exists():
-    settings = Settings(_env_file=str(env_path))
-else:
-    # Load from environment variables directly (for GitHub Actions)
-    settings = Settings()
+settings = Settings()
