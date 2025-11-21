@@ -7,7 +7,7 @@ from openai import OpenAI
 agent_engine_path = Path(__file__).parent.parent.parent.parent.parent.parent / 'agent_engine'
 sys.path.append(str(agent_engine_path))
 from config import settings
-print(f"testing -- {settings.OPENAI_API_KEY} - {agent_engine_path}", flush=True, file=sys.stderr)
+print(f"testing -- {settings} - {agent_engine_path}", flush=True, file=sys.stderr)
 from .schemas import Cluster, TopicIdea
 
 class KeywordResearchAgent:
