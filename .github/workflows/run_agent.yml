@@ -101,12 +101,23 @@ jobs:
           mcp-servers/output/blogs/*.md
           output/**/*.md
         if-no-files-found: warn
-    
-    - name: Commit Generated Blog (Optional)
+
+    ####################################################################
+    # ✔ FINAL STEP: Push generated blog to ganji repo
+    ####################################################################
+    - name: Push generated blog to ganji repo
       if: success()
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add -A mcp-servers/output/blogs/*.md 2>/dev/null || true
-        git diff --staged --quiet || git commit -m "Generated blog: ${{ inputs.topic }}"
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+
+        echo "Cloning ganji repo..."
+        git clone https://x-access-token:${{ secrets.GANJI_REPO_PAT }}@github.com/mustafabutt/ganji.git ganji
+
+        echo "Copying generated blog files..."
+        cp mcp-servers/output/blogs/*.md ganji/ 2>/dev/null || echo "No MD files to copy"
+
+        cd ganji
+        git add .
+        git commit -m "Add generated blog: ${{ inputs.topic }} (Run ${{ github.run_number }})" || echo "No changes to commit"
         git push || echo "No changes to push"
