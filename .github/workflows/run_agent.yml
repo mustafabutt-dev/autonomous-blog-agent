@@ -54,11 +54,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-
         cd agent_engine
         pip install -r requirements.txt
         cd ..
-
         cd mcp-servers
         pip install -r requirements.txt
         cd ..
@@ -75,29 +73,16 @@ jobs:
         EOF
         echo ".env file created"
 
-    - name: Verify .env file (without exposing secrets)
-      run: |
-        cd agent_engine
-        echo "Checking .env file exists:"
-        ls -la .env
-        echo "Number of lines in .env:"
-        wc -l .env
-
     - name: Generate Blog
       run: |
         cd agent_engine
         python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}"
 
-    - name: Prepare blogs-to-push folder
-      run: |
-        mkdir -p blogs-to-push
-        cp -r mcp-servers/output/blogs/*.md blogs-to-push/ 2>/dev/null || echo "⚠ No generated blogs found in mcp-servers/output/blogs/"
-
     - name: Upload Generated Blog as Artifact
       uses: actions/upload-artifact@v4
       with:
         name: generated-blog-${{ github.run_number }}
-        path: blogs-to-push/*.md
+        path: output/blogs/*.md
         if-no-files-found: warn
 
     ####################################################################
@@ -120,9 +105,9 @@ jobs:
           exit 1
         }
 
-        echo "Copying generated blog files from blogs-to-push/"
-        cp blogs-to-push/*.md ganji/ 2>/dev/null || {
-          echo "❌ No MD files found in blogs-to-push/"
+        echo "Copying generated blog files from output/blogs/"
+        cp output/blogs/*.md ganji/ 2>/dev/null || {
+          echo "❌ No MD files found in output/blogs/"
           exit 1
         }
 
