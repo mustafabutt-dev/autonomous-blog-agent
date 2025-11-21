@@ -78,12 +78,55 @@ jobs:
         cd agent_engine
         python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}"
 
+    - name: Find and list generated blog files
+      run: |
+        echo "=== Searching for generated MD files ==="
+        find . -name "*.md" -type f -mmin -10 -exec ls -lh {} \;
+        echo ""
+        echo "=== Checking common output directories ==="
+        ls -la output/blogs/ 2>/dev/null || echo "output/blogs/ not found"
+        ls -la mcp-servers/output/blogs/ 2>/dev/null || echo "mcp-servers/output/blogs/ not found"
+        ls -la agent_engine/output/blogs/ 2>/dev/null || echo "agent_engine/output/blogs/ not found"
+
+    - name: Collect generated blogs to staging directory
+      run: |
+        mkdir -p staging_blogs
+        
+        # Try to find and copy MD files from various possible locations
+        if [ -d "mcp-servers/output/blogs" ]; then
+          echo "Found files in mcp-servers/output/blogs/"
+          cp mcp-servers/output/blogs/*.md staging_blogs/ 2>/dev/null || echo "No MD files in mcp-servers/output/blogs/"
+        fi
+        
+        if [ -d "output/blogs" ]; then
+          echo "Found files in output/blogs/"
+          cp output/blogs/*.md staging_blogs/ 2>/dev/null || echo "No MD files in output/blogs/"
+        fi
+        
+        if [ -d "agent_engine/output/blogs" ]; then
+          echo "Found files in agent_engine/output/blogs/"
+          cp agent_engine/output/blogs/*.md staging_blogs/ 2>/dev/null || echo "No MD files in agent_engine/output/blogs/"
+        fi
+        
+        # Find any MD files created in the last 10 minutes
+        find . -name "*.md" -type f -mmin -10 -exec cp {} staging_blogs/ \; 2>/dev/null || true
+        
+        echo ""
+        echo "=== Files collected in staging_blogs/ ==="
+        ls -la staging_blogs/
+        
+        # Check if we have any files
+        if [ -z "$(ls -A staging_blogs/)" ]; then
+          echo "❌ No blog files were generated!"
+          exit 1
+        fi
+
     - name: Upload Generated Blog as Artifact
       uses: actions/upload-artifact@v4
       with:
         name: generated-blog-${{ github.run_number }}
-        path: output/blogs/*.md
-        if-no-files-found: warn
+        path: staging_blogs/*.md
+        if-no-files-found: error
 
     ####################################################################
     # Push generated blog to ganji repo
@@ -105,16 +148,18 @@ jobs:
           exit 1
         }
 
-        echo "Copying generated blog files from output/blogs/"
-        cp output/blogs/*.md ganji/ 2>/dev/null || {
-          echo "❌ No MD files found in output/blogs/"
+        echo "Copying generated blog files from staging_blogs/"
+        cp staging_blogs/*.md ganji/ || {
+          echo "❌ No MD files found in staging_blogs/"
           exit 1
         }
 
         cd ganji
-        git add .
+        git add *.md
         git commit -m "Add generated blog: ${{ inputs.topic }} (Run ${{ github.run_number }})" || echo "⚠ Nothing to commit"
         git push || {
           echo "❌ Authentication failed when pushing — invalid PAT or insufficient permissions."
           exit 1
         }
+        
+        echo "✅ Successfully pushed blog to ganji repo"
