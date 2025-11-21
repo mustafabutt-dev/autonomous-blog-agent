@@ -111,13 +111,27 @@ jobs:
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
 
-        echo "Cloning ganji repo..."
-        git clone https://x-access-token:${{ secrets.GANJI_REPO_PAT }}@github.com/mustafabutt/ganji.git ganji
+        if [ -z "${{ secrets.GANJI_REPO_PAT }}" ]; then
+          echo "❌ GANJI_REPO_PAT is EMPTY! Fix your repo secret."
+          exit 1
+        fi
 
-        echo "Copying generated blog files..."
-        cp mcp-servers/output/blogs/*.md ganji/ 2>/dev/null || echo "No MD files to copy"
+        echo "Cloning ganji repo..."
+        git clone https://x-access-token:${{ secrets.GANJI_REPO_PAT }}@github.com/mustafabutt/ganji.git ganji || {
+          echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
+          exit 1
+        }
+
+        echo "Copying generated blog files from output/blogs/"
+        cp output/blogs/*.md ganji/ 2>/dev/null || {
+          echo "❌ No MD files found in output/blogs/"
+          exit 1
+        }
 
         cd ganji
         git add .
-        git commit -m "Add generated blog: ${{ inputs.topic }} (Run ${{ github.run_number }})" || echo "No changes to commit"
-        git push || echo "No changes to push"
+        git commit -m "Add generated blog: ${{ inputs.topic }} (Run ${{ github.run_number }})" || echo "⚠ Nothing to commit"
+        git push || {
+          echo "❌ Authentication failed when pushing — invalid PAT or insufficient permissions."
+          exit 1
+        }
