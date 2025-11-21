@@ -60,48 +60,9 @@ jobs:
         pip install -r requirements.txt
         cd ..
     
-    - name: Debug Environment Variables
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        OPENAI_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-        OPENAI_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-        ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
-        ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-        ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-        SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-      run: |
-        echo "Environment variables check:"
-        echo "OPENAI_API_KEY length: ${#OPENAI_API_KEY}"
-        echo "OPENAI_API_KEY first 10 chars: ${OPENAI_API_KEY:0:10}"
-        echo "ASPOSE_LLM_API_KEY length: ${#ASPOSE_LLM_API_KEY}"
-        echo "Python environment check:"
-        python3 -c "import os; print(f'OPENAI_API_KEY from Python: {os.getenv(\"OPENAI_API_KEY\", \"NOT SET\")[:10]}...')"
-        python3 -c "import os; print(f'ASPOSE_LLM_API_KEY from Python: {os.getenv(\"ASPOSE_LLM_API_KEY\", \"NOT SET\")[:10]}...')"
-    
-    - name: Test config loading
-      env:
-        OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
-        OPENAI_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-        OPENAI_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-        ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
-        ASPOSE_LLM_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
-        ASPOSE_LLM_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
-        SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
-      run: |
-        cd agent_engine
-        python3 -c "
-        import sys
-        import os
-        print('Direct env check:', os.getenv('OPENAI_API_KEY', 'NOT SET')[:10] if os.getenv('OPENAI_API_KEY') else 'NOT SET')
-        
-        from config import settings
-        print(f'Settings OPENAI_API_KEY: {settings.OPENAI_API_KEY[:10] if settings.OPENAI_API_KEY else \"NOT SET\"}')
-        print(f'Settings ASPOSE_LLM_API_KEY: {settings.ASPOSE_LLM_API_KEY[:10] if settings.ASPOSE_LLM_API_KEY else \"NOT SET\"}')
-        "
-    
     - name: Generate Blog
       env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
         OPENAI_BASE_URL: ${{ secrets.ASPOSE_LLM_BASE_URL }}
         OPENAI_MODEL: ${{ secrets.ASPOSE_LLM_MODEL }}
         ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
