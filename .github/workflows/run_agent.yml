@@ -78,42 +78,32 @@ jobs:
         cd agent_engine
         python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}"
 
-    - name: Find and list generated blog files
-      run: |
-        echo "=== Searching for generated MD files ==="
-        find . -name "*.md" -type f -mmin -10 -exec ls -lh {} \;
-        echo ""
-        echo "=== Checking common output directories ==="
-        ls -la output/blogs/ 2>/dev/null || echo "output/blogs/ not found"
-        ls -la mcp-servers/output/blogs/ 2>/dev/null || echo "mcp-servers/output/blogs/ not found"
-        ls -la agent_engine/output/blogs/ 2>/dev/null || echo "agent_engine/output/blogs/ not found"
-
-    - name: Collect generated blogs to staging directory
+    - name: Collect generated blogs with folder structure
       run: |
         mkdir -p staging_blogs
         
-        # Try to find and copy MD files from various possible locations
-        if [ -d "mcp-servers/output/blogs" ]; then
-          echo "Found files in mcp-servers/output/blogs/"
-          cp mcp-servers/output/blogs/*.md staging_blogs/ 2>/dev/null || echo "No MD files in mcp-servers/output/blogs/"
-        fi
-        
-        if [ -d "output/blogs" ]; then
-          echo "Found files in output/blogs/"
-          cp output/blogs/*.md staging_blogs/ 2>/dev/null || echo "No MD files in output/blogs/"
-        fi
-        
-        if [ -d "agent_engine/output/blogs" ]; then
-          echo "Found files in agent_engine/output/blogs/"
-          cp agent_engine/output/blogs/*.md staging_blogs/ 2>/dev/null || echo "No MD files in agent_engine/output/blogs/"
-        fi
-        
-        # Find any MD files created in the last 10 minutes
-        find . -name "*.md" -type f -mmin -10 -exec cp {} staging_blogs/ \; 2>/dev/null || true
+        # Find MD files created in the last 10 minutes
+        echo "=== Finding recently generated MD files ==="
+        find . -name "*.md" -type f -mmin -10 | while read mdfile; do
+          echo "Found: $mdfile"
+          
+          # Get the directory containing the MD file
+          md_dir=$(dirname "$mdfile")
+          md_basename=$(basename "$mdfile")
+          
+          # Create the same directory structure in staging
+          target_dir="staging_blogs/$(basename "$md_dir")"
+          mkdir -p "$target_dir"
+          
+          # Copy the entire directory (including any associated files/folders)
+          cp -r "$md_dir"/* "$target_dir/" 2>/dev/null || true
+          
+          echo "Copied $md_dir to $target_dir"
+        done
         
         echo ""
-        echo "=== Files collected in staging_blogs/ ==="
-        ls -la staging_blogs/
+        echo "=== Staging directory structure ==="
+        tree staging_blogs/ 2>/dev/null || find staging_blogs/ -type f
         
         # Check if we have any files
         if [ -z "$(ls -A staging_blogs/)" ]; then
@@ -125,7 +115,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: generated-blog-${{ github.run_number }}
-        path: staging_blogs/*.md
+        path: staging_blogs/
         if-no-files-found: error
 
     ####################################################################
@@ -148,18 +138,31 @@ jobs:
           exit 1
         }
 
-        echo "Copying generated blog files from staging_blogs/"
-        cp staging_blogs/*.md ganji/ || {
-          echo "❌ No MD files found in staging_blogs/"
+        echo "Copying generated blog folders (excluding README and existing files)..."
+        
+        # Copy only the newly generated content from staging_blogs
+        cp -r staging_blogs/* ganji/ || {
+          echo "❌ Failed to copy files from staging_blogs/"
           exit 1
         }
 
         cd ganji
-        git add *.md
-        git commit -m "Add generated blog: ${{ inputs.topic }} (Run ${{ github.run_number }})" || echo "⚠ Nothing to commit"
-        git push || {
-          echo "❌ Authentication failed when pushing — invalid PAT or insufficient permissions."
-          exit 1
-        }
         
-        echo "✅ Successfully pushed blog to ganji repo"
+        # Only add the new files/folders (not README.md or other existing files)
+        git add staging_blogs/* 2>/dev/null || git add . --ignore-errors
+        
+        # Check what's being committed
+        echo "=== Files to be committed ==="
+        git status --short
+        
+        # Commit only if there are changes
+        if git diff --staged --quiet; then
+          echo "⚠️ No new files to commit"
+        else
+          git commit -m "Add generated blog: ${{ inputs.topic }} (Run ${{ github.run_number }})"
+          git push || {
+            echo "❌ Authentication failed when pushing — invalid PAT or insufficient permissions."
+            exit 1
+          }
+          echo "✅ Successfully pushed blog to ganji repo"
+        fi
