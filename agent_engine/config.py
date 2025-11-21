@@ -4,7 +4,8 @@ Configuration for Blog Agent
 
 import os
 from typing import List
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pathlib import Path
 
 class Settings(BaseSettings):
     ASPOSE_LLM_BASE_URL: str = "http://your-llm-server.com/v1"
@@ -26,7 +27,7 @@ class Settings(BaseSettings):
     # NEW: Keyword Services
     GSC_CREDENTIALS_PATH: str = ""
     GSC_SITE_URL: str = ""
-    SERPAPI_API_KEY: str = ""  # Add this!
+    SERPAPI_API_KEY: str = ""
     
     # Agent Settings
     MAX_TOKENS: int = 5000
@@ -44,8 +45,15 @@ class Settings(BaseSettings):
     KRA_DATA_DIR: str = "./src/data/samples"
     KRA_OUTPUT_DIR: str = "./src/data/outputs"
     DEBUG: bool = False
-    class Config:
-        env_file = ".env"
+    
+    model_config = SettingsConfigDict(
+        env_file='.env',
+        env_file_encoding='utf-8',
+        case_sensitive=False,
+        # This is the key setting - environment variables take precedence over .env file
+        env_prefix='',
+        extra='ignore'
+    )
         
     def get_allowed_origins(self) -> List[str]:
         return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
