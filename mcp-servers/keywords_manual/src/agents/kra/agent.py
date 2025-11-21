@@ -1,9 +1,16 @@
 from __future__ import annotations
 import json, uuid
 from pathlib import Path
-import sys
+import sys, os
 from typing import List
 from openai import OpenAI
+
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+ASPOSE_LLM_API_KEY = os.getenv('ASPOSE_LLM_API_KEY')
+ASPOSE_LLM_BASE_URL = os.getenv('ASPOSE_LLM_BASE_URL')
+ASPOSE_LLM_MODEL = os.getenv('ASPOSE_LLM_MODEL')
+print(f"testing -- OPENAI_API_KEY: {OPENAI_API_KEY[:10] if OPENAI_API_KEY else 'NOT SET'}", flush=True, file=sys.stderr)
+
 current_file = Path(__file__).resolve()
 # Go up to the blog-agent-backend root
 repo_root = current_file.parent.parent.parent.parent.parent.parent
@@ -12,7 +19,7 @@ agent_engine_path = repo_root / 'agent_engine'
 # Add to path
 sys.path.insert(0, str(agent_engine_path))
 from config import settings
-print(f"testing -- {settings} - {agent_engine_path}", flush=True, file=sys.stderr)
+# print(f"testing -- {settings} - {agent_engine_path}", flush=True, file=sys.stderr)
 from .schemas import Cluster, TopicIdea
 
 class KeywordResearchAgent:
