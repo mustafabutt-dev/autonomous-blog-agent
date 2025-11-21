@@ -67,7 +67,7 @@ jobs:
       run: |
         cd agent_engine
         cat > .env << EOF
-        OPENAI_API_KEY=${{ secrets.ASPOSE_LLM_API_KEY }}
+        OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
         ASPOSE_LLM_API_KEY=${{ secrets.ASPOSE_LLM_API_KEY }}
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
