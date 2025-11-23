@@ -3,7 +3,7 @@ Orchestrator with OpenAI Agents SDK + Runner
 Agent autonomously decides tool sequence
 """
 from openai import AsyncOpenAI
-from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled
+from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled, ModelSettings
 from config import settings
 from tools.mcp_tools import fetch_keywords_auto, fetch_keywords_manual, generate_markdown_file, fetch_category_related_articles, generate_seo_title, generate_blog_outline
 from utils import prompts
@@ -74,7 +74,7 @@ class BlogOrchestrator:
 
         print(f" Connecting to MCP server fetch_keywords...{keyword_source}")
 
-        related_links = await fetch_category_related_articles(topic, product_name, product_info.get('BlogsURL'))
+        related_links = await fetch_category_related_articles(topic, product_name, product_info.get('BlogsURL'),3)
         # related_links = format_related_posts(related_links)
         if keyword_source == "manual":
             
@@ -107,7 +107,8 @@ class BlogOrchestrator:
                 related_links,
                 context
             ),
-            model=self.model
+            model=self.model,
+            model_settings=ModelSettings(temperature=0.6)
         )
 
         try:
