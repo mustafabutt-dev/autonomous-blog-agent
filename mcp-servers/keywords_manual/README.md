@@ -1,20 +1,36 @@
 # Blog Keyword Analyzer Agent
 
-**Blog Keyword Analyzer** groups your keywords, scores real opportunity, and spits out on-brand topics you can ship next—no spreadsheet wrangling required.
+Version: 1.0
 
-**Turns raw keyword exports into a ranked content plan.**
-Upload a CSV/XLSX (or plug in Google Keyword Planner / Ahrefs), the agent clusters related queries, scores opportunity (volume, difficulty, CPC, competition, brand-fit, intent), and generates on-brand topic ideas—available via API + a lightweight web UI.
+**Blog Keyword Analyzer** groups your keywords, scores real opportunity, and spits out on-brand topics you can ship next.
+
+## Overview
+
+**Turns raw keywords into a ranked content plan.**
+
+Upload a CSV/XLSX from Google Keyword Planner (or connect via API when available), and the agent clusters related queries, scores opportunity (volume, difficulty, intent, brand-fit), and generates ready-to-publish topic ideas. It understands semantic relationships and search intent to deliver actionable content strategies, not just keyword lists.
+
+Built for content teams managing multiple blog properties (aspose.com, groupdocs.com, etc.), this agent eliminates hours of manual keyword analysis and turns data into decisions in minutes.
 
 ---
 
-## Features
+## What It Does / Features
 
-* **File ingest**: `.xlsx` / `.csv` (robust encoding + delimiter detection).
-* **Clustering**: groups semantically related keywords.
-* **Scoring**: blends volume, KD, CPC, competition, brand-fit, and intent.
-* **Topic generation**: LLM-guided, on-brand titles + outline + supporting keywords.
-* **Web UI**: upload or run defaults; pretty topic cards; spinner; debug JSON.
-* **API**: single `POST /api/run` returns full JSON and writes an artifact file.
+- **Smart Clustering**: Groups keywords by semantic similarity and user intent
+- **Intent Classification**: Identifies commercial, informational, and navigational queries
+- **Opportunity Scoring**: Ranks clusters by volume, competition, and brand alignment
+- **Topic Generation**: Produces SEO-optimized blog titles mapped to specific keyword clusters
+- **Dual Interface**: CLI for automation + Web UI for quick testing
+- **File ingest**: `.xlsx` / `.csv` (robust encoding + delimiter detection).
+
+---
+
+## Built With
+
+- **LLM**: Professionalize LLM’s gpt-oss model
+- **Backend**: Python 3.x
+- **Web UI**: FastAPI + Uvicorn
+- **Input Formats**: CSV, XLSX (Google Keyword Planner exports)
 
 ---
 
@@ -26,7 +42,7 @@ my-agents/
   pyproject.toml
   requirements.txt
   src/
-    agents/
+    agent_engine/
       __init__.py
       kra/
         __init__.py
@@ -43,9 +59,12 @@ my-agents/
           scoring.py       # Cluster scoring (weights + normalization)
     apps/
       __init__.py
+      brands.json          # Source data for brands and products
       api/
         __init__.py
         main.py            # FastAPI app + single-page UI
+      images/
+        favicon.ico
   src/data/
     keywords.xlsx          # your default dataset (optional)
     outputs/               # JSON run artifacts land here
@@ -76,29 +95,23 @@ pip install -e .
 ### 2) Environment variables (`.env`)
 
 ```env
-# OpenAI
-OPENAI_API_KEY=sk-xxx
-DEFAULT_MODEL=gpt-4.1-mini
+# === Required ===
+CUSTOM_LLM_BASE_URL="https://llm.professionalize.com/v1"
+CUSTOM_LLM_API_KEY="sk-"
 
-# Paths
-KRA_DATA_DIR=./src/data
+# Which model name the agent should use by default
+DEFAULT_LLM_MODEL="gpt-oss"
+
+# === Optional (defaults) ===
+KRA_TOP_CLUSTERS=12
+KRA_MAX_ROWS=50000
+KRA_DATA_DIR=./src/data/samples
 KRA_OUTPUT_DIR=./src/data/outputs
 
-# Orchestration knobs
-TOP_CLUSTERS=12
-MAX_ROWS=50000
 DEBUG=true
-
-# (Optional) Scoring weights
-W_VOLUME=0.35
-W_KD=0.25
-W_CPC=0.15
-W_BRAND=0.15
-W_INTENT=0.10
-# W_COMP=0.00   # enable later if you want competition to affect score
 ```
 
-> Put `keywords.xlsx` or `keywords.csv` in `src/data/` to run without uploading.
+> Put `keywords.xlsx` or `keywords.csv` in `src/data/samples/` to run without uploading.
 
 ---
 
@@ -107,22 +120,22 @@ W_INTENT=0.10
 ### A) Web UI (+ API)
 
 ```bash
-uvicorn apps.api.main:app --reload --port 8000 --app-dir src
+python -m uvicorn apps.api.main:app --reload --port 8000
 ```
 
 Open [http://localhost:8000](http://localhost:8000)
 
 * Fill **Brand/Product/Locale/Top clusters**
-* Optionally **upload `.xlsx`/`.csv`** or use default file in `KRA_DATA_DIR`
+* Optionally **upload `.csv`/`.xlsx`** or use default file in `KRA_DATA_DIR`
 * Click **Run Agent** (spinner shows) → topic cards render.
 * Full JSON saved to `KRA_OUTPUT_DIR/kra_result_<run_id>.json`.
 
 ### B) CLI (orchestrator only)
 
 ```bash
-python -m agents.kra.runner --brand Aspose --product "Aspose.Cells" --top 12
+python -m agent_engine.kra.runner --brand Aspose --product "Aspose.Cells" --top 12
 # or point to a file
-python -m agents.kra.runner --file ./src/data/keywords.xlsx --brand Aspose --product "Aspose.Cells"
+python -m agent_engine.kra.runner --file ./src/data/samples/keywords.csv --brand Aspose --product "Aspose.Cells"
 ```
 
 ---
@@ -205,17 +218,6 @@ Each cluster gets a 0–1 **score** blending:
 * **Intent boost** (informational / commercial / transactional / navigational)
 
 You can tune weights in `.env` (see above). Topics inherit their source **cluster** score to keep lists stable and sortable.
-
----
-
-## UI Notes
-
-* **Form card** (light theme), spinner on submit, graceful fallback if JS fails.
-* **Topic cards** with intent color pills:
-
-  * informational (blue), commercial (amber), transactional (green), navigational (purple)
-* **Keyword chips** show: `keyword · volume · C Competition` (label + numeric if available).
-* **Brand-fit bar** and **Score** shown for each topic’s cluster.
 
 ---
 

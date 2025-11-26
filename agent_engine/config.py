@@ -33,8 +33,10 @@ class Settings(BaseSettings):
     MAX_TOKENS: int = 5000
     TEMPERATURE: float = 0.7
     
-    OPENAI_API_KEY: str | None = None
-    DEFAULT_MODEL: str = "gpt-4.1-mini"
+    CUSTOM_LLM_BASE_URL: str | None = None
+    CUSTOM_LLM_API_KEY: str | None = None
+
+    # --- KRA scoring / data dirs (unchanged) ---
     W_VOLUME: float = 0.35
     W_KD: float = 0.25
     W_CPC: float = 0.15
@@ -45,6 +47,7 @@ class Settings(BaseSettings):
     KRA_DATA_DIR: str = "./src/data/samples"
     KRA_OUTPUT_DIR: str = "./src/data/outputs"
     DEBUG: bool = False
+
     class Config:
         # Use local .env in dev, ignore if not present (CI/CD uses actual env)
         env_file = ".env"

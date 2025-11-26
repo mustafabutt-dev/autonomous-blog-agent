@@ -2,9 +2,10 @@ import json
 from datetime import datetime
 import sys, os
 from .helpers import slugify
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from utils.helpers import format_related_posts
+from config import settings
 
 def get_blog_writer_prompt(
     title: str,
@@ -17,7 +18,6 @@ def get_blog_writer_prompt(
     Creates a full SEO blog-writing prompt with frontmatter, outline, and
     a final 'Read More' section using the provided related_links.
     """
-
     url = slugify(title)
 
     # Parse context fields
@@ -215,7 +215,7 @@ def build_outline_prompt(title: str, keywords: list[str]) -> str:
         - NO content outside the outline structure
 
         OUTPUT FORMAT:
-        Return ONLY a well-formatted markdown outline with exactly 5-7 H2 sections.
+        Return ONLY a well-formatted markdown outline with exactly {settings.NUMBER_OF_BLOG_SECTIONS} H2 sections.
 
         ENFORCEMENT:
         - STRICTLY 5-7 main H2 headings - no more, no less

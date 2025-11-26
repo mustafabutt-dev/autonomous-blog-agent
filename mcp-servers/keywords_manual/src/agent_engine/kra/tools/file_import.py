@@ -1,10 +1,10 @@
 # src/agents/kra/tools/file_import.py
 from __future__ import annotations
 import os, re, sys
+from pathlib import Path
 from typing import List, Dict, Optional
 import pandas as pd
 from ..schemas import RunRequest, KeywordRecord
-from pathlib import Path
 agent_engine_path = Path(__file__).parent.parent.parent.parent.parent.parent.parent / 'agent_engine'
 sys.path.append(str(agent_engine_path))
 from config import settings
@@ -79,7 +79,15 @@ def _read_table_resilient(path: str) -> pd.DataFrame:
     last_err = None
     for enc in encodings:
         try:
-            return pd.read_csv(p, encoding=enc, sep=None, engine="python")
+            # return pd.read_csv(p, encoding=enc, sep=None, engine="python")
+            # GKP CSV: first 2 lines are meta, real header starts at line 3
+            return pd.read_csv(
+                p,
+                skiprows=2,  # skip "Keyword Stats..." and date range line
+                encoding=enc,
+                sep=None,
+                engine="python"
+            )
         except Exception as e:
             last_err = e
             continue
@@ -125,7 +133,6 @@ def _parse_competition(value) -> tuple[Optional[float], Optional[str]]:
 def import_file(req: RunRequest) -> List[KeywordRecord]:
     # --- resolve path (use your existing robust search or pass absolute) ---
     path = req.file_path
-    print(f"hell: {req.file_path}")
     if not path or not os.path.exists(path):
         for p in (
             "./src/data/keywords.xlsx", "./src/data/keywords.csv",
@@ -140,7 +147,10 @@ def import_file(req: RunRequest) -> List[KeywordRecord]:
         raise FileNotFoundError(f"Input file not found: {req.file_path}")
 
     # --- load ---
-    df = pd.read_excel(path) if path.lower().endswith(".xlsx") else pd.read_csv(path)
+    # df = pd.read_excel(path) if path.lower().endswith(".xlsx") else pd.read_csv(path)
+    # df.columns = [c.strip().lower() for c in df.columns]
+
+    df = _read_table_resilient(path)
     df.columns = [c.strip().lower() for c in df.columns]
 
     # --- header mapping: broaden aliases ---

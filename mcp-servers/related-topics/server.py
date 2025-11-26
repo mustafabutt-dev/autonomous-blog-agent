@@ -306,7 +306,7 @@ def detect_language_from_text(text: str, target_language: str = None) -> Tuple[b
 async def fetch_category_articles(url, required, max_limit=300):
     """
     Scrape category pages and stop immediately once `required` relevant links are found.
-    Works with Aspose Hugo category pages.
+    Works with Hugo category pages.
     """
     results = []
     next_page = url

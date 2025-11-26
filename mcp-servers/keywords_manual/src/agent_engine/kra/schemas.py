@@ -46,7 +46,7 @@ class RunRequest(BaseModel):
     brand: str = "Aspose"
     product: str = "Aspose.Cells"
     locale: str = "en-US"
-    file_path: str = "/mnt/data/keywords.xlsx"
+    file_path: str = "/mnt/data/keywords.csv"
     clustering_k: int | None = None
     top_clusters: int = 10
     max_rows: int = 50000

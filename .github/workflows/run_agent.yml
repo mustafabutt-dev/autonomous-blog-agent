@@ -1,4 +1,4 @@
-name: Generate Blog Post
+name: Generate Blog Post for aspose.com
 
 on:
   workflow_dispatch:
@@ -7,20 +7,60 @@ on:
         description: 'Blog topic'
         required: true
         type: string
+      
       product:
         description: 'Product name'
         required: true
-        type: string
+        type: choice
+        default: 'Aspose.Slides'
+        options:
+          - 'Aspose.Slides'
+          - 'Aspose.Words'
+          - 'Aspose.PSD'
+          - 'Aspose.Imaging'
+          - 'Aspose.3D'
+          - 'Aspose.Page'
+          - 'Aspose.TeX'
+          - 'Aspose.GIS'
+          - 'Aspose.OMR'
+          - 'Aspose.HTML'
+          - 'Aspose.ZIP'
+          - 'Aspose.CAD'
+          - 'Aspose.Email'
+          - 'Aspose.BarCode'
+      
       platform:
-        description: 'Platform (e.g., aspose)'
+        description: 'Platform'
         required: true
-        type: string
-        default: 'aspose'
+        type: choice
+        options:
+          - 'Java'
+          - '.NET'
+          - 'C++'
+          - 'PHP'
+          - 'SharePoint'
+          - 'JasperReports'
+          - 'Reporting Services'
+          - 'JavaScript via C++'
+          - 'Go via C++'
+          - 'Rust via C++'
+          - 'Node.js via C++'
+          - 'Node.js via Java'
+          - 'Node.js via .NET'
+          - 'PHP via Java'
+          - 'Python via .NET'
+          - 'Python via Java'
+          - 'Android via Java'
+        default: 'Java'
+      
       keyword_source:
-        description: 'Keyword source (e.g., manual, auto)'
+        description: 'Keyword source'
         required: true
-        type: string
-        default: 'manual'
+        type: choice
+        options:
+          - 'auto'
+          - 'manual'
+        default: 'auto'
 
 jobs:
   generate:
@@ -65,7 +105,6 @@ jobs:
       run: |
         cd agent_engine
         cat > .env << EOF
-        OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
         ASPOSE_LLM_API_KEY=${{ secrets.ASPOSE_LLM_API_KEY }}
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
@@ -76,7 +115,7 @@ jobs:
     - name: Generate Blog
       run: |
         cd agent_engine
-        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}"
+        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}" --brand "aspose.com"
 
     - name: Find generated blog folder
       id: find_blog
