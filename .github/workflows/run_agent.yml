@@ -84,7 +84,7 @@ jobs:
 
     - name: Prepare keywords file
       run: |
-        cp output/kra/samples/keywords.xlsx output/kra/keywords.xlsx
+        cp output/kra/samples/keywords.xlsx output/kra/samples/keywords.xlsx
 
     - name: Remove any .env files that could interfere
       run: |
