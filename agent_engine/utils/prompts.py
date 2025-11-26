@@ -51,8 +51,10 @@ You are an expert technical blog writer. Your task: Write a detailed, SEO-optimi
 ### MANDATORY STRUCTURAL REQUIREMENTS:
 You MUST include these sections REGARDLESS of the outline:
 1. **Introduction section** (H2 header: ## Introduction)
-2. **Conclusion section** (H2 header: ## Conclusion)  
-3. **Read More section** (H2 header: ## Read More)
+2. **Steps section** (H2 header: ## Steps to [Task])
+3. **Conclusion section** (H2 header: ## Conclusion)
+4. **FAQs section** (H2 header: ## FAQs)
+5. **Read More section** (H2 header: ## Read More)
 
 ### READ MORE LINKS TO INCLUDE EXACTLY:
 {formatted_related}
@@ -64,7 +66,7 @@ You MUST include these sections REGARDLESS of the outline:
 1. **START** with frontmatter - no text before `---`
 2. **END** after "Read More" section - no text after the last link
 3. Write ONLY the frontmatter and the sections specified below
-4. **ALWAYS CREATE Introduction and Conclusion sections** even if not in outline
+4. **ALWAYS CREATE Introduction, Steps, Conclusion, FAQs, and Read More sections** even if not in outline
 5. DO NOT add any additional sections, notes, or commentary
 6. DO NOT add author notes, editor notes, or meta-commentary
 7. DO NOT add "Note:", "Remember:", "Important:" or similar annotations
@@ -88,30 +90,97 @@ cover:
     image: images/{url}.png
     alt: "{title}"
     caption: "{title}"
+steps:
+  - "[Step 1: Clear, actionable instruction]"
+  - "[Step 2: Clear, actionable instruction]"
+  - "[Step 3: Clear, actionable instruction]"
+  - "[Step 4: Clear, actionable instruction]"
+  - "[Step 5: Clear, actionable instruction - OPTIONAL]"
+faqs:
+  - q: "[First relevant question about the topic]"
+    a: "[Detailed answer with product link if applicable]"
+  - q: "[Second relevant question about the topic]"
+    a: "[Detailed answer with product link if applicable]"
+  - q: "[Third relevant question about the topic]"
+    a: "[Detailed answer with product link if applicable]"
+  - q: "[Fourth relevant question about the topic - OPTIONAL]"
+    a: "[Detailed answer with product link if applicable]"
 ---
 
 ### FINAL BLOG STRUCTURE (MUST FOLLOW THIS ORDER):
 1. **Introduction** (ALWAYS CREATE this section first after frontmatter)
-2. **Outline Sections** (Follow the provided outline exactly)
-3. **Conclusion** (ALWAYS CREATE this section before Read More)
-4. **Read More** (ALWAYS include this section last)
+2. **Steps** (ALWAYS CREATE this section with 4-6 actionable steps)
+3. **Outline Sections** (Follow the provided outline exactly)
+4. **Conclusion** (ALWAYS CREATE this section)
+5. **FAQs** (ALWAYS CREATE this section with 3-4 questions)
+6. **Read More** (ALWAYS include this section last)
 
 ### WRITING INSTRUCTIONS:
 - **Start immediately** with frontmatter above (fill bracketed parts)
 - **Always begin** with ## Introduction section after frontmatter
+- **Always include** ## Steps section after Introduction
 - Follow the provided outline EXACTLY for the main content
-- **Always include** ## Conclusion section before Read More
-- Write 600-800 words total (excluding frontmatter)
+- **Always include** ## Conclusion section
+- **Always include** ## FAQs section with 3-4 relevant questions
+- **Always include** ## Read More section last
+- Write 600-800 words total (excluding frontmatter, steps, and FAQs)
 - Use clean Markdown with H2/H3 headers
 - Include keywords naturally throughout
 - DO NOT add extra content not in the outline
 
 ### CONTENT STRUCTURE:
 - **Introduction** = H2 header (## Introduction) with 2-3 paragraphs
+- **Steps** = H2 header (## Steps to [Task Name]) with 4-6 numbered steps
 - Outline items = H2/H3 headers as specified
 - **Conclusion** = H2 header (## Conclusion) with 2-3 paragraphs
+- **FAQs** = H2 header (## FAQs) with 3-4 Q&A pairs
 - Complete paragraphs required for all sections
 - Include relevant examples/code where appropriate
+
+### STEPS SECTION REQUIREMENTS:
+- Create 4-6 clear, actionable steps to accomplish the task described in the title
+- Steps should be technical and implementation-focused
+- Each step should be a complete, actionable instruction
+- Steps should follow a logical progression from setup to completion
+- Use technical terminology appropriate to the product/platform
+- Steps MUST be included in both:
+  1. **Frontmatter** (in YAML format as a list)
+  2. **Content section** (as markdown H2 section after Introduction)
+
+### STEPS CONTENT FORMAT:
+## Steps to [Task Name Based on Title]
+
+1. **[Step 1 summary]**: [Brief explanation of the step]
+2. **[Step 2 summary]**: [Brief explanation of the step]
+3. **[Step 3 summary]**: [Brief explanation of the step]
+4. **[Step 4 summary]**: [Brief explanation of the step]
+5. **[Step 5 summary - OPTIONAL]**: [Brief explanation of the step]
+6. **[Step 6 summary - OPTIONAL]**: [Brief explanation of the step]
+
+### FAQs SECTION REQUIREMENTS:
+- Create 3-4 frequently asked questions relevant to the topic
+- Questions should cover common user concerns, technical details, or best practices
+- Answers should be detailed (2-4 sentences each)
+- Include product links in answers where appropriate using format: `[Product Name](URL)`
+- Questions should be practical and directly related to the blog topic
+- FAQs MUST be included in both:
+  1. **Frontmatter** (in YAML format as shown above)
+  2. **Content section** (as markdown H2 section before Read More)
+
+### FAQs CONTENT FORMAT:
+## FAQs
+
+**Q: [First question]**  
+A: [Detailed answer with links if applicable]
+
+**Q: [Second question]**  
+A: [Detailed answer with links if applicable]
+
+**Q: [Third question]**  
+A: [Detailed answer with links if applicable]
+
+**Q: [Fourth question - OPTIONAL]**  
+A: [Detailed answer with links if applicable]
 
 ### READ MORE SECTION RULES:
 At the end of the article, include this EXACT section:
@@ -130,38 +199,34 @@ At the end of the article, include this EXACT section:
 <!--[CODE_SNIPPET_START]-->
 ```language
 # Code here
+```
 <!--[CODE_SNIPPET_END]-->
-STRICTLY ENFORCED BOUNDARIES:
-BEGINNING: First character must be - of frontmatter (no spaces, no text before)
 
-INTRODUCTION: Must be first content section after frontmatter
+### STRICTLY ENFORCED BOUNDARIES:
+- **BEGINNING**: First character must be `-` of frontmatter (no spaces, no text before)
+- **INTRODUCTION**: Must be first content section after frontmatter
+- **STEPS**: Must be included after Introduction
+- **CONCLUSION**: Must be included before FAQs section
+- **FAQs**: Must be included before Read More section
+- **ENDING**: Last character must be after the final link in "Read More" section
+- **ABSOLUTELY NO CONTENT** outside these boundaries
+- **STOP WRITING IMMEDIATELY** after the Read More section
 
-CONCLUSION: Must be included before Read More section
+### OUTPUT REQUIREMENTS:
+- Complete markdown file starting with frontmatter
+- Always includes Introduction, Steps, Conclusion, FAQs, and Read More sections
+- Steps in both frontmatter (YAML list) and content (Markdown numbered list)
+- FAQs in both frontmatter (YAML) and content (Markdown)
+- Ending after Read More section
+- No trailing whitespace, comments, or additional text
+- Pure markdown content only
 
-ENDING: Last character must be after the final link in "Read More" section
-
-ABSOLUTELY NO CONTENT outside these boundaries
-
-STOP WRITING IMMEDIATELY after the Read More section
-
-OUTPUT REQUIREMENTS:
-Complete markdown file starting with frontmatter
-
-Always includes Introduction, Conclusion, and Read More sections
-
-Ending after Read More section
-
-No trailing whitespace, comments, or additional text
-
-Pure markdown content only
-
-VIOLATION PREVENTION:
-
-If Introduction or Conclusion missing → OUTPUT IS INVALID
-
-If any text before frontmatter or after Read More → OUTPUT IS INVALID
-
-If outline sections skipped → OUTPUT IS INVALID
+### VIOLATION PREVENTION:
+- If Introduction, Steps, Conclusion, FAQs, or Read More missing → OUTPUT IS INVALID
+- If Steps not in frontmatter → OUTPUT IS INVALID
+- If FAQs not in frontmatter → OUTPUT IS INVALID
+- If any text before frontmatter or after Read More → OUTPUT IS INVALID
+- If outline sections skipped → OUTPUT IS INVALID
 """
 
 def get_title_prompt(topic: str, product: str, keywords: str ) -> str:
