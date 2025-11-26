@@ -201,6 +201,7 @@ async def fetch_keywords_manual( product_name: str = "", brand: str = "") -> str
     
                 raw = result.content[0].text
                 parsed = json.loads(raw)
+                print(f"kra response {parsed} ")
                 if parsed.get("status") == "error":
                     print("keywords tool returned an error:")
                     print(parsed.get("error"))
