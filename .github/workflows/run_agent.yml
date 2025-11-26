@@ -84,7 +84,7 @@ jobs:
 
     - name: Prepare keywords file
       run: |
-        cp output/kra/samples/keywords.xlsx output/kra/samples/keywords.xlsx
+        cp /home/runner/work/autonomous-blog-agent/output/kra/samples/keywords.xlsx /home/runner/work/autonomous-blog-agent/output/kra/samples/keywords.xlsx
 
     - name: Remove any .env files that could interfere
       run: |
