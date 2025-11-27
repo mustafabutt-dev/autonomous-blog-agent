@@ -59,8 +59,8 @@ on:
         type: choice
         options:
           - 'auto'
-          - 'manual'
-        default: 'auto'
+          - 'manual (using Google Keyword Planner Sheet)'
+        default: 'auto (using SerpApi)'
 
 jobs:
   generate:
