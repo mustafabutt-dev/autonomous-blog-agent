@@ -45,7 +45,7 @@ You are an expert technical blog writer. Your task: Write a detailed, SEO-optimi
 
 ### MANDATORY CONTENT BOUNDARIES:
 - **START**: The blog post must begin EXACTLY with the frontmatter (no text before)
-- **END**: The blog post must end EXACTLY after the "Read More" section (no text after)
+- **END**: The blog post must end EXACTLY after the {"FAQs section" if not formatted_related else "Read More section"} (no text after)
 - **NO EXCEPTIONS**: No introductory text, no concluding remarks, no author notes, no meta-commentary outside the defined structure
 
 ### MANDATORY STRUCTURAL REQUIREMENTS:
@@ -54,23 +54,24 @@ You MUST include these sections REGARDLESS of the outline:
 2. **Steps section** (H2 header: ## Steps to [Task])
 3. **Conclusion section** (H2 header: ## Conclusion)
 4. **FAQs section** (H2 header: ## FAQs)
-5. **Read More section** (H2 header: ## Read More)
+{"5. **Read More section** (H2 header: ## Read More)" if formatted_related else ""}
 
-### READ MORE LINKS TO INCLUDE EXACTLY:
-{formatted_related}
+{"### READ MORE LINKS TO INCLUDE EXACTLY:" if formatted_related else "### READ MORE SECTION:"}
+{formatted_related if formatted_related else "SKIP - No related links provided. Do NOT include Read More section."}
 
 ### PROVIDED OUTLINE:
 {formatted_outline}
 
 ### CRITICAL RULES:
 1. **START** with frontmatter - no text before `---`
-2. **END** after "Read More" section - no text after the last link
+2. **END** after {"Read More section" if formatted_related else "FAQs section"} - no text after the last {"link" if formatted_related else "FAQ"}
 3. Write ONLY the frontmatter and the sections specified below
-4. **ALWAYS CREATE Introduction, Steps, Conclusion, FAQs, and Read More sections** even if not in outline
-5. DO NOT add any additional sections, notes, or commentary
-6. DO NOT add author notes, editor notes, or meta-commentary
-7. DO NOT add "Note:", "Remember:", "Important:" or similar annotations
-8. **STRICTLY NO CONTENT** before frontmatter or after Read More section
+4. **ALWAYS CREATE Introduction, Steps, Conclusion, and FAQs sections** even if not in outline
+{"5. **INCLUDE Read More section** with the provided links" if formatted_related else "5. **DO NOT CREATE Read More section** - no related links available"}
+6. DO NOT add any additional sections, notes, or commentary
+7. DO NOT add author notes, editor notes, or meta-commentary
+8. DO NOT add "Note:", "Remember:", "Important:" or similar annotations
+9. **STRICTLY NO CONTENT** before frontmatter or after {"Read More" if formatted_related else "FAQs"} section
 
 ### FRONTMATTER (MUST BE FIRST - NO TEXT BEFORE THIS):
 ---
@@ -113,7 +114,7 @@ faqs:
 3. **Outline Sections** (Follow the provided outline exactly)
 4. **Conclusion** (ALWAYS CREATE this section)
 5. **FAQs** (ALWAYS CREATE this section with 3-4 questions)
-6. **Read More** (ALWAYS include this section last)
+{"6. **Read More** (ALWAYS include this section last)" if formatted_related else ""}
 
 ### WRITING INSTRUCTIONS:
 - **Start immediately** with frontmatter above (fill bracketed parts)
@@ -122,7 +123,7 @@ faqs:
 - Follow the provided outline EXACTLY for the main content
 - **Always include** ## Conclusion section
 - **Always include** ## FAQs section with 3-4 relevant questions
-- **Always include** ## Read More section last
+{"- **Always include** ## Read More section last" if formatted_related else "- **DO NOT include** Read More section (no related links provided)"}
 - Write 600-800 words total (excluding frontmatter, steps, and FAQs)
 - Use clean Markdown with H2/H3 headers
 - Include keywords naturally throughout
@@ -134,6 +135,7 @@ faqs:
 - Outline items = H2/H3 headers as specified
 - **Conclusion** = H2 header (## Conclusion) with 2-3 paragraphs
 - **FAQs** = H2 header (## FAQs) with 3-4 Q&A pairs
+{"- **Read More** = H2 header (## Read More) with provided links" if formatted_related else ""}
 - Complete paragraphs required for all sections
 - Include relevant examples/code where appropriate
 
@@ -165,7 +167,7 @@ faqs:
 - Questions should be practical and directly related to the blog topic
 - FAQs MUST be included in both:
   1. **Frontmatter** (in YAML format as shown above)
-  2. **Content section** (as markdown H2 section before Read More)
+  2. **Content section** (as markdown H2 section {"before Read More" if formatted_related else "as the FINAL section"})
 
 ### FAQs CONTENT FORMAT:
 ## FAQs
@@ -182,13 +184,14 @@ A: [Detailed answer with links if applicable]
 **Q: [Fourth question - OPTIONAL]**  
 A: [Detailed answer with links if applicable]
 
-### READ MORE SECTION RULES:
+{'''### READ MORE SECTION RULES:
 At the end of the article, include this EXACT section:
 
 ## Read More
-{formatted_related}
+''' + formatted_related + '''
 
-(Use EXACT titles and URLs provided. Do NOT change them.)
+(Use EXACT titles and URLs provided. Do NOT change them.)''' if formatted_related else '''### READ MORE SECTION:
+**DO NOT INCLUDE** - No related links provided. The blog MUST end after the FAQs section.'''}
 
 ### LINK FORMAT:
 - Product references: `[Product Name](URL)`
@@ -207,25 +210,28 @@ At the end of the article, include this EXACT section:
 - **INTRODUCTION**: Must be first content section after frontmatter
 - **STEPS**: Must be included after Introduction
 - **CONCLUSION**: Must be included before FAQs section
-- **FAQs**: Must be included before Read More section
-- **ENDING**: Last character must be after the final link in "Read More" section
+- **FAQs**: Must be included {"before Read More section" if formatted_related else "as the FINAL section"}
+{"- **READ MORE**: Must be included as the FINAL section" if formatted_related else ""}
+- **ENDING**: Last character must be after the final {"link in Read More section" if formatted_related else "FAQ answer"}
 - **ABSOLUTELY NO CONTENT** outside these boundaries
-- **STOP WRITING IMMEDIATELY** after the Read More section
+- **STOP WRITING IMMEDIATELY** after the {"Read More" if formatted_related else "FAQs"} section
 
 ### OUTPUT REQUIREMENTS:
 - Complete markdown file starting with frontmatter
-- Always includes Introduction, Steps, Conclusion, FAQs, and Read More sections
+- Always includes Introduction, Steps, Conclusion, and FAQs sections
+{"- Always includes Read More section with provided links" if formatted_related else "- Does NOT include Read More section (no related links)"}
 - Steps in both frontmatter (YAML list) and content (Markdown numbered list)
 - FAQs in both frontmatter (YAML) and content (Markdown)
-- Ending after Read More section
+- Ending after {"Read More" if formatted_related else "FAQs"} section
 - No trailing whitespace, comments, or additional text
 - Pure markdown content only
 
 ### VIOLATION PREVENTION:
-- If Introduction, Steps, Conclusion, FAQs, or Read More missing → OUTPUT IS INVALID
+- If Introduction, Steps, Conclusion, or FAQs missing → OUTPUT IS INVALID
+{"- If Read More section missing → OUTPUT IS INVALID" if formatted_related else "- If Read More section present → OUTPUT IS INVALID"}
 - If Steps not in frontmatter → OUTPUT IS INVALID
 - If FAQs not in frontmatter → OUTPUT IS INVALID
-- If any text before frontmatter or after Read More → OUTPUT IS INVALID
+- If any text before frontmatter or after {"Read More" if formatted_related else "FAQs"} → OUTPUT IS INVALID
 - If outline sections skipped → OUTPUT IS INVALID
 """
 
@@ -310,9 +316,25 @@ def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS) -> str:
     return f"""
     You are an expert in keyword filtering and refinement.
     I have a product called {PRODUCT_NAME} and a list of candidate keywords: {KEYWORDS}.
+    
     1. Only return keywords that are relevant to the exact product.
     2. Exclude any keyword that refers to other products or cloud offerings if the product is on-premises.
     3. If any keyword is incomplete, truncated, or has trailing ellipses (e.g., "..."), complete it sensibly while keeping it relevant.
-    4. Return the filtered and refined keywords in the **exact structure as you received** (e.g., primary, secondary, long_tail).
-
-    """
+    4. Remove or replace any characters that break Hugo/Markdown rendering:
+       - Replace Unicode dashes (\\u2013, \\u2014, em dash, en dash) with standard hyphens (-)
+       - Replace smart quotes (\\u201c, \\u201d, \\u2018, \\u2019) with straight quotes (' or ")
+       - Replace ellipsis character (\\u2026) with three periods (...)
+       - Remove any other Unicode characters that could break YAML frontmatter
+       - Ensure all characters are safe for Hugo YAML frontmatter rendering
+    5. Return the filtered and refined keywords in the **exact structure as you received** (e.g., primary, secondary, long_tail).
+    
+    **Character Replacement Rules:**
+    - \\u2013 (en dash) → - (hyphen)
+    - \\u2014 (em dash) → - (hyphen)
+    - \\u201c, \\u201d (curly double quotes) → " (straight double quote)
+    - \\u2018, \\u2019 (curly single quotes) → ' (straight single quote)
+    - \\u2026 (ellipsis) → ... (three periods)
+    - Any other problematic Unicode → Remove or replace with ASCII equivalent
+    
+    Ensure all output keywords are Hugo/YAML-safe and will render correctly in frontmatter.
+"""
