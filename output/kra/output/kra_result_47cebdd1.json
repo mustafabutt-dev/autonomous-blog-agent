@@ -1,0 +1,424 @@
+{
+  "run_id": "47cebdd1",
+  "brand": "aspose",
+  "product": "Aspose.Slides for Java",
+  "locale": "en-US",
+  "clusters": [
+    {
+      "cluster_id": "c5",
+      "label": "to excel",
+      "members": [
+        {
+          "keyword": "csv to excel",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "convert csv to excel",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 275000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.217484,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c1",
+      "label": "excel to",
+      "members": [
+        {
+          "keyword": "convert excel to csv",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "excel to csv",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.059968,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c0",
+      "label": "xlsx",
+      "members": [
+        {
+          "keyword": "xlsx to csv",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.059968,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c8",
+      "label": "xlsx",
+      "members": [
+        {
+          "keyword": "convert xlsx to csv",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 5000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.028465,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c6",
+      "label": "to excel",
+      "members": [
+        {
+          "keyword": "csv file to excel",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 5000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.028465,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c2",
+      "label": "converter",
+      "members": [
+        {
+          "keyword": "csv to qbo converter free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        },
+        {
+          "keyword": "csv to qbo converter online",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.4
+      }
+    },
+    {
+      "cluster_id": "c4",
+      "label": "csv",
+      "members": [
+        {
+          "keyword": "snowflake import csv",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.2
+      }
+    }
+  ],
+  "topics": [
+    {
+      "cluster_id": "c5",
+      "title": "How to Convert CSV Files to Excel Using Aspose.Slides for Java",
+      "angle": "Show Java developers how to extract tabular data from PowerPoint slides into CSV, then convert that CSV to Excel using Aspose.Cells, creating a seamless workflow for reporting.",
+      "outline": [
+        "Why converting CSV to Excel matters for business reporting",
+        "Exporting slide tables to CSV with Aspose.Slides for Java",
+        "Converting the generated CSV to XLSX using Aspose.Cells",
+        "Full code example: From slide to Excel workbook",
+        "Best practices for handling large datasets",
+        "Common pitfalls and troubleshooting tips"
+      ],
+      "target_persona": "Java developers building automated reporting or data‑driven presentation solutions",
+      "primary_keyword": "convert csv to excel",
+      "supporting_keywords": [
+        "csv to excel java",
+        "aspose slides export csv",
+        "aspose cells convert csv to xlsx",
+        "java csv excel conversion",
+        "export slide data to excel",
+        "aspose slides table to csv"
+      ],
+      "internal_links": [
+        "/slides/java/export-table-to-csv",
+        "/cells/java/csv-to-xlsx",
+        "/products/java"
+      ]
+    },
+    {
+      "cluster_id": "c1",
+      "title": "Convert Excel to CSV in Java and Use the Data in Aspose.Slides Presentations",
+      "angle": "Guide developers through converting Excel workbooks to CSV with Aspose.Cells, then feeding that CSV into Aspose.Slides to generate data‑rich slides automatically.",
+      "outline": [
+        "Overview of Excel‑to‑CSV conversion needs",
+        "Loading Excel files with Aspose.Cells for Java",
+        "Saving worksheets as CSV",
+        "Reading CSV data and creating tables/charts in Aspose.Slides",
+        "Complete Java code walkthrough",
+        "Performance considerations for large files"
+      ],
+      "target_persona": "Java engineers automating slide generation from spreadsheet data",
+      "primary_keyword": "convert excel to csv",
+      "supporting_keywords": [
+        "excel to csv java",
+        "aspose cells excel to csv",
+        "aspose slides import excel data",
+        "java generate ppt from excel",
+        "excel csv conversion library"
+      ],
+      "internal_links": [
+        "/cells/java/excel-to-csv",
+        "/slides/java/create-table-from-csv",
+        "/blog/java-automation"
+      ]
+    },
+    {
+      "cluster_id": "c0",
+      "title": "Transforming XLSX Files to CSV for Slide Data Integration with Aspose.Slides for Java",
+      "angle": "Explain how to turn modern XLSX workbooks into CSV files using Aspose.Cells, then import that CSV into PowerPoint slides via Aspose.Slides, enabling data‑driven presentations.",
+      "outline": [
+        "Understanding the need for XLSX‑to‑CSV conversion",
+        "Using Aspose.Cells to read XLSX and export CSV",
+        "Preparing CSV data for slide consumption",
+        "Creating tables and charts in Aspose.Slides from CSV",
+        "Sample Java implementation",
+        "Tips for preserving data integrity"
+      ],
+      "target_persona": "Java developers who need to visualize spreadsheet data in presentations",
+      "primary_keyword": "xlsx to csv",
+      "supporting_keywords": [
+        "aspose cells xlsx to csv",
+        "java convert xlsx to csv",
+        "import csv into aspose slides",
+        "slide generation from spreadsheet",
+        "xlsx csv conversion tutorial"
+      ],
+      "internal_links": [
+        "/cells/java/xlsx-to-csv",
+        "/slides/java/import-csv-data",
+        "/resources/java-data-visualization"
+      ]
+    },
+    {
+      "cluster_id": "c8",
+      "title": "Step‑by‑Step Guide: Convert XLSX to CSV Using Aspose.Cells for Java",
+      "angle": "Provide a focused tutorial on converting XLSX files to CSV with Aspose.Cells, then show a quick example of feeding the CSV into Aspose.Slides for visual reporting.",
+      "outline": [
+        "Why XLSX‑to‑CSV conversion is useful",
+        "Setting up Aspose.Cells in a Java project",
+        "Loading an XLSX workbook and selecting a worksheet",
+        "Saving the worksheet as CSV",
+        "Brief demo: Using the CSV in Aspose.Slides",
+        "Handling special characters and locales"
+      ],
+      "target_persona": "Java programmers needing reliable XLSX to CSV conversion for downstream processing",
+      "primary_keyword": "convert xlsx to csv",
+      "supporting_keywords": [
+        "aspose cells convert xlsx to csv",
+        "java xlsx csv conversion",
+        "aspose slides csv import",
+        "excel to csv library java",
+        "batch xlsx to csv conversion"
+      ],
+      "internal_links": [
+        "/cells/java/convert-xlsx-csv",
+        "/slides/java/quick-csv-import"
+      ]
+    },
+    {
+      "cluster_id": "c6",
+      "title": "Automating CSV‑to‑Excel Conversion in Java with Aspose.Cells and Leveraging Results in Aspose.Slides",
+      "angle": "Show a complete automation pipeline: take raw CSV data, turn it into a formatted Excel workbook using Aspose.Cells, then embed that workbook’s data into PowerPoint slides via Aspose.Slides.",
+      "outline": [
+        "Benefits of converting CSV to Excel before presentation",
+        "Loading CSV into Aspose.Cells and creating a workbook",
+        "Applying formatting and formulas programmatically",
+        "Exporting the workbook as XLSX",
+        "Reading the Excel file in Aspose.Slides to generate tables/charts",
+        "Full Java code sample and performance tips"
+      ],
+      "target_persona": "Java developers building end‑to‑end data reporting solutions",
+      "primary_keyword": "csv file to excel",
+      "supporting_keywords": [
+        "aspose cells csv to xlsx",
+        "java convert csv to excel",
+        "aspose slides import excel data",
+        "automated reporting java",
+        "excel formatting with aspose"
+      ],
+      "internal_links": [
+        "/cells/java/csv-to-xlsx",
+        "/slides/java/create-slide-from-excel",
+        "/blog/java-reporting-workflow"
+      ]
+    },
+    {
+      "cluster_id": "c2",
+      "title": "Importing CSV Financial Data into QuickBooks Online (QBO) and Visualizing with Aspose.Slides for Java",
+      "angle": "Teach finance‑tech developers how to convert CSV transaction files to QBO format, upload them to QuickBooks Online, and then generate summary slides using Aspose.Slides.",
+      "outline": [
+        "Overview of CSV → QBO conversion requirements",
+        "Using a free online CSV‑to‑QBO converter vs. custom Java solution",
+        "Building a Java utility with Aspose.Cells to format QBO files",
+        "Uploading the QBO file to QuickBooks Online via API",
+        "Fetching summary data and creating PowerPoint slides with Aspose.Slides",
+        "Sample code and best practices"
+      ],
+      "target_persona": "FinTech developers integrating accounting data with presentation reporting",
+      "primary_keyword": "csv to qbo converter online",
+      "supporting_keywords": [
+        "csv to qbo java",
+        "quickbooks online csv import",
+        "aspose slides financial reporting",
+        "java generate qbo file",
+        "automate accounting reports java"
+      ],
+      "internal_links": [
+        "/products/java",
+        "/slides/java/financial-reporting",
+        "/blog/quickbooks-integration"
+      ]
+    },
+    {
+      "cluster_id": "c4",
+      "title": "Loading CSV Data into Snowflake and Creating Presentation Slides with Aspose.Slides for Java",
+      "angle": "Guide data engineers on importing CSV files into Snowflake, then extracting query results to build dynamic PowerPoint presentations using Aspose.Slides.",
+      "outline": [
+        "Why Snowflake + CSV + Slides is a powerful combo",
+        "Preparing CSV files for Snowflake bulk load",
+        "Using Snowflake JDBC driver in Java to ingest CSV",
+        "Running analytical queries and retrieving results",
+        "Feeding query results into Aspose.Slides tables/charts",
+        "End‑to‑end Java code example and performance tips"
+      ],
+      "target_persona": "Data engineers and Java developers building data‑driven presentations",
+      "primary_keyword": "snowflake import csv",
+      "supporting_keywords": [
+        "java load csv into snowflake",
+        "snowflake jdbc csv import",
+        "aspose slides data visualization",
+        "generate ppt from sql results java",
+        "cloud data warehouse reporting"
+      ],
+      "internal_links": [
+        "/snowflake/java/import-csv",
+        "/slides/java/data-visualization",
+        "/resources/cloud-data-integration"
+      ]
+    }
+  ]
+}

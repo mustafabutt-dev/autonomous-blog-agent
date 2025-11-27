@@ -64,3 +64,34 @@ def format_related_posts(related_links):
             formatted_lines.append(f"- [Related Post]({post})")
 
     return "\n".join(formatted_lines)
+
+def get_productInfo(product_name:str, platform:str, products) -> str:
+    base_name = product_name.strip()
+    platform_clean = platform.strip()
+
+    # Build expected product name EXACTLY as in your data
+    if(platform == "cloud"):
+        expected_name = f"{base_name} {platform_clean}"
+    else: 
+        expected_name = f"{base_name} for {platform_clean}"
+
+    # Case-insensitive matching
+    product_info = next(
+        (p for p in products
+        if p["ProductName"].lower() == expected_name.lower()),
+        None
+    )
+
+    if not product_info:
+        raise ValueError(
+            f"No product found for '{product_name}' with platform '{platform}'"
+        )
+
+    return product_info
+
+def prepare_context(product_info) -> str:
+    context=''
+    # Prepare context
+    for k, v in product_info.items():
+        context += f"\n{k}: {v}"
+    return context

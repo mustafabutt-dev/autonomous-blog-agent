@@ -1,0 +1,18 @@
+[
+  {
+  "ProductName" : "Conholdate.Total Cloud",
+  "Category" : "Conholdate.Total Cloud Product Family",
+  "ProgrammingLanguage" : "Java",
+  "ProductURL" : "https://products.conholdate.cloud/total/",
+  "DownloadURL" : "https://releases.aspose.cloud/total/",
+  "ExternalDownloadURL" : "https://github.com/conholdate-cloud",
+  "DocumentationURL" : "https://docs.aspose.cloud/total/",
+  "BlogsURL" : "https://blog.conholdate.cloud/categories/conholdate.total-product-family/",
+  "APIReferenceURL" : "https://reference.conholdate.cloud/",
+  "FreeAppsURL" : "https://products.conholdate.app/conversion",
+  "ForumsURL" : "https://forum.conholdate.cloud/c/total/5",
+  "InstallCommand" : "",
+  "urlPrefix" : "total",
+  "license":"https://purchase.conholdate.cloud/temporary-license/"
+}
+]

@@ -1,0 +1,482 @@
+{
+  "run_id": "00531b5c",
+  "brand": "aspose.com",
+  "product": "Aspose.Slides for Java",
+  "locale": "en-US",
+  "clusters": [
+    {
+      "cluster_id": "c4",
+      "label": "pptx to",
+      "members": [
+        {
+          "keyword": "pptx to pdf",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.375,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c2",
+      "label": "pptx to",
+      "members": [
+        {
+          "keyword": "convert pptx to pdf",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 50000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.059685,
+        "avg_competition": 0.2
+      }
+    },
+    {
+      "cluster_id": "c0",
+      "label": "pdf to",
+      "members": [
+        {
+          "keyword": "pdf to pptx",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 50000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        },
+        {
+          "keyword": "pdf to pptx free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.9,
+          "competition_label": "high"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 27500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.043919,
+        "avg_competition": 0.55
+      }
+    },
+    {
+      "cluster_id": "c6",
+      "label": "convert pdf",
+      "members": [
+        {
+          "keyword": "convert pdf to pptx",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 5000.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.028153,
+        "avg_competition": 0.6
+      }
+    },
+    {
+      "cluster_id": "c5",
+      "label": "converter",
+      "members": [
+        {
+          "keyword": "pdf to pptx converter free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 5000,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        },
+        {
+          "keyword": "pdf to pptx converter online",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.2,
+          "competition_label": "low"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 2750.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.026577,
+        "avg_competition": 0.4
+      }
+    },
+    {
+      "cluster_id": "c3",
+      "label": "pptx free",
+      "members": [
+        {
+          "keyword": "convert pdf to pptx free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.9,
+          "competition_label": "high"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.9
+      }
+    },
+    {
+      "cluster_id": "c1",
+      "label": "pptx online",
+      "members": [
+        {
+          "keyword": "convert pdf to pptx online free",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.6
+      }
+    },
+    {
+      "cluster_id": "c7",
+      "label": "pptx online",
+      "members": [
+        {
+          "keyword": "pdf to pptx online",
+          "source": "upload",
+          "locale": "en-US",
+          "volume": 500,
+          "cpc": null,
+          "kd": null,
+          "clicks": null,
+          "url": null,
+          "competition": 0.6,
+          "competition_label": "medium"
+        }
+      ],
+      "metrics": {
+        "avg_volume": 500.0,
+        "avg_kd": 0.0,
+        "avg_cpc": 0.0,
+        "brand_fit": 0.0,
+        "intent": "informational",
+        "score": 0.025,
+        "avg_competition": 0.6
+      }
+    }
+  ],
+  "topics": [
+    {
+      "cluster_id": "c4",
+      "title": "How to Convert PPTX to PDF Seamlessly with Aspose.Slides for Java",
+      "angle": "Step‑by‑step guide for developers to automate PPTX‑to‑PDF conversion using Aspose.Slides Java API",
+      "outline": [
+        "Why PPTX‑to‑PDF conversion matters for business workflows",
+        "Setting up Aspose.Slides for Java in your project",
+        "Code example: Converting a PPTX file to PDF with a few lines of Java",
+        "Handling fonts, images, and slide transitions during conversion",
+        "Performance tips and batch processing strategies",
+        "Common pitfalls and how to troubleshoot them"
+      ],
+      "target_persona": "Java developers building document automation solutions",
+      "primary_keyword": "pptx to pdf",
+      "supporting_keywords": [
+        "convert pptx to pdf",
+        "Aspose.Slides PDF conversion",
+        "Java PPTX to PDF code",
+        "batch PPTX to PDF conversion",
+        "preserve slide formatting PDF"
+      ],
+      "internal_links": [
+        "/slides/java",
+        "/slides/java/conversion",
+        "/slides/java/api-reference",
+        "/pricing",
+        "/support"
+      ]
+    },
+    {
+      "cluster_id": "c2",
+      "title": "Convert PPTX to PDF in Java: A Complete Tutorial Using Aspose.Slides",
+      "angle": "Hands‑on tutorial that walks through real‑world scenarios like generating reports and e‑learning materials",
+      "outline": [
+        "Understanding the need for PPTX‑to‑PDF conversion in enterprise apps",
+        "Installing Aspose.Slides for Java via Maven/Gradle",
+        "Loading PPTX files from disk, stream, and cloud storage",
+        "Executing the conversion and customizing PDF output options",
+        "Saving the PDF to local storage, HTTP response, or AWS S3",
+        "Testing and validating the conversion results"
+      ],
+      "target_persona": "Software engineers creating automated reporting tools",
+      "primary_keyword": "convert pptx to pdf",
+      "supporting_keywords": [
+        "pptx to pdf Java library",
+        "Aspose Slides conversion tutorial",
+        "PDF export settings Aspose",
+        "Java document conversion best practices",
+        "automate PPTX to PDF"
+      ],
+      "internal_links": [
+        "/slides/java",
+        "/slides/java/tutorials",
+        "/slides/java/examples",
+        "/blog",
+        "/contact-sales"
+      ]
+    },
+    {
+      "cluster_id": "c0",
+      "title": "PDF to PPTX Conversion Made Easy with Aspose.Slides for Java (Free Options Explained)",
+      "angle": "Comparing free online converters vs. the robust Aspose.Slides Java API for reliable PDF‑to‑PPTX transformation",
+      "outline": [
+        "When to choose a free online converter and its limitations",
+        "Why developers prefer a programmatic solution with Aspose.Slides",
+        "Setting up the Java environment for PDF‑to‑PPTX conversion",
+        "Sample code: Turning a PDF into an editable PPTX presentation",
+        "Preserving layout, fonts, and graphics during conversion",
+        "Cost‑benefit analysis: free tools vs. Aspose licensing"
+      ],
+      "target_persona": "IT managers evaluating conversion tools for their teams",
+      "primary_keyword": "pdf to pptx",
+      "supporting_keywords": [
+        "pdf to pptx free",
+        "Aspose Slides PDF import",
+        "Java PDF to PowerPoint conversion",
+        "editable PPTX from PDF",
+        "online PDF to PPTX comparison"
+      ],
+      "internal_links": [
+        "/slides/java",
+        "/slides/java/pdf-to-pptx",
+        "/pricing",
+        "/case-studies",
+        "/faq"
+      ]
+    },
+    {
+      "cluster_id": "c6",
+      "title": "Programmatic PDF to PPTX Conversion Using Aspose.Slides for Java",
+      "angle": "Deep dive into the API methods that enable high‑fidelity PDF to PowerPoint conversion for enterprise applications",
+      "outline": [
+        "Overview of Aspose.Slides PDF import capabilities",
+        "Initializing the Slides API and loading a PDF document",
+        "Converting each PDF page to a slide with custom layouts",
+        "Adjusting slide size, orientation, and theme after conversion",
+        "Optimizing performance for large PDF files",
+        "Deploying the conversion service in a microservice architecture"
+      ],
+      "target_persona": "Enterprise architects designing document processing pipelines",
+      "primary_keyword": "convert pdf to pptx",
+      "supporting_keywords": [
+        "Aspose Slides PDF import Java",
+        "high fidelity PDF to PPTX",
+        "Java microservice PDF conversion",
+        "batch PDF to PowerPoint",
+        "preserve PDF graphics in PPTX"
+      ],
+      "internal_links": [
+        "/slides/java",
+        "/slides/java/api-reference",
+        "/solutions/document-processing",
+        "/blog",
+        "/support"
+      ]
+    },
+    {
+      "cluster_id": "c5",
+      "title": "Free Online PDF to PPTX Converters vs. Aspose.Slides for Java: Which Is Right for You?",
+      "angle": "Objective comparison that helps readers decide between no‑cost web tools and a scalable Java library",
+      "outline": [
+        "Key features of popular free PDF‑to‑PPTX online converters",
+        "Security and privacy concerns with uploading documents",
+        "Limitations on file size, formatting, and batch processing",
+        "How Aspose.Slides for Java overcomes those limitations",
+        "Cost structure and licensing options for Aspose",
+        "Decision matrix for choosing the right solution"
+      ],
+      "target_persona": "Small business owners and freelance developers",
+      "primary_keyword": "pdf to pptx converter free",
+      "supporting_keywords": [
+        "pdf to pptx converter online",
+        "Aspose Slides Java conversion",
+        "secure PDF to PPTX conversion",
+        "no‑install PDF to PowerPoint",
+        "compare free converters"
+      ],
+      "internal_links": [
+        "/slides/java",
+        "/slides/java/conversion",
+        "/pricing",
+        "/blog/comparison-articles",
+        "/contact-sales"
+      ]
+    },
+    {
+      "cluster_id": "c3",
+      "title": "How to Convert PDF to PPTX for Free Using Open‑Source Tools and Aspose.Slides for Java",
+      "angle": "Hybrid approach: start with free tools for quick jobs, then scale with Aspose for production‑grade needs",
+      "outline": [
+        "Quick free methods: LibreOffice, online converters",
+        "When free tools fall short (large files, branding, automation)",
+        "Integrating Aspose.Slides Java API into existing workflows",
+        "Sample code to replace manual steps with automated conversion",
+        "Testing output quality and ensuring compliance",
+        "Roadmap for migrating fully to Aspose"
+      ],
+      "target_persona": "Technical writers and content creators",
+      "primary_keyword": "convert pdf to pptx free",
+      "supporting_keywords": [
+        "free PDF to PowerPoint tools",
+        "Aspose Slides Java automation",
+        "open source PDF conversion",
+        "batch conversion free vs paid",
+        "document workflow optimization"
+      ],
+      "internal_links": [
+        "/slides/java",
+        "/slides/java/tutorials",
+        "/solutions/content-management",
+        "/blog",
+        "/support"
+      ]
+    },
+    {
+      "cluster_id": "c1",
+      "title": "Convert PDF to PPTX Online for Free: A Developer’s Guide to Using Aspose.Slides Cloud API",
+      "angle": "Leverage Aspose’s cloud REST API to build a free‑tier web converter without installing any libraries",
+      "outline": [
+        "Understanding Aspose.Slides Cloud free tier limits",
+        "Setting up API credentials and authentication",
+        "Calling the PDF‑to‑PPTX endpoint from JavaScript or Java",
+        "Handling file uploads, progress monitoring, and download",
+        "Implementing basic UI for end‑users",
+        "Scaling beyond the free tier with pricing options"
+      ],
+      "target_persona": "Web developers creating SaaS conversion tools",
+      "primary_keyword": "convert pdf to pptx online free",
+      "supporting_keywords": [
+        "Aspose Slides Cloud API",
+        "online PDF to PPTX conversion JavaScript",
+        "free tier document conversion",
+        "REST API PDF to PowerPoint",
+        "build web converter Aspose"
+      ],
+      "internal_links": [
+        "/slides/cloud",
+        "/slides/cloud/api-reference",
+        "/pricing",
+        "/blog/cloud-conversion",
+        "/support"
+      ]
+    },
+    {
+      "cluster_id": "c7",
+      "title": "PDF to PPTX Online Conversion Using Aspose.Slides for Java: Build a Secure Web Service",
+      "angle": "Step‑by‑step tutorial to create a secure Java‑based web service that converts PDFs to PPTX on the fly",
+      "outline": [
+        "Project setup: Spring Boot + Aspose.Slides for Java",
+        "Designing a REST endpoint for PDF upload",
+        "Performing conversion and streaming PPTX back to the client",
+        "Implementing authentication and rate limiting",
+        "Deploying to AWS Elastic Beanstalk or Azure App Service",
+        "Monitoring usage and handling errors gracefully"
+      ],
+      "target_persona": "Backend engineers building enterprise document services",
+      "primary_keyword": "pdf to pptx online",
+      "supporting_keywords": [
+        "Aspose Slides Java web service",
+        "secure PDF to PowerPoint API",
+        "Spring Boot conversion endpoint",
+        "cloud deployment Aspose",
+        "real‑time document conversion"
+      ],
+      "internal_links": [
+        "/slides/java",
+        "/slides/java/web-service",
+        "/solutions/cloud-deployment",
+        "/blog",
+        "/support"
+      ]
+    }
+  ]
+}
