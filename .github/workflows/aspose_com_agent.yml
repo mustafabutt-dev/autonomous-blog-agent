@@ -58,7 +58,7 @@ on:
         required: true
         type: choice
         options:
-          - 'auto'
+          - 'auto (using SerpApi)'
           - 'manual (using Google Keyword Planner Sheet)'
         default: 'auto (using SerpApi)'
 
