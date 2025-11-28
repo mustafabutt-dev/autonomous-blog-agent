@@ -312,7 +312,7 @@ async def fetch_category_articles(url, required, max_limit=300):
     next_page = url
 
     while next_page and len(results) < required and len(results) < max_limit:
-        print(f"[fetch_category_articles] Fetching: {next_page}", file=sys.stderr, flush=True)
+        # print(f"[fetch_category_articles] Fetching: {next_page}", file=sys.stderr, flush=True)
 
         resp = requests.get(next_page, headers={
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
@@ -349,7 +349,7 @@ async def fetch_category_articles(url, required, max_limit=300):
         next_link = soup.select_one("nav.pagination a.next")
         next_page = next_link.get("href") if next_link else None
 
-    print(f"[fetch_category_articles] collected {len(results)} items", file=sys.stderr, flush=True)
+    # print(f"[fetch_category_articles] collected {len(results)} items", file=sys.stderr, flush=True)
     return results
 
 # -------------------------
@@ -410,8 +410,8 @@ async def get_category_related_posts(
     """
     # 1) product language is authoritative
     target_language = extract_language_from_product(product_name)
-    print(f"[get_category_related_posts] topic={topic}", file=sys.stderr, flush=True)
-    print(f"[get_category_related_posts] product_name={product_name} -> target_language={target_language}", file=sys.stderr, flush=True)
+    # print(f"[get_category_related_posts] topic={topic}", file=sys.stderr, flush=True)
+    # print(f"[get_category_related_posts] product_name={product_name} -> target_language={target_language}", file=sys.stderr, flush=True)
 
     if not target_language:
         return {"error": f"Could not detect language from product: {product_name}", "related_posts": [], "target_language": None}
