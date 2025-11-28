@@ -1,6 +1,7 @@
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from typing import Dict, Optional
+from utils.helpers import sanitize_keywords
 import json
 import os
 
@@ -158,7 +159,18 @@ async def fetch_keywords_auto(topic: str, product_name: str = "") -> str:
                     "topic": topic,
                     "product_name": product_name
                 })
-                return result.content[0].text
+                content = result.content[0]
+
+                # If it's already a dict
+                if hasattr(content, "data") and isinstance(content.data, dict):
+                    keywords_data = content.data
+
+                # If text exists and is valid JSON
+                elif hasattr(content, "text") and content.text:
+                    keywords_data = json.loads(content.text)
+                f_keywords = keywords_data.get('keywords', {}).get('primary', [topic])
+                f_keywords = sanitize_keywords(f_keywords)
+                return f_keywords
                 
     except Exception as e:
         print(f" ERROR in fetch_keywords: {e}")
@@ -297,9 +309,9 @@ async def generate_blog_outline(topic: str, keywords) -> str:
         
 async def generate_seo_title(topic: str, keywords_json: str, product_name: str = "") -> str:
   
-    print(f" generate_seo_title TOOL CALLED! {keywords_json}", flush=True)
-    keywords_data = json.loads(keywords_json)
-    keywords = keywords_data.get('keywords', {}).get('primary', [topic])
+    # print(f" generate_seo_title TOOL CALLED! {keywords_json}", flush=True)
+    # keywords_data = json.loads(keywords_json)
+    # keywords = keywords_data.get('keywords', {}).get('primary', [topic])
     
     params = StdioServerParameters(
         command="python",
@@ -311,7 +323,7 @@ async def generate_seo_title(topic: str, keywords_json: str, product_name: str =
             await session.initialize()
             result = await session.call_tool("generate_seo_title", {
                 "topic": topic,
-                "keywords": keywords,
+                "keywords": keywords_json,
                 "product_name": product_name
             })
             parsed = json.loads(result.content[0].text)

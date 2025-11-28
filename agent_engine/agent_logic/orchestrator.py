@@ -76,12 +76,9 @@ class BlogOrchestrator:
             
         elif keyword_source == "auto (using SerpApi)":
           
-            res_keywords = await fetch_keywords_auto(topic=topic, product_name=product_name)
-        
-            keywords_data = json.loads(res_keywords)
-            f_keywords = keywords_data.get('keywords', {}).get('primary', [topic])
+            f_keywords = await fetch_keywords_auto(topic=topic, product_name=product_name)
             print("Connecting to SEO-Title MCP server")
-            res_title = await generate_seo_title(topic=topic, keywords_json=res_keywords, product_name=product_name)
+            res_title = await generate_seo_title(topic=topic, keywords_json=f_keywords, product_name=product_name)
             res_title = sanitize_markdown_title(res_title)
             print("Connecting to generate_blog_outline MCP server")
             blog_outline = await generate_blog_outline(res_title, f_keywords)
