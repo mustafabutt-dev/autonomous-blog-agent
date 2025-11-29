@@ -1,0 +1,5 @@
+openai<2,>=1.51
+pydantic<3,>=2.7
+pandas<3,>=2.2
+scikit-learn<2,>=1.4
+python-dotenv<2,>=1.0
