@@ -53,6 +53,11 @@ on:
           - 'Android via Java'
         default: 'Java'
       
+      author:
+        description: 'Author name'
+        required: true
+        type: string
+
       keyword_source:
         description: 'Keyword source'
         required: true
@@ -124,7 +129,7 @@ jobs:
     - name: Generate Blog
       run: |
         cd agent_engine
-        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}" --brand "aspose.com"
+        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}" --brand "aspose.com" --author "${{ inputs.author }}"
 
     - name: Find generated blog folder
       id: find_blog
