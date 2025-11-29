@@ -1,4 +1,4 @@
-import re
+import re, ast, json
 from datetime import datetime
 
 def slugify(text: str) -> str:
@@ -64,3 +64,124 @@ def format_related_posts(related_links):
             formatted_lines.append(f"- [Related Post]({post})")
 
     return "\n".join(formatted_lines)
+
+def get_productInfo(product_name:str, platform:str, products) -> str:
+    base_name = product_name.strip()
+    platform_clean = platform.strip()
+
+    # Build expected product name EXACTLY as in your data
+    if(platform == "cloud"):
+        expected_name = f"{base_name} {platform_clean}"
+    else: 
+        expected_name = f"{base_name} for {platform_clean}"
+
+    # Case-insensitive matching
+    product_info = next(
+        (p for p in products
+        if p["ProductName"].lower() == expected_name.lower()),
+        None
+    )
+
+    if not product_info:
+        raise ValueError(
+            f"No product found for '{product_name}' with platform '{platform}'"
+        )
+
+    return product_info
+
+def prepare_context(product_info) -> str:
+    context=''
+    # Prepare context
+    for k, v in product_info.items():
+        context += f"\n{k}: {v}"
+    return context
+
+
+def sanitize_for_hugo(text):
+    """Remove or replace characters that break Hugo/Markdown rendering"""
+    if not text:
+        return text
+    
+    replacements = {
+        '\u2013': '-',      # en dash
+        '\u2014': '-',      # em dash
+        '\u2015': '-',      # horizontal bar
+        '\u2212': '-',      # minus sign
+        '\u201c': '"',      # left double quote
+        '\u201d': '"',      # right double quote
+        '\u2018': "'",      # left single quote
+        '\u2019': "'",      # right single quote
+        '\u2026': '...',    # ellipsis
+        '\u00a0': ' ',      # non-breaking space
+        '\u200b': '',       # zero-width space
+        '\u200c': '',       # zero-width non-joiner
+        '\u200d': '',       # zero-width joiner
+        '\ufeff': '',       # zero-width no-break space (BOM)
+    }
+    
+    result = text
+    for old, new in replacements.items():
+        result = result.replace(old, new)
+    
+    # Remove any remaining non-ASCII characters that might cause issues
+    # (optional - only if you want strict ASCII)
+    # result = result.encode('ascii', 'ignore').decode('ascii')
+    
+    return result
+
+def sanitize_keywords(keywords_dict):
+    """Recursively sanitize all keyword strings in the structure"""
+    if isinstance(keywords_dict, dict):
+        return {k: sanitize_keywords(v) for k, v in keywords_dict.items()}
+    elif isinstance(keywords_dict, list):
+        return [sanitize_keywords(item) for item in keywords_dict]
+    elif isinstance(keywords_dict, str):
+        return sanitize_for_hugo(keywords_dict)
+    else:
+        return keywords_dict
+
+def parse_keywords_response(content):
+    """Safely parse keywords from MCP response with multiple fallback strategies"""
+    
+    # Strategy 1: Direct dict access
+    if hasattr(content, "data") and isinstance(content.data, dict):
+        return content.data
+    
+    # Strategy 2: Parse text content
+    if hasattr(content, "text") and content.text:
+        text = content.text.strip()
+        
+        # Remove markdown code blocks
+        if text.startswith("```"):
+            parts = text.split("```")
+            if len(parts) >= 2:
+                text = parts[1]
+                # Remove language identifier (json, python, etc.)
+                if text.startswith(("json", "python", "py")):
+                    text = text.split("\n", 1)[1] if "\n" in text else text[4:]
+        
+        text = text.strip()
+        
+        # Try multiple parsing strategies
+        strategies = [
+            # Standard JSON
+            lambda: json.loads(text),
+            # Python literal (handles single quotes)
+            lambda: ast.literal_eval(text),
+            # JSON with relaxed parsing (allows trailing commas, comments)
+            lambda: json.loads(re.sub(r',(\s*[}\]])', r'\1', text)),
+            # Remove any leading/trailing non-JSON text
+            lambda: json.loads(re.search(r'\{.*\}', text, re.DOTALL).group())
+        ]
+        
+        for strategy in strategies:
+            try:
+                return strategy()
+            except (json.JSONDecodeError, ValueError, SyntaxError, AttributeError):
+                continue
+        
+        # If all strategies fail, log the raw text for debugging
+        print(f"PARSE ERROR - Raw text: {repr(text)}")
+        raise ValueError(f"Unable to parse keywords response: {text[:200]}...")
+    
+    raise ValueError("No valid content found in response")

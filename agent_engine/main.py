@@ -9,7 +9,7 @@ def main():
     parser.add_argument("--topic", type=str, required=True, help="Blog topic")
     parser.add_argument("--product", type=str, required=True,  default=None, help="Product name")
     parser.add_argument("--platform", type=str, required=True,  default=None)
-    parser.add_argument("--brand", type=str, required=True,  default="aspose",
+    parser.add_argument("--brand", type=str, required=True,  default="aspose.com",
                         help="Platform: aspose.com | groupdocs.com | conholdate.com")
     parser.add_argument("--author", type=str, required=True,  default=None)
     parser.add_argument("--keyword_source", type=str, required=True,  default="auto",
