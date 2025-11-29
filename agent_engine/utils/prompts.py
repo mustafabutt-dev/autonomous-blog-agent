@@ -74,17 +74,53 @@ You MUST include these sections REGARDLESS of the outline:
 8. DO NOT add "Note:", "Remember:", "Important:" or similar annotations
 9. **STRICTLY NO CONTENT** before frontmatter or after {"Read More" if formatted_related else "FAQs"} section
 
+### MARKDOWN-SAFE CONTENT REQUIREMENTS (CRITICAL):
+All content in frontmatter and body MUST be safe for Hugo/Markdown/YAML:
+- **NO Unicode dashes**: Replace em dash (—), en dash (–) with standard hyphen (-)
+- **NO Smart quotes**: Replace curly quotes (" " ' ') with straight quotes (" ')
+- **NO Special characters**: Replace © → (c), ® → (R), ™ → (TM), • → -, … → ...
+- **NO Unescaped colons**: In YAML values (title, description, summary), avoid colons or wrap entire value in quotes
+- **NO Line breaks**: In YAML values, keep everything on one line
+- **NO Special symbols**: Replace %, &, *, @, #, etc. in YAML with words when possible
+- **MANDATORY**: Use only ASCII characters (a-z, A-Z, 0-9) and basic punctuation (. , - " ')
+- **In frontmatter strings**: If a value contains special characters, wrap it in double quotes
+- **Escape quotes**: If using quotes inside quoted strings, escape them properly
+
+### CHARACTER SANITIZATION RULES:
+**Replace these automatically in ALL content:**
+- — (em dash) → - (hyphen)
+- – (en dash) → - (hyphen)
+- " " (curly double quotes) → " (straight quotes)
+- ' ' (curly single quotes) → ' (straight quotes)
+- … (ellipsis) → ... (three periods)
+- © → (c)
+- ® → (R)
+- ™ → (TM)
+- • → -
+- ° → degrees
+- × → x
+- ÷ → /
+- Any other Unicode → Remove or replace with ASCII equivalent
+
+### FRONTMATTER YAML SAFETY RULES:
+1. **Strings with colons MUST be quoted**: title: "Convert PDF: A Complete Guide"
+2. **No line breaks in values**: Keep description, summary, steps on single lines
+3. **Escape internal quotes**: Use \\" for quotes inside quoted strings
+4. **No trailing colons**: Don't end values with colons
+5. **Safe characters only**: Stick to alphanumeric, spaces, hyphens, periods, commas
+6. **Test mentally**: Would this break YAML parsing? If yes, fix it.
+
 ### FRONTMATTER (MUST BE FIRST - NO TEXT BEFORE THIS):
 ---
-title: {title}
-seoTitle: {title}
-description: [Write a compelling 150-160 character meta description with main keyword]
+title: "{title}"
+seoTitle: "{title}"
+description: "[Write compelling 150-160 char meta description - NO colons, NO special chars, NO line breaks]"
 date: {current_date}
 lastmod: {current_date}
 draft: false
 url: /{data.get("urlPrefix")}/{url}/
 author: "{author}"
-summary: [1-2 sentence summary with keywords]
+summary: "[1-2 sentence summary - NO colons, NO special chars, NO line breaks, wrap in quotes if needed]"
 tags: {json.dumps(keywords)}
 categories: ["{category}"]
 showtoc: true
@@ -93,20 +129,20 @@ cover:
     alt: "{title}"
     caption: "{title}"
 steps:
-  - "[Step 1: Clear, actionable instruction]"
-  - "[Step 2: Clear, actionable instruction]"
-  - "[Step 3: Clear, actionable instruction]"
-  - "[Step 4: Clear, actionable instruction]"
-  - "[Step 5: Clear, actionable instruction - OPTIONAL]"
+  - "Step 1: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
+  - "Step 2: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
+  - "Step 3: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
+  - "Step 4: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
+  - "Step 5: [Clear actionable instruction - OPTIONAL]"
 faqs:
-  - q: "[First relevant question about the topic]"
-    a: "[Detailed answer with product link if applicable]"
-  - q: "[Second relevant question about the topic]"
-    a: "[Detailed answer with product link if applicable]"
-  - q: "[Third relevant question about the topic]"
-    a: "[Detailed answer with product link if applicable]"
-  - q: "[Fourth relevant question about the topic - OPTIONAL]"
-    a: "[Detailed answer with product link if applicable]"
+  - q: "[Question - NO special chars, safe punctuation only]"
+    a: "[Answer - NO special chars, use product links, safe punctuation only]"
+  - q: "[Question - NO special chars, safe punctuation only]"
+    a: "[Answer - NO special chars, use product links, safe punctuation only]"
+  - q: "[Question - NO special chars, safe punctuation only]"
+    a: "[Answer - NO special chars, use product links, safe punctuation only]"
+  - q: "[Question - OPTIONAL]"
+    a: "[Answer - OPTIONAL]"
 ---
 
 ### FINAL BLOG STRUCTURE (MUST FOLLOW THIS ORDER):
@@ -129,6 +165,7 @@ faqs:
 - Use clean Markdown with H2/H3 headers
 - Include keywords naturally throughout
 - DO NOT add extra content not in the outline
+- **Use only markdown-safe characters throughout entire content**
 
 ### CONTENT STRUCTURE:
 - **Introduction** = H2 header (## Introduction) with 2-3 paragraphs
@@ -139,6 +176,7 @@ faqs:
 {"- **Read More** = H2 header (## Read More) with provided links" if formatted_related else ""}
 - Complete paragraphs required for all sections
 - Include relevant examples/code where appropriate
+- **All content must use markdown-safe characters only**
 
 ### STEPS SECTION REQUIREMENTS:
 - Create 4-6 clear, actionable steps to accomplish the task described in the title
@@ -146,19 +184,20 @@ faqs:
 - Each step should be a complete, actionable instruction
 - Steps should follow a logical progression from setup to completion
 - Use technical terminology appropriate to the product/platform
+- **Steps must use only markdown-safe characters**
 - Steps MUST be included in both:
-  1. **Frontmatter** (in YAML format as a list)
+  1. **Frontmatter** (in YAML format as a list - quoted strings)
   2. **Content section** (as markdown H2 section after Introduction)
 
 ### STEPS CONTENT FORMAT:
 ## Steps to [Task Name Based on Title]
 
-1. **[Step 1 summary]**: [Brief explanation of the step]
-2. **[Step 2 summary]**: [Brief explanation of the step]
-3. **[Step 3 summary]**: [Brief explanation of the step]
-4. **[Step 4 summary]**: [Brief explanation of the step]
-5. **[Step 5 summary - OPTIONAL]**: [Brief explanation of the step]
-6. **[Step 6 summary - OPTIONAL]**: [Brief explanation of the step]
+1. **[Step 1 summary]**: [Brief explanation - markdown-safe chars only]
+2. **[Step 2 summary]**: [Brief explanation - markdown-safe chars only]
+3. **[Step 3 summary]**: [Brief explanation - markdown-safe chars only]
+4. **[Step 4 summary]**: [Brief explanation - markdown-safe chars only]
+5. **[Step 5 summary - OPTIONAL]**: [Brief explanation - markdown-safe chars only]
+6. **[Step 6 summary - OPTIONAL]**: [Brief explanation - markdown-safe chars only]
 
 ### FAQs SECTION REQUIREMENTS:
 - Create 3-4 frequently asked questions relevant to the topic
@@ -166,24 +205,25 @@ faqs:
 - Answers should be detailed (2-4 sentences each)
 - Include product links in answers where appropriate using format: `[Product Name](URL)`
 - Questions should be practical and directly related to the blog topic
+- **FAQs must use only markdown-safe characters**
 - FAQs MUST be included in both:
-  1. **Frontmatter** (in YAML format as shown above)
+  1. **Frontmatter** (in YAML format as shown above - quoted strings)
   2. **Content section** (as markdown H2 section {"before Read More" if formatted_related else "as the FINAL section"})
 
 ### FAQs CONTENT FORMAT:
 ## FAQs
 
-**Q: [First question]**  
-A: [Detailed answer with links if applicable]
+**Q: [First question - markdown-safe chars only]**  
+A: [Detailed answer - markdown-safe chars only, with links if applicable]
 
-**Q: [Second question]**  
-A: [Detailed answer with links if applicable]
+**Q: [Second question - markdown-safe chars only]**  
+A: [Detailed answer - markdown-safe chars only, with links if applicable]
 
-**Q: [Third question]**  
-A: [Detailed answer with links if applicable]
+**Q: [Third question - markdown-safe chars only]**  
+A: [Detailed answer - markdown-safe chars only, with links if applicable]
 
 **Q: [Fourth question - OPTIONAL]**  
-A: [Detailed answer with links if applicable]
+A: [Detailed answer - OPTIONAL]
 
 {'''### READ MORE SECTION RULES:
 At the end of the article, include this EXACT section:
@@ -198,11 +238,12 @@ At the end of the article, include this EXACT section:
 - Product references: `[Product Name](URL)`
 - No naked URLs allowed
 - At least one product link required in main content
+- Links are markdown-safe by default
 
 ### CODE FORMAT (if needed):
 <!--[CODE_SNIPPET_START]-->
 ```language
-# Code here
+# Code here - can use any characters inside code blocks
 ```
 <!--[CODE_SNIPPET_END]-->
 
@@ -221,8 +262,10 @@ At the end of the article, include this EXACT section:
 - Complete markdown file starting with frontmatter
 - Always includes Introduction, Steps, Conclusion, and FAQs sections
 {"- Always includes Read More section with provided links" if formatted_related else "- Does NOT include Read More section (no related links)"}
-- Steps in both frontmatter (YAML list) and content (Markdown numbered list)
-- FAQs in both frontmatter (YAML) and content (Markdown)
+- Steps in both frontmatter (YAML list - quoted) and content (Markdown numbered list)
+- FAQs in both frontmatter (YAML - quoted) and content (Markdown)
+- **ALL content uses only markdown-safe ASCII characters**
+- **NO Unicode characters that break YAML/Hugo rendering**
 - Ending after {"Read More" if formatted_related else "FAQs"} section
 - No trailing whitespace, comments, or additional text
 - Pure markdown content only
@@ -234,6 +277,20 @@ At the end of the article, include this EXACT section:
 - If FAQs not in frontmatter → OUTPUT IS INVALID
 - If any text before frontmatter or after {"Read More" if formatted_related else "FAQs"} → OUTPUT IS INVALID
 - If outline sections skipped → OUTPUT IS INVALID
+- **If Unicode/special characters in frontmatter → OUTPUT IS INVALID**
+- **If unquoted YAML values contain colons → OUTPUT IS INVALID**
+- **If line breaks in YAML string values → OUTPUT IS INVALID**
+
+### PRE-SUBMISSION CHECKLIST:
+Before returning the blog post, verify:
+- [ ] No em/en dashes (— –) anywhere - use hyphens (-)
+- [ ] No curly quotes (" " ' ') - use straight quotes (" ')
+- [ ] No special Unicode characters
+- [ ] All YAML values with colons are quoted
+- [ ] No line breaks in frontmatter string values
+- [ ] All steps are quoted in frontmatter
+- [ ] All FAQ questions and answers are properly formatted in YAML
+- [ ] Content ends exactly after {"Read More" if formatted_related else "FAQs"} section
 """
 
 def get_title_prompt(topic: str, product: str, keywords: str ) -> str:
