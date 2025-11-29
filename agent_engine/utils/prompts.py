@@ -336,5 +336,14 @@ def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS) -> str:
     - \\u2026 (ellipsis) → ... (three periods)
     - Any other problematic Unicode → Remove or replace with ASCII equivalent
     
+    **CRITICAL OUTPUT FORMAT REQUIREMENT:**
+    - You MUST return ONLY valid JSON format
+    - Use DOUBLE QUOTES for all strings (not single quotes)
+    - Do NOT return Python dict format with single quotes
+    - Your response must be parseable by json.loads() without any modifications
+    - Example of CORRECT format: {{"primary": ["keyword1", "keyword2"]}}
+    - Example of INCORRECT format: {{'primary': ['keyword1', 'keyword2']}}
+    
+    Return ONLY the JSON object with no additional text, explanation, or markdown formatting.
     Ensure all output keywords are Hugo/YAML-safe and will render correctly in frontmatter.
 """

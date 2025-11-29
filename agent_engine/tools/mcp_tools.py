@@ -1,7 +1,7 @@
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from typing import Dict, Optional
-from utils.helpers import sanitize_keywords
+from utils.helpers import sanitize_keywords, parse_keywords_response
 import json
 import os
 
@@ -159,17 +159,10 @@ async def fetch_keywords_auto(topic: str, product_name: str = "") -> str:
                     "topic": topic,
                     "product_name": product_name
                 })
-                content = result.content[0]
-
-                # If it's already a dict
-                if hasattr(content, "data") and isinstance(content.data, dict):
-                    keywords_data = content.data
-
-                # If text exists and is valid JSON
-                elif hasattr(content, "text") and content.text:
-                    keywords_data = json.loads(content.text)
+                keywords_data = parse_keywords_response(result.content[0])
                 f_keywords = keywords_data.get('keywords', {}).get('primary', [topic])
                 f_keywords = sanitize_keywords(f_keywords)
+                print(f" raww - {f_keywords}")
                 return f_keywords
                 
     except Exception as e:

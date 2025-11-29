@@ -4,7 +4,7 @@ Uses modular services via aggregator
 """
 
 import sys
-import os, json
+import os, json, re, ast
 from dotenv import load_dotenv
 from fastmcp import FastMCP
 from typing import Dict, List
@@ -45,32 +45,73 @@ mcp = FastMCP("keywords-server")
 # ---------------------------------------------
 @mcp.tool()
 async def fetch_keywords(topic: str, product_name: str = None) -> dict:
-   
     print(f"fetch_keywords TOOL CALLED (topic={topic}, product={product_name})", file=sys.stderr, flush=True)
-    all_results = []
-    serpapi = SerpAPIKeywordService()
+    
     try:
-        result = await serpapi.fetch_keywords(topic, product_name)
-        all_results.append(result)
-    except Exception as e:
-        print(f" Error from: {e}")
-    
-    # Merge results
-    merged = _merge_keywords(all_results)
-    prompt = keyword_filter_prompt(product_name, merged)
-    response = client.responses.create(
-        model='gpt-oss', 
-        input=prompt,
-    )
-    final_keywords = json.loads(response.output_text.strip())
-    
-    print(f" Result fetched: {final_keywords}", file=sys.stderr, flush=True)
+        all_results = []
+        serpapi = SerpAPIKeywordService()
+        
+        try:
+            result = await serpapi.fetch_keywords(topic, product_name)
+            all_results.append(result)
+        except Exception as e:
+            print(f"Error from SerpAPI: {e}", file=sys.stderr, flush=True)
+        
+        # Merge results
+        merged = _merge_keywords(all_results)
+        prompt = keyword_filter_prompt(product_name, merged)
+        
+        response = client.responses.create(
+            model='gpt-oss', 
+            input=prompt,
+        )
+        
+        # Add robust parsing here
+        output_text = response.output_text.strip()
+        
+        if not output_text:
+            raise ValueError("Empty response from LLM")
+        
+        # Try parsing with fallbacks
+        try:
+            final_keywords = json.loads(output_text)
+        except json.JSONDecodeError:
+            print(f"LLM returned invalid JSON: {repr(output_text)}", file=sys.stderr, flush=True)
+            
+            # Try Python literal eval (handles single quotes)
+            try:
+                final_keywords = ast.literal_eval(output_text)
+                print("Successfully parsed as Python dict", file=sys.stderr, flush=True)
+            except (ValueError, SyntaxError):
+                # Try to extract JSON from text
+                match = re.search(r'\{.*\}', output_text, re.DOTALL)
+                if match:
+                    try:
+                        final_keywords = json.loads(match.group())
+                    except json.JSONDecodeError:
+                        final_keywords = ast.literal_eval(match.group())
+                else:
+                    # Fallback to original merged keywords if LLM fails
+                    print("Falling back to unfiltered keywords", file=sys.stderr, flush=True)
+                    final_keywords = merged
+        
+        print(f"Result fetched: {final_keywords}", file=sys.stderr, flush=True)
 
-    return {
-        "topic": topic,
-        "keywords": final_keywords,
-        "status": "success"
-    }
+        return {
+            "topic": topic,
+            "keywords": final_keywords,
+            "status": "success"
+        }
+        
+    except Exception as e:
+        print(f"ERROR in fetch_keywords: {str(e)}", file=sys.stderr, flush=True)
+        # Return error in proper format instead of raising
+        return {
+            "topic": topic,
+            "keywords": {"primary": [topic], "secondary": [], "long_tail": []},
+            "status": "error",
+            "error": str(e)
+        }
 
     # return {
     #     "topic": topic,
