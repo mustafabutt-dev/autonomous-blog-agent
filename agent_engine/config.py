@@ -29,7 +29,9 @@ class Settings(BaseSettings):
 
     KRA_DATA_DIR: str = "./src/data/samples"
     KRA_OUTPUT_DIR: str = "./src/data/outputs"
-
+    TOP_CLUSTERS: int = 10
+    MAX_ROWS: int = 50000
+    DEBUG: bool = False
     # Optional value which your helper method uses
     ALLOWED_ORIGINS: str = "*"
 

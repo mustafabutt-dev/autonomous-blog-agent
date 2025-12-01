@@ -189,7 +189,11 @@ async def fetch_keywords_manual( product_name: str = "", brand: str = "") -> str
 
         async with stdio_client(params) as (read, write):
             async with ClientSession(read, write) as session:
-
+                if os.getenv('GITHUB_ACTIONS'):
+                    file_path= "output/kra/samples/Keywords.xlsx"
+                else:
+                    file_path= "../output/kra/samples/Keywords.xlsx"
+                print(f"env is -- {os.getenv('GITHUB_ACTIONS')}")
                 # handshake
                 await session.initialize()
 
@@ -198,7 +202,7 @@ async def fetch_keywords_manual( product_name: str = "", brand: str = "") -> str
                     "brand": brand,
                     "product": product_name,
                     "locale": "en-US",
-                    "file_path": "../output/kra/samples/keywords.xlsx",
+                    "file_path": file_path,
                     "clustering_k": None,
                     "top_clusters": 12,
                     "max_rows": 10

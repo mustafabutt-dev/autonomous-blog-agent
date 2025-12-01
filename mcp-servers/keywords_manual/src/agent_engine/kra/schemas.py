@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import List, Optional, Literal, Dict
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
+
 
 class KeywordRecord(BaseModel):
     keyword: str
@@ -13,24 +14,28 @@ class KeywordRecord(BaseModel):
     url: Optional[str] = None
     competition: Optional[float] = None
     competition_label: Optional[str] = None
-    @validator("keyword")
+
+    @field_validator("keyword")
     def norm_kw(cls, v: str) -> str:
         return v.strip().lower()
+
 
 class ClusterMetrics(BaseModel):
     avg_volume: float = 0.0
     avg_kd: float = 0.0
     avg_cpc: float = 0.0
     brand_fit: float = 0.0
-    intent: Literal["informational","commercial","transactional","navigational"] = "informational"
+    intent: Literal["informational", "commercial", "transactional", "navigational"] = "informational"
     score: float = 0.0
     avg_competition: Optional[float] = None
+
 
 class Cluster(BaseModel):
     cluster_id: str
     label: str
     members: List[KeywordRecord]
     metrics: ClusterMetrics
+
 
 class TopicIdea(BaseModel):
     cluster_id: str
@@ -42,6 +47,7 @@ class TopicIdea(BaseModel):
     supporting_keywords: List[str]
     internal_links: List[str] = []
 
+
 class RunRequest(BaseModel):
     brand: str = "Aspose"
     product: str = "Aspose.Cells"
@@ -52,9 +58,14 @@ class RunRequest(BaseModel):
     max_rows: int = 50000
     weights: Dict[str, float] = Field(
         default_factory=lambda: {
-            "volume": 0.35, "kd": 0.25, "cpc": 0.15, "brand": 0.15, "intent": 0.10
+            "volume": 0.35,
+            "kd": 0.25,
+            "cpc": 0.15,
+            "brand": 0.15,
+            "intent": 0.10,
         }
     )
+
 
 class RunResult(BaseModel):
     run_id: str
