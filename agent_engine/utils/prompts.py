@@ -63,6 +63,25 @@ You MUST include these sections REGARDLESS of the outline:
 ### PROVIDED OUTLINE:
 {formatted_outline}
 
+### CONTEXT RESOURCES (MUST USE):
+The context above contains important resource URLs including:
+- Product documentation links
+- API reference pages
+- Category pages
+- Related product pages
+- Download/installation pages
+
+**MANDATORY LINKING REQUIREMENTS:**
+1. You MUST include at least 2-3 contextual links from the provided resources in your content
+2. Link naturally within paragraphs where relevant (not just in FAQs)
+3. Use descriptive anchor text, not "click here" or naked URLs
+4. Prioritize linking to:
+   - Documentation when explaining features
+   - API references when discussing technical implementation
+   - Category pages when mentioning product categories
+   - Download pages when discussing installation/setup
+5. Links should enhance the reader's understanding and provide paths for deeper exploration
+
 ### CRITICAL RULES:
 1. **START** with frontmatter - no text before `---`
 2. **END** after {"Read More section" if formatted_related else "FAQs section"} - no text after the last {"link" if formatted_related else "FAQ"}
@@ -73,6 +92,7 @@ You MUST include these sections REGARDLESS of the outline:
 7. DO NOT add author notes, editor notes, or meta-commentary
 8. DO NOT add "Note:", "Remember:", "Important:" or similar annotations
 9. **STRICTLY NO CONTENT** before frontmatter or after {"Read More" if formatted_related else "FAQs"} section
+10. **MUST include contextual links from provided resources throughout the content**
 
 ### MARKDOWN-SAFE CONTENT REQUIREMENTS (CRITICAL):
 All content in frontmatter and body MUST be safe for Hugo/Markdown/YAML:
@@ -124,10 +144,6 @@ summary: "[1-2 sentence summary - NO colons, NO special chars, NO line breaks, w
 tags: {json.dumps(keywords)}
 categories: ["{category}"]
 showtoc: true
-cover:
-    image: images/{url}.png
-    alt: "{title}"
-    caption: "{title}"
 steps:
   - "Step 1: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
   - "Step 2: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
@@ -166,17 +182,40 @@ faqs:
 - Include keywords naturally throughout
 - DO NOT add extra content not in the outline
 - **Use only markdown-safe characters throughout entire content**
+- **MUST include 2-3+ contextual links from provided context resources**
 
 ### CONTENT STRUCTURE:
-- **Introduction** = H2 header (## Introduction) with 2-3 paragraphs
-- **Steps** = H2 header (## Steps to [Task Name]) with 4-6 numbered steps
-- Outline items = H2/H3 headers as specified
-- **Conclusion** = H2 header (## Conclusion) with 2-3 paragraphs
-- **FAQs** = H2 header (## FAQs) with 3-4 Q&A pairs
+- **Introduction** = H2 header (## Introduction) with 2-3 paragraphs (include at least 1 contextual link)
+- **Steps** = H2 header (## Steps to [Task Name]) with 4-6 numbered steps (include contextual links where relevant)
+- Outline items = H2/H3 headers as specified (include contextual links naturally)
+- **Conclusion** = H2 header (## Conclusion) with 2-3 paragraphs (include at least 1 contextual link)
+- **FAQs** = H2 header (## FAQs) with 3-4 Q&A pairs (include contextual links in answers)
 {"- **Read More** = H2 header (## Read More) with provided links" if formatted_related else ""}
 - Complete paragraphs required for all sections
 - Include relevant examples/code where appropriate
 - **All content must use markdown-safe characters only**
+- **Contextual links must be naturally integrated, not forced**
+
+### CONTEXTUAL LINKING GUIDELINES:
+**When to link to documentation:**
+- "Learn more about [feature] in the [documentation](URL)"
+- "For detailed API specifications, see the [API reference](URL)"
+- "Check out the [complete guide](URL) for advanced features"
+
+**When to link to category pages:**
+- "Explore more [category] solutions at [Category Page](URL)"
+- "This is part of our [Product Category](URL) offerings"
+
+**When to link to download/installation:**
+- "Get started by [downloading the SDK](URL)"
+- "Visit our [installation guide](URL) for setup instructions"
+
+**Link placement best practices:**
+- Integrate links naturally within sentences
+- Use descriptive anchor text that tells readers what they'll find
+- Place links where readers would logically want more information
+- Don't cluster multiple links in one sentence unless necessary
+- Ensure links add value and aren't just inserted for SEO
 
 ### STEPS SECTION REQUIREMENTS:
 - Create 4-6 clear, actionable steps to accomplish the task described in the title
@@ -185,6 +224,7 @@ faqs:
 - Steps should follow a logical progression from setup to completion
 - Use technical terminology appropriate to the product/platform
 - **Steps must use only markdown-safe characters**
+- **Include contextual links in steps where relevant (setup, configuration, API calls)**
 - Steps MUST be included in both:
   1. **Frontmatter** (in YAML format as a list - quoted strings)
   2. **Content section** (as markdown H2 section after Introduction)
@@ -192,10 +232,10 @@ faqs:
 ### STEPS CONTENT FORMAT:
 ## Steps to [Task Name Based on Title]
 
-1. **[Step 1 summary]**: [Brief explanation - markdown-safe chars only]
-2. **[Step 2 summary]**: [Brief explanation - markdown-safe chars only]
-3. **[Step 3 summary]**: [Brief explanation - markdown-safe chars only]
-4. **[Step 4 summary]**: [Brief explanation - markdown-safe chars only]
+1. **[Step 1 summary]**: [Brief explanation - markdown-safe chars only, include link if relevant]
+2. **[Step 2 summary]**: [Brief explanation - markdown-safe chars only, include link if relevant]
+3. **[Step 3 summary]**: [Brief explanation - markdown-safe chars only, include link if relevant]
+4. **[Step 4 summary]**: [Brief explanation - markdown-safe chars only, include link if relevant]
 5. **[Step 5 summary - OPTIONAL]**: [Brief explanation - markdown-safe chars only]
 6. **[Step 6 summary - OPTIONAL]**: [Brief explanation - markdown-safe chars only]
 
@@ -203,7 +243,7 @@ faqs:
 - Create 3-4 frequently asked questions relevant to the topic
 - Questions should cover common user concerns, technical details, or best practices
 - Answers should be detailed (2-4 sentences each)
-- Include product links in answers where appropriate using format: `[Product Name](URL)`
+- **MUST include contextual links in FAQ answers** using format: `[Resource Name](URL)`
 - Questions should be practical and directly related to the blog topic
 - **FAQs must use only markdown-safe characters**
 - FAQs MUST be included in both:
@@ -214,13 +254,13 @@ faqs:
 ## FAQs
 
 **Q: [First question - markdown-safe chars only]**  
-A: [Detailed answer - markdown-safe chars only, with links if applicable]
+A: [Detailed answer with at least one contextual link - markdown-safe chars only]
 
 **Q: [Second question - markdown-safe chars only]**  
-A: [Detailed answer - markdown-safe chars only, with links if applicable]
+A: [Detailed answer with contextual link if relevant - markdown-safe chars only]
 
 **Q: [Third question - markdown-safe chars only]**  
-A: [Detailed answer - markdown-safe chars only, with links if applicable]
+A: [Detailed answer with contextual link if relevant - markdown-safe chars only]
 
 **Q: [Fourth question - OPTIONAL]**  
 A: [Detailed answer - OPTIONAL]
@@ -235,9 +275,11 @@ At the end of the article, include this EXACT section:
 **DO NOT INCLUDE** - No related links provided. The blog MUST end after the FAQs section.'''}
 
 ### LINK FORMAT:
+- Contextual resource links: `[Descriptive Text](URL from context)`
 - Product references: `[Product Name](URL)`
 - No naked URLs allowed
-- At least one product link required in main content
+- **At least 2-3 contextual links from provided resources required throughout content**
+- **At least 1 product/documentation link required in FAQ answers**
 - Links are markdown-safe by default
 
 ### CODE FORMAT (if needed):
@@ -249,10 +291,10 @@ At the end of the article, include this EXACT section:
 
 ### STRICTLY ENFORCED BOUNDARIES:
 - **BEGINNING**: First character must be `-` of frontmatter (no spaces, no text before)
-- **INTRODUCTION**: Must be first content section after frontmatter
-- **STEPS**: Must be included after Introduction
-- **CONCLUSION**: Must be included before FAQs section
-- **FAQs**: Must be included {"before Read More section" if formatted_related else "as the FINAL section"}
+- **INTRODUCTION**: Must be first content section after frontmatter (include contextual link)
+- **STEPS**: Must be included after Introduction (include contextual links where relevant)
+- **CONCLUSION**: Must be included before FAQs section (include contextual link)
+- **FAQs**: Must be included {"before Read More section" if formatted_related else "as the FINAL section"} (include contextual links in answers)
 {"- **READ MORE**: Must be included as the FINAL section" if formatted_related else ""}
 - **ENDING**: Last character must be after the final {"link in Read More section" if formatted_related else "FAQ answer"}
 - **ABSOLUTELY NO CONTENT** outside these boundaries
@@ -266,6 +308,7 @@ At the end of the article, include this EXACT section:
 - FAQs in both frontmatter (YAML - quoted) and content (Markdown)
 - **ALL content uses only markdown-safe ASCII characters**
 - **NO Unicode characters that break YAML/Hugo rendering**
+- **MINIMUM 2-3 contextual links from provided resources integrated naturally**
 - Ending after {"Read More" if formatted_related else "FAQs"} section
 - No trailing whitespace, comments, or additional text
 - Pure markdown content only
@@ -280,6 +323,8 @@ At the end of the article, include this EXACT section:
 - **If Unicode/special characters in frontmatter → OUTPUT IS INVALID**
 - **If unquoted YAML values contain colons → OUTPUT IS INVALID**
 - **If line breaks in YAML string values → OUTPUT IS INVALID**
+- **If fewer than 2 contextual links from provided resources → OUTPUT IS INVALID**
+- **If no links in FAQ answers → OUTPUT IS INVALID**
 
 ### PRE-SUBMISSION CHECKLIST:
 Before returning the blog post, verify:
@@ -290,6 +335,11 @@ Before returning the blog post, verify:
 - [ ] No line breaks in frontmatter string values
 - [ ] All steps are quoted in frontmatter
 - [ ] All FAQ questions and answers are properly formatted in YAML
+- [ ] **At least 2-3 contextual links from provided resources included naturally**
+- [ ] **At least 1 link in Introduction section**
+- [ ] **At least 1 link in Conclusion section**
+- [ ] **At least 1 link in FAQ answers**
+- [ ] All links use descriptive anchor text (not "click here")
 - [ ] Content ends exactly after {"Read More" if formatted_related else "FAQs"} section
 """
 
