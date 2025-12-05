@@ -5,7 +5,7 @@ Agent autonomously decides tool sequence
 from openai import AsyncOpenAI
 from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled, ModelSettings
 from config import settings
-from tools.mcp_tools import fetch_keywords_auto, fetch_keywords_manual, generate_markdown_file, fetch_category_related_articles, generate_seo_title, generate_blog_outline
+from tools.mcp_tools import fetch_keywords_auto, fetch_keywords_manual, generate_markdown_file, fetch_category_related_articles, generate_seo_title, generate_blog_outline, gist_injector
 from utils import prompts
 from utils.helpers import sanitize_markdown_title, prepare_context, get_productInfo
 import json
@@ -76,8 +76,8 @@ class BlogOrchestrator:
             
         elif keyword_source == "auto (using SerpApi)":
           
-            f_keywords = await fetch_keywords_auto(topic=topic, product_name=product_name)
-             
+            f_keywords = await fetch_keywords_auto(topic=topic, product_name=product_name, platform=platform)
+              
             print("Connecting to SEO-Title MCP server")
             res_title = await generate_seo_title(topic=topic, keywords_json=f_keywords, product_name=product_name)
             res_title = sanitize_markdown_title(res_title)
@@ -101,13 +101,14 @@ class BlogOrchestrator:
 
         try:
             result = await Runner.run(agent, context, max_turns=10)
+            print(f"Injecting gists now.")
+        
+            jistified = await gist_injector(result.final_output, res_title)
+            text_output = jistified.content[0].text  # TextContent object -> get text
+            data = json.loads(text_output)         # parse JSON string
+            final_content = data["jistified_content"]
 
-            final_content = (
-                "\n\n".join(result.final_output)
-                if isinstance(result.final_output, list)
-                else str(result.final_output)
-            )
-            print("Generating markdown file")
+            # print(f"Generating markdown file. {final_content}", flush=True)
             file_res = await generate_markdown_file(
                 title=res_title,
                 content=final_content,

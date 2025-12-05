@@ -23,7 +23,6 @@ client = OpenAI(
 # MCP Server
 mcp = FastMCP("outline_generator")
 
-
 # -----------------------------
 # MCP TOOL
 # -----------------------------

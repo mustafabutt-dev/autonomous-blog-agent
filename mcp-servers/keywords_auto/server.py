@@ -44,7 +44,7 @@ mcp = FastMCP("keywords-server")
 # Define MCP Tool
 # ---------------------------------------------
 @mcp.tool()
-async def fetch_keywords(topic: str, product_name: str = None) -> dict:
+async def fetch_keywords(topic: str, product_name: str = None, platform:str=None) -> dict:
     print(f"fetch_keywords TOOL CALLED (topic={topic}, product={product_name})", file=sys.stderr, flush=True)
     
     try:
@@ -59,7 +59,7 @@ async def fetch_keywords(topic: str, product_name: str = None) -> dict:
         
         # Merge results
         merged = _merge_keywords(all_results)
-        prompt = keyword_filter_prompt(product_name, merged)
+        prompt = keyword_filter_prompt(product_name, merged, platform)
         
         response = client.responses.create(
             model='gpt-oss', 
@@ -94,8 +94,6 @@ async def fetch_keywords(topic: str, product_name: str = None) -> dict:
                     # Fallback to original merged keywords if LLM fails
                     print("Falling back to unfiltered keywords", file=sys.stderr, flush=True)
                     final_keywords = merged
-        
-        print(f"Result fetched: {final_keywords}", file=sys.stderr, flush=True)
 
         return {
             "topic": topic,
@@ -113,11 +111,6 @@ async def fetch_keywords(topic: str, product_name: str = None) -> dict:
             "error": str(e)
         }
 
-    # return {
-    #     "topic": topic,
-    #     "keywords": {'primary': ['Convert docx to xml', 'Convert docx to xml using Aspose', 'Free online DOCX to XML conversion App via java', 'Java API to Convert DOCX to XLAM or with free Online ...', 'Saving Documents as OOXML Format in Aspose.Words for Java'], 'secondary': [], 'long_tail': ['Can I convert docx to XML?', 'How to convert DOCX to PDF in Java Aspose words?', 'How to convert PDF to XML in Java?', 'How do you create an XML file from a Word document?'], 'metadata': {'sources': ['SerpAPI'], 'total_services': 1, 'total_keywords': 9}},
-    #     "status": "success"
-    # }
 def _merge_keywords( results: List[Dict]) -> Dict:
     """
     Merge keywords from multiple sources
@@ -155,5 +148,4 @@ def _merge_keywords( results: List[Dict]) -> Dict:
 # Run MCP Server
 # ---------------------------------------------
 if __name__ == "__main__":
-    print(" Starting Keywords MCP Server (Dynamic)...", file=sys.stderr, flush=True)
     mcp.run()

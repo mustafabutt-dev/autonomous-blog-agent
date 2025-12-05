@@ -71,5 +71,4 @@ def generate_markdown_file(
 # Run MCP Server
 # ---------------------------------------------
 if __name__ == "__main__":
-    print(" Starting File Generator MCP Server...", file=sys.stderr, flush=True)
     mcp.run()

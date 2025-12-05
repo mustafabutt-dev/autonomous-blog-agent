@@ -66,5 +66,4 @@ async def generate_seo_title(topic: str, keywords: list, product_name: str = Non
     }
 
 if __name__ == "__main__":
-    print(" SEO MCP Server running on http://127.0.0.1:3002")
     mcp.run()

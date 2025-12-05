@@ -1,5 +1,6 @@
-import re, ast, json
+import re, ast, json, sys
 from datetime import datetime
+import requests
 
 def slugify(text: str) -> str:
     """Convert text into a clean URL slug with C# → csharp normalization."""
@@ -185,3 +186,307 @@ def parse_keywords_response(content):
         raise ValueError(f"Unable to parse keywords response: {text[:200]}...")
     
     raise ValueError("No valid content found in response")
+
+def extract_first_topic(response: dict) -> dict:
+    # Ensure 'topics' exists and has at least one item
+    topics = response.get("topics", [])
+    if not topics:
+        return {}
+    
+    first_topic = topics[0]
+    
+    # Extract data
+    topic_title = first_topic.get("title", "")
+    primary_keywords = [first_topic.get("primary_keyword", "")] if first_topic.get("primary_keyword") else []
+    secondary_keywords = first_topic.get("supporting_keywords", [])
+    topic_outline = first_topic.get("outline", [])
+    
+    return {
+        "topic": topic_title,
+        "keywords": {
+            "primary": primary_keywords,
+            "secondary": secondary_keywords
+        },
+        "outline": topic_outline
+    }
+
+
+def extract_all_complete_code_snippets(markdown_content: str) -> dict:
+    """
+    Extract ALL complete code snippets from Complete Code Example sections
+    Stores the exact matched text for replacement later
+    Returns:
+        dict: {
+            "task1": {
+                "language": "java", 
+                "code": "...", 
+                "task_name": "...",
+                "matched_text": "<!--[CODE_SNIPPET_START_COMPLETE]-->...<!--[CODE_SNIPPET_END_COMPLETE]-->",
+                "filename": "convert_ppt_to_html.java"
+            }
+        }
+    """
+    import re
+    
+    section_pattern = r'##\s+(.+?)\s*-\s*Complete Code Example(.*?)(?=##|\Z)'
+    sections = re.finditer(section_pattern, markdown_content, re.DOTALL | re.IGNORECASE)
+    
+    snippets = {}
+    snippet_index = 1
+    
+    for section in sections:
+        task_name = section.group(1).strip()
+        section_content = section.group(2)
+        
+        matched_text = None
+        language = None
+        code = None
+        
+        # Try COMPLETE_CODE_SNIPPET tags first
+        code_pattern_complete = r'<!--\[CODE_SNIPPET_START_COMPLETE\]-->\s*```([\w#+-]*)\s*(.*?)\s*```\s*<!--\[CODE_SNIPPET_END_COMPLETE\]-->'
+        match = re.search(code_pattern_complete, section_content, re.DOTALL)
+        
+        if match:
+            matched_text = match.group(0)
+            language = match.group(1).strip() or 'text'
+            code = match.group(2).strip()
+        
+        # Fallback to regular CODE_SNIPPET tags
+        if not match:
+            code_pattern_regular = r'<!--\[CODE_SNIPPET_START\]-->\s*```([\w#+-]*)\s*(.*?)\s*```\s*<!--\[CODE_SNIPPET_END\]-->'
+            match = re.search(code_pattern_regular, section_content, re.DOTALL)
+            
+            if match:
+                matched_text = match.group(0)
+                language = match.group(1).strip() or 'text'
+                code = match.group(2).strip()
+        
+        # Final fallback: just get first code block without tags
+        if not match:
+            code_pattern_plain = r'```([\w#+-]*)\s*(.*?)\s*```'
+            match = re.search(code_pattern_plain, section_content, re.DOTALL)
+            
+            if match:
+                matched_text = match.group(0)
+                language = match.group(1).strip() or 'text'
+                code = match.group(2).strip()
+        
+        if match and matched_text:
+            # Create a clean, safe filename
+            safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
+            safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name)
+            safe_task_name = safe_task_name.lower()[:50]
+            
+            # Get proper file extension
+            extension = get_file_extension(language)
+            
+            key = f"snippet_{snippet_index}_{safe_task_name}"
+            filename = f"{safe_task_name}.{extension}"
+            
+            snippets[key] = {
+                "language": language,
+                "extension": extension,  # Store extension separately
+                "code": code,
+                "task_name": task_name,
+                "matched_text": matched_text,
+                "filename": filename
+            }
+            snippet_index += 1
+    
+    return snippets
+
+
+async def upload_to_gist(
+    files_dict: dict,  # {"file1.java": "code1", "file2.py": "code2"}
+    description: str = "",
+    token: str = "",
+    gist_name: str = ""
+) -> dict:
+    """
+    Upload code to GitHub Gist - handles single or multiple files intelligently
+    
+    Args:
+        files_dict: Dictionary of {filename: code_content}
+        description: Gist description
+        token: GitHub token
+        gist_name: Gist owner name
+    
+    Returns:
+        dict: {
+            "gist_id": "abc123",
+            "shortcodes": {
+                "file1.java": "{{< gist ... >}}",
+                "file2.py": "{{< gist ... >}}"
+            }
+        }
+    """
+    print(f"Uploading {len(files_dict)} file(s) to gist...", flush=True, file=sys.stderr)
+    
+    # --- Token Check ---
+    if not token:
+        return {"error": "GITHUB_TOKEN environment variable not set"}
+    
+    print(f"🔑 GITHUB_TOKEN found", flush=True, file=sys.stderr)
+    
+    # --- Build files object for gist ---
+    gist_files = {
+        filename: {"content": content} 
+        for filename, content in files_dict.items()
+    }
+    
+    # --- Send Request ---
+    response = requests.post(
+        "https://api.github.com/gists",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json"
+        },
+        json={
+            "description": description,
+            "public": True,
+            "files": gist_files
+        }
+    )
+    
+    # --- Handle Response ---
+    if response.ok:
+        gist = response.json()
+        gist_id = gist['id']
+        
+        # Generate shortcodes for each file
+        shortcodes = {}
+        for file_name in gist['files'].keys():
+            shortcodes[file_name] = f'{{{{< gist "{gist_name}" "{gist_id}" "{file_name}" >}}}}'
+            print(f"✓ Created shortcode for {file_name}", flush=True, file=sys.stderr)
+        
+        print(f"✓ Gist created: {gist_id} with {len(shortcodes)} file(s)", flush=True, file=sys.stderr)
+        
+        return {
+            "success": True,
+            "gist_id": gist_id,
+            "shortcodes": shortcodes,
+            "gist_url": gist['html_url']
+        }
+    
+    error_msg = f"Error {response.status_code}: {response.text}"
+    print(f"❌ {error_msg}", flush=True, file=sys.stderr)
+    return {
+        "success": False,
+        "error": error_msg
+    }
+
+def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shortcodes_map: dict) -> str:
+    """
+    Replace all code snippets with their corresponding gist shortcodes
+    
+    Args:
+        markdown_content: Original markdown
+        snippets: Output from extract_all_complete_code_snippets()
+        shortcodes_map: {filename: gist_shortcode} from gist upload
+    
+    Returns:
+        Updated markdown with gist shortcodes
+    """
+    updated_content = markdown_content
+    
+    for key, data in snippets.items():
+        filename = data['filename']
+        matched_text = data['matched_text']
+        
+        # Get the corresponding gist shortcode
+        if filename in shortcodes_map:
+            gist_shortcode = shortcodes_map[filename]
+            
+            # Replace the matched code block with gist shortcode
+            updated_content = updated_content.replace(matched_text, gist_shortcode, 1)
+            
+            print(f"✓ Replaced {filename} with gist", flush=True, file=sys.stderr)
+        else:
+            print(f"⚠ No gist found for {filename}", flush=True, file=sys.stderr)
+    
+    return updated_content
+
+
+def get_file_extension(language: str) -> str:
+    """
+    Map code language to proper file extension
+    
+    Args:
+        language: Language identifier from code block (e.g., 'java', 'csharp', 'python')
+    
+    Returns:
+        File extension (e.g., 'java', 'cs', 'py')
+    """
+    language = language.lower().strip()
+    
+    # Language to extension mapping
+    extension_map = {
+        # Java
+        'java': 'java',
+        
+        # C#/.NET
+        'csharp': 'cs',
+        'cs': 'cs',
+        'c#': 'cs',
+        'dotnet': 'cs',
+        '.net': 'cs',
+        
+        # Python
+        'python': 'py',
+        'py': 'py',
+        
+        # JavaScript/TypeScript
+        'javascript': 'js',
+        'js': 'js',
+        'typescript': 'ts',
+        'ts': 'ts',
+        
+        # C/C++
+        'c': 'c',
+        'cpp': 'cpp',
+        'c++': 'cpp',
+        
+        # Web
+        'html': 'html',
+        'css': 'css',
+        'php': 'php',
+        
+        # Ruby
+        'ruby': 'rb',
+        'rb': 'rb',
+        
+        # Go
+        'go': 'go',
+        'golang': 'go',
+        
+        # Rust
+        'rust': 'rs',
+        'rs': 'rs',
+        
+        # Swift
+        'swift': 'swift',
+        
+        # Kotlin
+        'kotlin': 'kt',
+        'kt': 'kt',
+        
+        # Shell/Bash
+        'bash': 'sh',
+        'sh': 'sh',
+        'shell': 'sh',
+        
+        # SQL
+        'sql': 'sql',
+        
+        # XML/JSON/YAML
+        'xml': 'xml',
+        'json': 'json',
+        'yaml': 'yaml',
+        'yml': 'yml',
+        
+        # Default fallback
+        'text': 'txt',
+        '': 'txt'
+    }
+    
+    return extension_map.get(language, language or 'txt')

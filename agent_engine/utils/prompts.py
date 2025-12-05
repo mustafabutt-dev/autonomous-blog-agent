@@ -53,9 +53,10 @@ You are an expert technical blog writer. Your task: Write a detailed, SEO-optimi
 You MUST include these sections REGARDLESS of the outline:
 1. **Introduction section** (H2 header: ## Introduction)
 2. **Steps section** (H2 header: ## Steps to [Task])
-3. **Conclusion section** (H2 header: ## Conclusion)
-4. **FAQs section** (H2 header: ## FAQs)
-{"5. **Read More section** (H2 header: ## Read More)" if formatted_related else ""}
+3. **Complete Code Example section(s)** (H2 header: ## [Task] - Complete Code Example) - MUST include full working code for EACH task in title
+4. **Conclusion section** (H2 header: ## Conclusion)
+5. **FAQs section** (H2 header: ## FAQs)
+{"6. **Read More section** (H2 header: ## Read More)" if formatted_related else ""}
 
 {"### READ MORE LINKS TO INCLUDE EXACTLY:" if formatted_related else "### READ MORE SECTION:"}
 {formatted_related if formatted_related else "SKIP - No related links provided. Do NOT include Read More section."}
@@ -86,13 +87,15 @@ The context above contains important resource URLs including:
 1. **START** with frontmatter - no text before `---`
 2. **END** after {"Read More section" if formatted_related else "FAQs section"} - no text after the last {"link" if formatted_related else "FAQ"}
 3. Write ONLY the frontmatter and the sections specified below
-4. **ALWAYS CREATE Introduction, Steps, Conclusion, and FAQs sections** even if not in outline
+4. **ALWAYS CREATE Introduction, Steps, Complete Code Example(s), Conclusion, and FAQs sections** even if not in outline
 {"5. **INCLUDE Read More section** with the provided links" if formatted_related else "5. **DO NOT CREATE Read More section** - no related links available"}
 6. DO NOT add any additional sections, notes, or commentary
 7. DO NOT add author notes, editor notes, or meta-commentary
 8. DO NOT add "Note:", "Remember:", "Important:" or similar annotations
 9. **STRICTLY NO CONTENT** before frontmatter or after {"Read More" if formatted_related else "FAQs"} section
 10. **MUST include contextual links from provided resources throughout the content**
+11. **ALL code snippets MUST be wrapped with <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]--> tags**
+12. **If title contains MULTIPLE tasks, create SEPARATE Complete Code Example sections for EACH task**
 
 ### MARKDOWN-SAFE CONTENT REQUIREMENTS (CRITICAL):
 All content in frontmatter and body MUST be safe for Hugo/Markdown/YAML:
@@ -163,31 +166,37 @@ faqs:
 
 ### FINAL BLOG STRUCTURE (MUST FOLLOW THIS ORDER):
 1. **Introduction** (ALWAYS CREATE this section first after frontmatter)
-2. **Steps** (ALWAYS CREATE this section with 4-6 actionable steps)
-3. **Outline Sections** (Follow the provided outline exactly)
-4. **Conclusion** (ALWAYS CREATE this section)
-5. **FAQs** (ALWAYS CREATE this section with 3-4 questions)
-{"6. **Read More** (ALWAYS include this section last)" if formatted_related else ""}
+2. **Steps** (ALWAYS CREATE this section with 4-6 actionable steps, can include code snippets)
+3. **Outline Sections** (Follow the provided outline exactly, can include code snippets with explanations)
+4. **Complete Code Example(s)** (ALWAYS CREATE - one section per task mentioned in title)
+   - If single task: ONE Complete Code Example section
+   - If multiple tasks: MULTIPLE Complete Code Example sections (one for each task)
+5. **Conclusion** (ALWAYS CREATE this section)
+6. **FAQs** (ALWAYS CREATE this section with 3-4 questions)
+{"7. **Read More** (ALWAYS include this section last)" if formatted_related else ""}
 
 ### WRITING INSTRUCTIONS:
 - **Start immediately** with frontmatter above (fill bracketed parts)
 - **Always begin** with ## Introduction section after frontmatter
 - **Always include** ## Steps section after Introduction
 - Follow the provided outline EXACTLY for the main content
+- **Always include** Complete Code Example section(s) before Conclusion - ONE section per task in title
 - **Always include** ## Conclusion section
 - **Always include** ## FAQs section with 3-4 relevant questions
 {"- **Always include** ## Read More section last" if formatted_related else "- **DO NOT include** Read More section (no related links provided)"}
-- Write 600-800 words total (excluding frontmatter, steps, and FAQs)
+- Write 600-800 words total (excluding frontmatter, steps, code examples, and FAQs)
 - Use clean Markdown with H2/H3 headers
 - Include keywords naturally throughout
 - DO NOT add extra content not in the outline
 - **Use only markdown-safe characters throughout entire content**
 - **MUST include 2-3+ contextual links from provided context resources**
+- **ALL code snippets MUST use <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]--> tags**
 
 ### CONTENT STRUCTURE:
 - **Introduction** = H2 header (## Introduction) with 2-3 paragraphs (include at least 1 contextual link)
-- **Steps** = H2 header (## Steps to [Task Name]) with 4-6 numbered steps (include contextual links where relevant)
-- Outline items = H2/H3 headers as specified (include contextual links naturally)
+- **Steps** = H2 header (## Steps to [Task Name]) with 4-6 numbered steps (include contextual links where relevant, may include code snippets)
+- Outline items = H2/H3 headers as specified (include contextual links naturally, may include code snippets with explanations)
+- **Complete Code Example(s)** = H2 header(s) (## [Specific Task] - Complete Code Example) with full working code wrapped in tags - ONE section per task
 - **Conclusion** = H2 header (## Conclusion) with 2-3 paragraphs (include at least 1 contextual link)
 - **FAQs** = H2 header (## FAQs) with 3-4 Q&A pairs (include contextual links in answers)
 {"- **Read More** = H2 header (## Read More) with provided links" if formatted_related else ""}
@@ -195,6 +204,88 @@ faqs:
 - Include relevant examples/code where appropriate
 - **All content must use markdown-safe characters only**
 - **Contextual links must be naturally integrated, not forced**
+
+### CODE SNIPPET REQUIREMENTS (CRITICAL):
+**EVERY code snippet MUST follow this exact format:**
+
+<!--[CODE_SNIPPET_START]-->
+```language
+// Your code here
+// Can be partial or full code
+```
+<!--[CODE_SNIPPET_END]-->
+
+**Rules for code snippets:**
+- **MANDATORY**: Wrap ALL code blocks with <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]-->
+- In Steps section: Can include partial code snippets with explanations
+- In Outline sections: Can include code chunks broken down for explanation
+- In Complete Code Example section(s): MUST include the FULL, working, copy-paste ready code
+- Always specify the language (python, javascript, java, csharp, etc.)
+- Include comments where helpful
+- Code inside blocks can use any characters (not restricted to ASCII)
+
+### COMPLETE CODE EXAMPLE SECTION (MANDATORY):
+This section MUST appear after outline sections and before Conclusion.
+
+**MULTIPLE TASKS HANDLING:**
+- If title contains ONE task (e.g., "Convert PDF to PNG"): Create ONE Complete Code Example section
+- If title contains MULTIPLE tasks (e.g., "Convert PDF to PNG and JPG"): Create SEPARATE Complete Code Example sections for EACH task
+- Parse the title to identify all tasks (look for "and", "or", conjunctions, multiple formats mentioned)
+- Each task gets its own dedicated Complete Code Example section
+
+**Format for SINGLE task:**
+## [Task from Title] - Complete Code Example
+
+Example: "## Convert PDF to PNG - Complete Code Example"
+
+**Format for MULTIPLE tasks:**
+## [First Task] - Complete Code Example
+[Full code for first task]
+
+## [Second Task] - Complete Code Example
+[Full code for second task]
+
+## [Third Task] - Complete Code Example (if applicable)
+[Full code for third task]
+
+**Examples:**
+- Title: "Convert PDF to PNG and JPG" → Create 2 sections:
+  - "## Convert PDF to PNG - Complete Code Example"
+  - "## Convert PDF to JPG - Complete Code Example"
+  
+- Title: "Convert DOCX to PDF, HTML, and Markdown" → Create 3 sections:
+  - "## Convert DOCX to PDF - Complete Code Example"
+  - "## Convert DOCX to HTML - Complete Code Example"
+  - "## Convert DOCX to Markdown - Complete Code Example"
+
+- Title: "Convert PDF to PNG" → Create 1 section:
+  - "## Convert PDF to PNG - Complete Code Example"
+
+**Structure for each Complete Code Example section:**
+
+[1-2 sentence introduction explaining what this specific code does]
+
+<!--[COMPLETE_CODE_SNIPPET_START]-->
+```language
+// Full working code for THIS specific task
+// Include all necessary imports, initialization, and implementation
+// This should be production-ready or near-production quality
+// Must be complete - no placeholders like "// ... rest of code"
+```
+<!--[COMPLETE_CODE_SNIPPET_END]-->
+
+[Optional: 1-2 sentences explaining how to run or use this code]
+
+**Requirements for EACH Complete Code Example:**
+- Must be FULL working code for that specific task (no partial snippets)
+- Must be copy-paste ready (no "..." or placeholders)
+- Must include all imports/dependencies needed for that task
+- Must include proper initialization and error handling
+- Should be well-commented for clarity
+- Must focus on ONE specific task per section
+- Must be wrapped in <!--[COMPLETE_CODE_SNIPPET_START]--> and <!--[COMPLETE_CODE_SNIPPET_END]-->
+- Each section is independent and can be used standalone
+- If title has multiple tasks, each gets its own complete, standalone code example
 
 ### CONTEXTUAL LINKING GUIDELINES:
 **When to link to documentation:**
@@ -225,6 +316,7 @@ faqs:
 - Use technical terminology appropriate to the product/platform
 - **Steps must use only markdown-safe characters**
 - **Include contextual links in steps where relevant (setup, configuration, API calls)**
+- **Can include partial code snippets in steps** (wrapped in tags) to illustrate specific actions
 - Steps MUST be included in both:
   1. **Frontmatter** (in YAML format as a list - quoted strings)
   2. **Content section** (as markdown H2 section after Introduction)
@@ -233,10 +325,22 @@ faqs:
 ## Steps to [Task Name Based on Title]
 
 1. **[Step 1 summary]**: [Brief explanation - markdown-safe chars only, include link if relevant]
+   
+   [Optional code snippet if needed]
+   <!--[CODE_SNIPPET_START]-->
+```language
+   // Step-specific code
+```
+   <!--[CODE_SNIPPET_END]-->
+
 2. **[Step 2 summary]**: [Brief explanation - markdown-safe chars only, include link if relevant]
+
 3. **[Step 3 summary]**: [Brief explanation - markdown-safe chars only, include link if relevant]
+
 4. **[Step 4 summary]**: [Brief explanation - markdown-safe chars only, include link if relevant]
+
 5. **[Step 5 summary - OPTIONAL]**: [Brief explanation - markdown-safe chars only]
+
 6. **[Step 6 summary - OPTIONAL]**: [Brief explanation - markdown-safe chars only]
 
 ### FAQs SECTION REQUIREMENTS:
@@ -282,17 +386,11 @@ At the end of the article, include this EXACT section:
 - **At least 1 product/documentation link required in FAQ answers**
 - Links are markdown-safe by default
 
-### CODE FORMAT (if needed):
-<!--[CODE_SNIPPET_START]-->
-```language
-# Code here - can use any characters inside code blocks
-```
-<!--[CODE_SNIPPET_END]-->
-
 ### STRICTLY ENFORCED BOUNDARIES:
 - **BEGINNING**: First character must be `-` of frontmatter (no spaces, no text before)
 - **INTRODUCTION**: Must be first content section after frontmatter (include contextual link)
-- **STEPS**: Must be included after Introduction (include contextual links where relevant)
+- **STEPS**: Must be included after Introduction (include contextual links where relevant, may include code)
+- **COMPLETE CODE EXAMPLE(S)**: Must be included before Conclusion (full working code with tags, one section per task)
 - **CONCLUSION**: Must be included before FAQs section (include contextual link)
 - **FAQs**: Must be included {"before Read More section" if formatted_related else "as the FINAL section"} (include contextual links in answers)
 {"- **READ MORE**: Must be included as the FINAL section" if formatted_related else ""}
@@ -302,10 +400,12 @@ At the end of the article, include this EXACT section:
 
 ### OUTPUT REQUIREMENTS:
 - Complete markdown file starting with frontmatter
-- Always includes Introduction, Steps, Conclusion, and FAQs sections
+- Always includes Introduction, Steps, Complete Code Example(s), Conclusion, and FAQs sections
 {"- Always includes Read More section with provided links" if formatted_related else "- Does NOT include Read More section (no related links)"}
 - Steps in both frontmatter (YAML list - quoted) and content (Markdown numbered list)
 - FAQs in both frontmatter (YAML - quoted) and content (Markdown)
+- **ALL code snippets wrapped with <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]-->**
+- **Complete Code Example section(s) with full, copy-paste ready code - ONE section per task in title**
 - **ALL content uses only markdown-safe ASCII characters**
 - **NO Unicode characters that break YAML/Hugo rendering**
 - **MINIMUM 2-3 contextual links from provided resources integrated naturally**
@@ -314,10 +414,14 @@ At the end of the article, include this EXACT section:
 - Pure markdown content only
 
 ### VIOLATION PREVENTION:
-- If Introduction, Steps, Conclusion, or FAQs missing → OUTPUT IS INVALID
+- If Introduction, Steps, Complete Code Example(s), Conclusion, or FAQs missing → OUTPUT IS INVALID
+- If title mentions multiple tasks (e.g., "X to Y and Z") and only ONE Complete Code Example exists → OUTPUT IS INVALID
+- If title mentions N tasks and fewer than N Complete Code Example sections exist → OUTPUT IS INVALID
 {"- If Read More section missing → OUTPUT IS INVALID" if formatted_related else "- If Read More section present → OUTPUT IS INVALID"}
 - If Steps not in frontmatter → OUTPUT IS INVALID
 - If FAQs not in frontmatter → OUTPUT IS INVALID
+- If any code snippet lacks <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]--> → OUTPUT IS INVALID
+- If any Complete Code Example is partial or has placeholders → OUTPUT IS INVALID
 - If any text before frontmatter or after {"Read More" if formatted_related else "FAQs"} → OUTPUT IS INVALID
 - If outline sections skipped → OUTPUT IS INVALID
 - **If Unicode/special characters in frontmatter → OUTPUT IS INVALID**
@@ -335,6 +439,12 @@ Before returning the blog post, verify:
 - [ ] No line breaks in frontmatter string values
 - [ ] All steps are quoted in frontmatter
 - [ ] All FAQ questions and answers are properly formatted in YAML
+- [ ] **ALL code snippets wrapped with <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]-->**
+- [ ] **Analyzed title for number of tasks (count "and", "or", multiple formats)**
+- [ ] **Created separate Complete Code Example section for EACH task identified**
+- [ ] **Each Complete Code Example section has FULL working code (no placeholders)**
+- [ ] **Each Complete Code Example section is independently usable**
+- [ ] **All Complete Code Example sections appear BEFORE Conclusion**
 - [ ] **At least 2-3 contextual links from provided resources included naturally**
 - [ ] **At least 1 link in Introduction section**
 - [ ] **At least 1 link in Conclusion section**
@@ -419,22 +529,35 @@ def build_outline_prompt(title: str, keywords: list[str]) -> str:
         Now create the outline for: **{title}**
         """
 
-def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS) -> str:
- 
+def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS, platform) -> str:
+    print(f"platform is----- {platform}", flush=True, file=sys.stderr)
     return f"""
     You are an expert in keyword filtering and refinement.
-    I have a product called {PRODUCT_NAME} and a list of candidate keywords: {KEYWORDS}.
+    I have a product called {PRODUCT_NAME} and a list of candidate keywords: {KEYWORDS} and platform: {platform}.
     
     1. Only return keywords that are relevant to the exact product.
     2. Exclude any keyword that refers to other products or cloud offerings if the product is on-premises.
-    3. If any keyword is incomplete, truncated, or has trailing ellipses (e.g., "..."), complete it sensibly while keeping it relevant.
-    4. Remove or replace any characters that break Hugo/Markdown rendering:
+    3. **PLATFORM-SPECIFIC FILTERING:**
+       - If platform is NOT 'cloud' (i.e., on-premises/desktop):
+         * EXCLUDE all keywords mentioning: REST API, REST APIs, Web API, Cloud API, cURL, HTTP requests, API endpoints, web services, cloud storage, cloud conversion
+         * EXCLUDE keywords with terms: "online", "web-based", "cloud", "SaaS", "API call", "REST", "endpoint"
+         * KEEP only keywords related to: desktop applications, local libraries, SDK, on-premise tools, offline conversion
+       - If platform IS 'cloud':
+         * INCLUDE keywords related to REST APIs, cloud services, web APIs, online tools
+    4. If any keyword is incomplete, truncated, or has trailing ellipses (e.g., "..."), complete it sensibly while keeping it relevant.
+    5. Remove or replace any characters that break Hugo/Markdown rendering:
        - Replace Unicode dashes (\\u2013, \\u2014, em dash, en dash) with standard hyphens (-)
        - Replace smart quotes (\\u201c, \\u201d, \\u2018, \\u2019) with straight quotes (' or ")
        - Replace ellipsis character (\\u2026) with three periods (...)
        - Remove any other Unicode characters that could break YAML frontmatter
        - Ensure all characters are safe for Hugo YAML frontmatter rendering
-    5. Return the filtered and refined keywords in the **exact structure as you received** (e.g., primary, secondary, long_tail).
+    6. **MINIMUM KEYWORD REQUIREMENT:**
+       - If after filtering, the total number of keywords (primary + secondary + long_tail) is less than 2:
+         * Generate 2-5 additional relevant keywords based on the product name and topic
+         * Add them to the appropriate category (primary for broad terms, long_tail for specific queries)
+         * Ensure generated keywords match the platform type (cloud vs on-premises)
+         * Generated keywords must be realistic search queries users would actually type
+    7. Return the filtered and refined keywords in the **exact structure as you received** (e.g., primary, secondary, long_tail).
     
     **Character Replacement Rules:**
     - \\u2013 (en dash) → - (hyphen)
@@ -449,8 +572,25 @@ def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS) -> str:
     - Use DOUBLE QUOTES for all strings (not single quotes)
     - Do NOT return Python dict format with single quotes
     - Your response must be parseable by json.loads() without any modifications
-    - Example of CORRECT format: {{"primary": ["keyword1", "keyword2"]}}
+    - Example of CORRECT format: {{"primary": ["keyword1", "keyword2"], "secondary": [], "long_tail": ["how to keyword3"]}}
     - Example of INCORRECT format: {{'primary': ['keyword1', 'keyword2']}}
+    
+    **EXAMPLES OF PLATFORM-SPECIFIC FILTERING:**
+    
+    Example 1 - On-premises platform:
+    Input: platform="java", keywords=["Convert PDF using REST API", "PDF to Word Java", "Cloud PDF conversion"]
+    Output: {{"primary": ["PDF to Word Java"], "secondary": [], "long_tail": []}}
+    (Excluded: REST API and Cloud keywords)
+    
+    Example 2 - Cloud platform:
+    Input: platform="cloud", keywords=["Convert PDF REST API", "PDF to Word online", "Java PDF library"]
+    Output: {{"primary": ["Convert PDF REST API", "PDF to Word online"], "secondary": [], "long_tail": []}}
+    (Kept: REST API and online keywords, excluded Java library as it's not cloud-related)
+    
+    Example 3 - Minimum keywords requirement:
+    Input: After filtering, only 1 keyword remains
+    Output: {{"primary": ["original keyword", "generated relevant keyword 1"], "secondary": [], "long_tail": ["generated long-tail keyword"]}}
+    (Added keywords to meet minimum of 2)
     
     Return ONLY the JSON object with no additional text, explanation, or markdown formatting.
     Ensure all output keywords are Hugo/YAML-safe and will render correctly in frontmatter.

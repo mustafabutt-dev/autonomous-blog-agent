@@ -17,7 +17,8 @@ class Settings(BaseSettings):
     ASPOSE_LLM_BASE_URL: str = "http://your-llm-server.com/v1"
     ASPOSE_LLM_API_KEY: str = "your-api-key"
     ASPOSE_LLM_MODEL: str = "gpt-oss"
-    
+    GIST_NAME: str = "mustafabutt"
+    GITHUB_TOKEN: str = ""
     # Paths
     PRODUCTS_JSON_PATH: str = "../data/products.json"
     OUTPUT_DIR: str = "../output/blogs"
