@@ -7,6 +7,10 @@ on:
         description: 'Blog topic'
         required: true
         type: string
+      blog_markdown:
+        description: 'Paste Markdown (persona, keywords, outline)'
+        required: false
+        type: string
       
       product:
         description: 'Product name'
