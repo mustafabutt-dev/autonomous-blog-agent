@@ -11,6 +11,12 @@ on:
         description: 'Paste Markdown (persona, keywords, outline)'
         required: false
         type: string
+        default: |
+          ## Section 1
+          Content here
+          
+          ## Section 2
+          More content
       
       product:
         description: 'Product name'
