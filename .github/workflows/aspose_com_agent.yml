@@ -33,14 +33,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
 
-    - name: Prepare keywords file
-      run: |
-        mkdir -p output/kra/samples
-        # Note: Capital K in Keywords.xlsx
-        cp output/kra/samples/Keywords.xlsx output/kra/samples/keywords.xlsx
-        ls -la output/kra/samples/keywords.xlsx
-        echo "Keywords file prepared successfully"
-
     - name: Clean up old blog folders
       run: |
         # Remove any existing blog folders to avoid confusion
