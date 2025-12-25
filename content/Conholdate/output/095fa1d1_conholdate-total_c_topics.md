@@ -2,7 +2,7 @@
 
 - **Brand:** Conholdate.com
 - **Product:** Conholdate.Total
-- **Platform:** C#
+- **Platform:** .NET
 - **Run ID:** 095fa1d1
 - **Topics:** 14
 
