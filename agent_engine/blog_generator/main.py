@@ -9,14 +9,14 @@ def main():
 
     parser.add_argument("--author", type=str, required=True,  default=None)
     parser.add_argument("--brand", type=str, required=True,  default=None)
-    parser.add_argument("--topics_file", type=str, required=True,  default=None)
+    parser.add_argument("--keywords_file", type=str, required=True,  default=None)
     args = parser.parse_args()
 
     orchestrator = BlogOrchestrator(brand=args.brand)
 
     result = asyncio.run(
         orchestrator.create_blog_autonomously(
-            topics_file=args.topics_file,
+            topics_file=args.keywords_file,
             author=args.author
         )
     )
