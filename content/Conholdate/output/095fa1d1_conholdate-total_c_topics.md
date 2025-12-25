@@ -1,23 +1,23 @@
 # Blog Topics for Conholdate.Total (en-US)
 
-- **Brand:** Conholdate
-- **Product:** Conholdate.Conversion
-- **Platform:** c#
+- **Brand:** Conholdate.com
+- **Product:** Conholdate.Total
+- **Platform:** c
 - **Run ID:** 095fa1d1
 - **Topics:** 14
 
 ---
 
-## 1. Convert PPTX to PNG (and JPG) in C# with Conholdate.Conversion – .NET Implementation
+## 1. Convert PPTX to PNG (and JPG) in C# with Conholdate.Total – .NET Implementation
 - **Cluster ID:** `c2`
 - **Target persona:** C# developer building document processing features
-- **Angle:** Show both PNG and JPG export using the same Conholdate.Conversion API in a C# project.
-- **Primary keyword:** `convert pptx to png with conholdate.Conversion for .net. using system;. using ... convert ppt to jpg with conholdate.Conversion for .net. // convert ppt to jpg ...`
-- **Supporting keywords:** `conholdate Conversion convert ppt to png online`, `conholdate Conversion convert ppt to png free`, `conholdate Conversion convert ppt to png download`, `conholdate Conversion convert ppt to png github`
+- **Angle:** Show both PNG and JPG export using the same Conholdate.Total API in a C# project.
+- **Primary keyword:** `convert pptx to png with conholdate.total for .net. using system;. using ... convert ppt to jpg with conholdate.total for .net. // convert ppt to jpg ...`
+- **Supporting keywords:** `conholdate total convert ppt to png online`, `conholdate total convert ppt to png free`, `conholdate total convert ppt to png download`, `conholdate total convert ppt to png github`
 
 **Suggested outline:**
-- Understanding Conholdate.Conversion conversion capabilities for .NET
-- Setting up a C# project and adding the Conholdate.Conversion NuGet package
+- Understanding Conholdate.Total’s conversion capabilities for .NET
+- Setting up a C# project and adding the Conholdate.Total NuGet package
 - Loading a PPTX file and selecting output formats
 - Exporting slides to PNG and JPG images
 - Saving images to disk and handling file streams

@@ -1,6 +1,6 @@
 # Blog Topics for GroupDocs.Conversion (en-US)
 
-- **Brand:** GroupDocs
+- **Brand:** GroupDocs.com
 - **Product:** GroupDocs.Conversion
 - **Platform:** c
 - **Run ID:** e5afbdf4
