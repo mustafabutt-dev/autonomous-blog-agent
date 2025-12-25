@@ -37,7 +37,7 @@ jobs:
       run: |
         # Remove any existing blog folders to avoid confusion
         echo "=== Cleaning up old blog folders ==="
-        find output/blogs -type d -name "20??-??-??-*" -exec rm -rf {} + 2>/dev/null || true
+        find content/blogPosts -type d -name "20??-??-??-*" -exec rm -rf {} + 2>/dev/null || true
         echo "✅ Cleanup completed"
 
     - name: Remove any .env files that could interfere
