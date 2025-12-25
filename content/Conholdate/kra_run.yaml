@@ -9,11 +9,13 @@ meta:
 
 engine:
   # === Core KRA inputs ===
-  input_file: "content/Conholdate/keywords.csv"
+  # input_file: "content/Conholdate/keywords.csv"
   brand: "Conholdate"
   product: "Conholdate.Total"
   platform: "c#"           # used as --platform; also passed into prompt as fw_label
   locale: "en-US"
+  use-serp-api: true
+  serp-topic: "convert PPT to PNG"
 
   # === KRA behavior tuning ===
   top_clusters: 10              # --top

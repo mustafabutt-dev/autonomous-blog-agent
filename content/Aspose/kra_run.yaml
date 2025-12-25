@@ -23,7 +23,7 @@ engine:
   max_rows: 50000               # --max-rows
   use_content_index: false       # if false, we skip existing_topics lookup
   debug: false                  # optional, you can map this to LOG_LEVEL/DEBUG flag
-  output_dir: "content//Aspose/output"
+  output_dir: "content/Aspose/output"
 
 content_index:
   # Where the blog content lives locally for directory search
