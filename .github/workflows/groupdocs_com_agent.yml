@@ -79,7 +79,7 @@ jobs:
         
         python main.py \
           --keywords_file "${{ inputs.keywords_file }}" \
-          --brand "conholdate.com" \
+          --brand "groupdocs.com" \
           --author "${{ inputs.author }}"
         
         echo "✅ Blog generation completed"
