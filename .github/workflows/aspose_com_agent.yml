@@ -49,22 +49,20 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         cd agent_engine
+        cd blog_generator
         pip install -r requirements.txt
         cd ..
         cd mcp-servers
         pip install -r requirements.txt
         cd ..
+        cd ..
 
     - name: Create runtime .env file with secrets
       run: |
-        cd agent_engine
         cat > .env << EOF
         ASPOSE_LLM_API_KEY=${{ secrets.ASPOSE_LLM_API_KEY }}
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
-        SERPAPI_API_KEY=${{ secrets.SERPAPI_API_KEY }}
-        REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_COM }}
-        GIST_NAME=${{ vars.ASPOSE_COM_GIST }}
         EOF
         echo ".env file created"
 
@@ -72,6 +70,7 @@ jobs:
       id: generate_blog
       run: |
         cd agent_engine
+        cd blog_generator
         echo "=== Starting blog generation ==="
         echo "Brand: aspose.com"
         echo "Product: ${{ inputs.product }}"
@@ -91,7 +90,7 @@ jobs:
         echo "=== Searching for generated blog folder ==="
         
         # Search specifically in brand directory
-        BRAND_DIR="output/blogs/aspose_com"
+        BRAND_DIR="content/blogPosts/aspose_com"
         
         if [ ! -d "$BRAND_DIR" ]; then
           echo "❌ Brand directory not found: $BRAND_DIR"
