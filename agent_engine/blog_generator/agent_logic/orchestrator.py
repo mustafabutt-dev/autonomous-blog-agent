@@ -82,7 +82,6 @@ class BlogOrchestrator:
         platform = topics_raw_data.pop("platform")
 
         print(f"updateee --- {topics_raw_data}", flush=True)
-        return
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products)
         
