@@ -1,0 +1,67 @@
+[
+  {
+    "ProductName" : "GroupDocs.Conversion for .NET",
+    "Category" : "GroupDocs.Conversion Product Family",
+    "ProgrammingLanguage" : "C#",
+    "ProductURL" : "https://products.groupdocs.com/conversion/net/",
+    "DownloadURL" : "https://www.nuget.org/packages/GroupDocs.Conversion",
+    "ExternalDownloadURL" : "https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-.NET",
+    "DocumentationURL" : "https://docs.groupdocs.com/conversion/net/",
+    "BlogsURL" : "https://blog.groupdocs.com/categories/groupdocs.conversion-product-family/",
+    "APIReferenceURL" : "https://reference.groupdocs.com/conversion/net/",
+    "FreeAppsURL" : "https://products.groupdocs.app/conversion",
+    "ForumsURL" : "https://forum.groupdocs.com/",
+    "InstallCommand" : "dotnet add package GroupDocs.Conversion --version 25.10.0",
+    "urlPrefix" : "conversion",
+    "license":"https://purchase.groupdocs.com/temporary-license"
+  },
+  {
+    "ProductName" : "GroupDocs.Conversion for Java",
+    "Category" : "GroupDocs.Conversion Product Family",
+    "ProgrammingLanguage" : "Java",
+    "ProductURL" : "https://products.groupdocs.com/conversion/java/",
+    "DownloadURL" : "https://releases.groupdocs.com/java/repo/com/groupdocs/groupdocs-conversion/",
+    "ExternalDownloadURL" : "https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-Java",
+    "DocumentationURL" : "https://docs.groupdocs.com/conversion/java/",
+    "BlogsURL" : "https://blog.groupdocs.com/categories/groupdocs.conversion-product-family/",
+    "APIReferenceURL" : "https://reference.groupdocs.com/conversion/java/",
+    "FreeAppsURL" : "https://products.groupdocs.app/conversion",
+    "ForumsURL" : "https://forum.groupdocs.com/",
+    "InstallCommand" : "<repository>\n  <id>GroupDocs Artifact Repository</id>\n  <name>GroupDocs Artifact Repository</name>\n  <url>https://releases.groupdocs.com/java/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.groupdocs</groupId>\n  <artifactId>groupdocs-conversion</artifactId>\n  <version>25.2</version>\n</dependency>",
+    "urlPrefix" : "conversion",
+    "license":"https://purchase.groupdocs.com/temporary-license"
+  },
+  {
+    "ProductName" : "GroupDocs.Conversion for Python via .NET",
+    "Category" : "GroupDocs.Conversion Product Family",
+    "ProgrammingLanguage" : "Python",
+    "ProductURL" : "https://products.groupdocs.com/conversion/python-net/",
+    "DownloadURL" : "https://releases.groupdocs.com/conversion/python-net/",
+    "ExternalDownloadURL" : "https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-Python-via-.NET",
+    "DocumentationURL" : "https://docs.groupdocs.com/conversion/python-net/",
+    "BlogsURL" : "https://blog.groupdocs.com/categories/groupdocs.conversion-product-family/",
+    "APIReferenceURL" : "https://reference.groupdocs.com/conversion/python-net/",
+    "FreeAppsURL" : "https://products.groupdocs.app/conversion",
+    "ForumsURL" : "https://forum.groupdocs.com/",
+    "InstallCommand" : "pip install groupdocs-conversion-net",
+    "urlPrefix" : "conversion",
+    "license":"https://purchase.groupdocs.com/temporary-license"
+  }
+,
+{
+    "ProductName" : "GroupDocs.Conversion for Node.js",
+    "Category" : "GroupDocs.Conversion Product Family",
+    "ProgrammingLanguage" : "JavaScript",
+    "ProductURL" : "https://products.groupdocs.com/conversion/nodejs-java/",
+    "DownloadURL" : "https://www.npmjs.com/package/@groupdocs/groupdocs.conversion",
+    "ExternalDownloadURL" : "https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-Node.js-via-Java",
+    "DocumentationURL" : "https://docs.groupdocs.com/conversion/nodejs-java/features-overview/",
+    "BlogsURL" : "https://blog.groupdocs.com/categories/groupdocs.conversion-product-family/",
+    "APIReferenceURL" : "https://reference.groupdocs.com/conversion/nodejs-java/",
+    "FreeAppsURL" : "https://products.groupdocs.app/conversion",
+    "ForumsURL" : "https://forum.groupdocs.com/",
+    "InstallCommand" : "npm i @groupdocs/groupdocs.conversion",
+    "urlPrefix" : "conversion",
+    "license":"https://purchase.groupdocs.com/temporary-license"
+  }
+]

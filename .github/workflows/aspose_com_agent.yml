@@ -3,69 +3,15 @@ name: Generate Blog Post for aspose.com
 on:
   workflow_dispatch:
     inputs:
-      topic:
-        description: 'Blog topic'
+      keywords_file:
+        description: 'Keywords File (e.g., content/Aspose/output/449388a2_aspose-cells_java_topics.md)'
         required: true
         type: string
-      
-      product:
-        description: 'Product name'
-        required: true
-        type: choice
-        default: 'Aspose.Slides'
-        options:
-          - 'Aspose.Slides'
-          - 'Aspose.Words'
-          - 'Aspose.PSD'
-          - 'Aspose.Imaging'
-          - 'Aspose.3D'
-          - 'Aspose.Page'
-          - 'Aspose.TeX'
-          - 'Aspose.GIS'
-          - 'Aspose.OMR'
-          - 'Aspose.HTML'
-          - 'Aspose.ZIP'
-          - 'Aspose.CAD'
-          - 'Aspose.Email'
-          - 'Aspose.BarCode'
-      
-      platform:
-        description: 'Platform'
-        required: true
-        type: choice
-        options:
-          - 'Java'
-          - '.NET'
-          - 'C++'
-          - 'PHP'
-          - 'SharePoint'
-          - 'JasperReports'
-          - 'Reporting Services'
-          - 'JavaScript via C++'
-          - 'Go via C++'
-          - 'Rust via C++'
-          - 'Node.js via C++'
-          - 'Node.js via Java'
-          - 'Node.js via .NET'
-          - 'PHP via Java'
-          - 'Python via .NET'
-          - 'Python via Java'
-          - 'Android via Java'
-        default: 'Java'
       
       author:
-        description: 'Author name'
+        description: 'Author Name'
         required: true
         type: string
-
-      keyword_source:
-        description: 'Keyword source'
-        required: true
-        type: choice
-        options:
-          - 'auto (using SerpApi)'
-          - 'manual (using Google Keyword Planner Sheet)'
-        default: 'auto (using SerpApi)'
 
 jobs:
   generate:
@@ -89,16 +35,18 @@ jobs:
 
     - name: Prepare keywords file
       run: |
-        # Create the target directory structure
-        mkdir -p /home/runner/work/autonomous-blog-agent/output/kra/samples
-        
-        # Copy the keywords file to the expected location
-        cp output/kra/samples/keywords.xlsx /home/runner/work/autonomous-blog-agent/output/kra/samples/keywords.xlsx
-        
-        # Verify the file exists
-        ls -la /home/runner/work/autonomous-blog-agent/output/kra/samples/keywords.xlsx
-        
-        echo " Keywords file prepared successfully"
+        mkdir -p output/kra/samples
+        # Note: Capital K in Keywords.xlsx
+        cp output/kra/samples/Keywords.xlsx output/kra/samples/keywords.xlsx
+        ls -la output/kra/samples/keywords.xlsx
+        echo "Keywords file prepared successfully"
+
+    - name: Clean up old blog folders
+      run: |
+        # Remove any existing blog folders to avoid confusion
+        echo "=== Cleaning up old blog folders ==="
+        find output/blogs -type d -name "20??-??-??-*" -exec rm -rf {} + 2>/dev/null || true
+        echo "✅ Cleanup completed"
 
     - name: Remove any .env files that could interfere
       run: |
@@ -123,39 +71,76 @@ jobs:
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
         SERPAPI_API_KEY=${{ secrets.SERPAPI_API_KEY }}
+        REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_COM }}
+        GIST_NAME=${{ vars.ASPOSE_COM_GIST }}
         EOF
         echo ".env file created"
 
     - name: Generate Blog
+      id: generate_blog
       run: |
         cd agent_engine
-        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}" --brand "aspose.com" --author "${{ inputs.author }}"
+        echo "=== Starting blog generation ==="
+        echo "Brand: aspose.com"
+        echo "Product: ${{ inputs.product }}"
+        echo "Platform: ${{ inputs.platform }}"
+        echo "Topic: ${{ inputs.topic }}"
+        
+        python main.py \
+          --keywords_file "${{ inputs.keywords_file }}" \
+          --brand "aspose.com" \
+          --author "${{ inputs.author }}"
+        
+        echo "✅ Blog generation completed"
 
     - name: Find generated blog folder
       id: find_blog
       run: |
         echo "=== Searching for generated blog folder ==="
         
-        # Search for folders matching the pattern YYYY-MM-DD-*
-        blog_folder=$(find . -type d -name "20??-??-??-*" -mmin -10 | head -1)
+        # Search specifically in brand directory
+        BRAND_DIR="output/blogs/aspose_com"
+        
+        if [ ! -d "$BRAND_DIR" ]; then
+          echo "❌ Brand directory not found: $BRAND_DIR"
+          exit 1
+        fi
+        
+        echo "Searching in: $BRAND_DIR"
+        
+        # Find the most recently created folder (within last 10 minutes)
+        blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
         
         if [ -z "$blog_folder" ]; then
-          echo " No blog folder found with pattern YYYY-MM-DD-*"
+          echo "❌ No blog folder found with pattern YYYY-MM-DD-* in $BRAND_DIR"
+          echo "Contents of $BRAND_DIR:"
+          ls -la "$BRAND_DIR" || echo "Directory is empty"
           exit 1
         fi
         
         echo "Found blog folder: $blog_folder"
+        
         blog_folder_name=$(basename "$blog_folder")
-        echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
-        echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+        echo "Blog folder name: $blog_folder_name"
         
         # Verify index.md exists
         if [ ! -f "$blog_folder/index.md" ]; then
-          echo " index.md not found in $blog_folder"
+          echo "❌ index.md not found in $blog_folder"
           exit 1
         fi
         
+        # Optional: Verify the brand in frontmatter
+        if grep -q "aspose" "$blog_folder/index.md" 2>/dev/null; then
+          echo "✅ Verified: Blog is for aspose.com"
+        else
+          echo "⚠️  Warning: Could not verify brand in frontmatter"
+        fi
+        
+        echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
+        echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+        
         echo "✅ Found: $blog_folder_name with index.md"
+        echo "=== Folder contents ==="
         ls -la "$blog_folder"
 
     - name: Extract product folder name
@@ -165,111 +150,26 @@ jobs:
         # Example: "Aspose.Slides" -> "slides"
         product_folder=$(echo "${{ inputs.product }}" | sed 's/Aspose\.//g' | tr '[:upper:]' '[:lower:]')
         echo "product_folder=$product_folder" >> $GITHUB_OUTPUT
-        echo " Product folder name: $product_folder"
+        echo "✅ Product folder name: $product_folder"
+
+    - name: Verify blog content before upload
+      run: |
+        echo "=== Verifying blog content ==="
+        BLOG_PATH="${{ steps.find_blog.outputs.blog_folder_path }}"
+        
+        echo "Blog folder: $BLOG_PATH"
+        echo "Expected brand: aspose.com"
+        
+        # Check frontmatter for brand indicators
+        if [ -f "$BLOG_PATH/index.md" ]; then
+          echo "--- Frontmatter excerpt ---"
+          head -20 "$BLOG_PATH/index.md"
+          echo "--- End excerpt ---"
+        fi
 
     - name: Upload Generated Blog as Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: generated-blog-${{ github.run_number }}
+        name: generated-blog-aspose-${{ github.run_number }}
         path: ${{ steps.find_blog.outputs.blog_folder_path }}
         if-no-files-found: error
-
-    ####################################################################
-    # Create Pull Request in ganji repo
-    ####################################################################
-    - name: Create Pull Request in ganji repo
-      if: success()
-      env:
-        BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
-        BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
-        PRODUCT_FOLDER: ${{ steps.product_folder.outputs.product_folder }}
-        GH_TOKEN: ${{ secrets.GANJI_REPO_PAT }}
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub Action"
-
-        if [ -z "${{ secrets.GANJI_REPO_PAT }}" ]; then
-          echo " GANJI_REPO_PAT is EMPTY! Fix your repo secret."
-          exit 1
-        fi
-
-        echo "Cloning ganji repo..."
-        git clone https://x-access-token:${{ secrets.GANJI_REPO_PAT }}@github.com/mustafabutt/ganji.git ganji || {
-          echo " Failed to clone repo — invalid PAT or wrong GitHub account."
-          exit 1
-        }
-
-        cd ganji
-        
-        # Create the target directory structure if it doesn't exist
-        TARGET_DIR="content/Aspose.Blog/$PRODUCT_FOLDER"
-        mkdir -p "$TARGET_DIR"
-        echo " Target directory: $TARGET_DIR"
-        
-        # Create a new branch for this blog post
-        BRANCH_NAME="blog/$PRODUCT_FOLDER/$BLOG_FOLDER_NAME"
-        git checkout -b "$BRANCH_NAME"
-        
-        echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
-        
-        # Copy the blog folder to the correct product directory
-        cp -r "../$BLOG_FOLDER_PATH" "$TARGET_DIR/" || {
-          echo " Failed to copy folder $BLOG_FOLDER_PATH"
-          exit 1
-        }
-        
-        # Add only the new blog folder
-        git add "$TARGET_DIR/$BLOG_FOLDER_NAME"
-        
-        # Check what's being committed
-        echo "=== Files to be committed ==="
-        git status --short
-        
-        if git diff --staged --quiet; then
-          echo " No new files to commit"
-          exit 0
-        fi
-        
-        # Commit the changes
-        git commit -m "Add generated blog for ${{ inputs.product }}: ${{ inputs.topic }}"
-        
-        # Push the branch
-        git push -u origin "$BRANCH_NAME" || {
-          echo " Failed to push branch."
-          exit 1
-        }
-        
-        echo " Branch $BRANCH_NAME pushed successfully"
-        
-        # Create Pull Request using GitHub CLI
-        gh pr create \
-          --repo mustafabutt/ganji \
-          --base main \
-          --head "$BRANCH_NAME" \
-          --title "[${{ inputs.product }}] ${{ inputs.topic }}" \
-          --body "## Generated Blog Post
-
-        **Product:** ${{ inputs.product }}
-        **Topic:** ${{ inputs.topic }}
-        **Platform:** ${{ inputs.platform }}
-        **Keyword Source:** ${{ inputs.keyword_source }}
-        **Target Path:** \`content/Aspose.Blog/$PRODUCT_FOLDER/$BLOG_FOLDER_NAME\`
-
-        **Generated by:** GitHub Actions (Run #${{ github.run_number }})
-        **Workflow:** ${{ github.workflow }}
-
-        ---
-
-        This pull request adds a new blog post generated by the autonomous blog agent.
-
-        ### Contents:
-        - Folder: \`$BLOG_FOLDER_NAME\`
-        - File: \`index.md\`
-        - Location: \`content/Aspose.Blog/$PRODUCT_FOLDER/\`
-
-        Please review and merge if the content looks good!" || {
-          echo " Failed to create pull request."
-          exit 1
-        }
-        
-        echo " Pull request created successfully!"
