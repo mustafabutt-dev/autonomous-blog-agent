@@ -19,7 +19,12 @@ class MetricsRecorder:
     """
     Records and reports metrics for blog post generation agent
     """
+    
+    GOOGLE_SCRIPT_URL_FOR_TEAM = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
+    TOKEN_FOR_TEAM = "blog_team_agent-2026"
 
+    GOOGLE_SCRIPT_URL_FOR_PROD = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
+    TOKEN_FOR_PROD = "lM6iU2mW0gV1eZ"
     
     def __init__(
         self, 
@@ -40,11 +45,6 @@ class MetricsRecorder:
         self.agent_name = agent_name
         self.agent_owner = agent_owner
         self.job_type = job_type
-        self.GOOGLE_SCRIPT_URL_FOR_TEAM = settings.GOOGLE_SCRIPT_URL_FOR_TEAM
-        self.TOKEN_FOR_TEAM = settings.TOKEN_FOR_TEAM
-
-        self.GOOGLE_SCRIPT_URL_FOR_PROD = settings.GOOGLE_SCRIPT_URL_FOR_PROD
-        self.TOKEN_FOR_PROD = settings.TOKEN_FOR_PROD
         
         # Auto-detect environment if not specified
         if run_env is None:
