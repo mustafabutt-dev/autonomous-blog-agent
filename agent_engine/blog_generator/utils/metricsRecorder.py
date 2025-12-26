@@ -9,7 +9,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Optional, Dict, Any, Literal
 import logging
-import os, sys, certifi, ssl
+import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from config import settings
 logger = logging.getLogger(__name__)
@@ -86,15 +86,7 @@ class MetricsRecorder:
         
         # Error tracking (for logging, not in payload)
         self.errors = []
-    def _get_ssl_context(self):
-        """
-        GitHub Actions already has CA certs.
-        Local virtualenvs usually do not.
-        """
-        if os.getenv("GITHUB_ACTIONS"):
-            return None
-
-        return ssl.create_default_context(cafile=certifi.where())
+    
     def start_job(
         self, 
         product: str, 
@@ -187,40 +179,65 @@ class MetricsRecorder:
         return payload
     
     async def send_metrics_to_team(self) -> bool:
+        """
+        Send metrics to Team Google Script endpoint
+        
+        Returns:
+            True if successful, False otherwise
+        """
         payload = self.get_metrics_payload()
         print(f"metrix for teams - {payload} - env is {os.getenv('GITHUB_ACTIONS')}")
-        
+        logger.debug(
+            "Sending team metrics payload:\n%s",
+            json.dumps(payload, indent=2)
+        )
+
+        # Add token as query parameter
         url_with_token = f"{self.GOOGLE_SCRIPT_URL_FOR_TEAM}?token={self.TOKEN_FOR_TEAM}"
-        headers = {"Content-Type": "application/json"}
+
+        headers = {
+            "Content-Type": "application/json"
+        }
+     
         timeout = aiohttp.ClientTimeout(total=30)
-        ssl_context = self._get_ssl_context()  # ✅ added
 
         try:
+            # No need for custom SSL context in GitHub Actions
             async with aiohttp.ClientSession(timeout=timeout) as session:
                 async with session.post(
                     url_with_token,
                     json=payload,
-                    headers=headers,
-                    ssl=ssl_context
+                    headers=headers
                 ) as response:
 
                     response_text = await response.text()
 
                     if response.status == 200:
-                        logger.info(f"✅ Team metrics sent successfully [{self.run_id}]")
+                        logger.info(
+                            f"✅ Team metrics sent successfully for run_id: {self.run_id}"
+                        )
+                        logger.debug(f"Response: {response_text}")
                         return True
 
-                    logger.error(f"❌ Team metrics failed [{response.status}]")
-                    logger.error(response_text)
+                    logger.error(
+                        f"❌ Failed to send team metrics "
+                        f"(HTTP {response.status}) for run_id: {self.run_id}"
+                    )
+                    logger.error(f"Response: {response_text}")
                     return False
 
         except asyncio.TimeoutError:
-            logger.error(f"❌ Timeout sending team metrics [{self.run_id}]")
+            logger.error(
+                f"❌ Timeout while sending team metrics for run_id: {self.run_id}"
+            )
             return False
 
         except Exception:
-            logger.exception(f"❌ Unexpected error sending team metrics [{self.run_id}]")
+            logger.exception(
+                f"❌ Unexpected error while sending team metrics for run_id: {self.run_id}"
+            )
             return False
+    
     async def send_metrics_to_prod(self) -> bool:
         """
         Send metrics to Prod Google Script endpoint
@@ -323,4 +340,3 @@ class MetricsRecorder:
         self.status = "running"
         self.timestamp = None
         logger.info(f"Metrics reset with new run_id: {self.run_id}")
-

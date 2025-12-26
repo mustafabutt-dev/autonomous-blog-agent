@@ -63,6 +63,8 @@ jobs:
         ASPOSE_LLM_API_KEY=${{ secrets.ASPOSE_LLM_API_KEY }}
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
+        TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
+        TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
         EOF
         echo ".env file created"
 

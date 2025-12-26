@@ -82,6 +82,7 @@ class BlogOrchestrator:
         platform = topics_raw_data.pop("platform")
 
         print(f"updateee --- {topics_raw_data}", flush=True)
+        
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products)
         
@@ -155,13 +156,13 @@ class BlogOrchestrator:
             # Print and send metrics
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script...")
-            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            # if metrics_sent_for_team and metrics_sent_for_pro:
-            #     print("Metrics sent successfully\n")
-            # else:
-            #     print("Failed to send metrics (check logs)\n")
+            if metrics_sent_for_team and metrics_sent_for_pro:
+                print("Metrics sent successfully\n")
+            else:
+                print("Failed to send metrics (check logs)\n")
 
             return {
                 "agent_output": result.final_output,
