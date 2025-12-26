@@ -65,6 +65,8 @@ jobs:
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
         TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
         TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
+        GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
+        GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
         EOF
         echo ".env file created"
 
