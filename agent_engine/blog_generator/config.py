@@ -24,12 +24,15 @@ class Settings(BaseSettings):
     # Paths
     PRODUCTS_JSON_PATH: str = "../data/products.json"
     OUTPUT_DIR: str = "../output/blogs"
+
+    GOOGLE_SCRIPT_URL_FOR_TEAM = os.getenv("GOOGLE_SCRIPT_URL_FOR_TEAM", "")
+    TOKEN_FOR_TEAM = os.getenv("TOKEN_FOR_TEAM", "")
     
-    SERPAPI_API_KEY: str = ""  
-    GOOGLE_SCRIPT_URL_FOR_TEAM: str= ""
-    TOKEN_FOR_TEAM: str = ""
-    GOOGLE_SCRIPT_URL_FOR_PROD: str = ""
-    TOKEN_FOR_PROD: str = ""
+    GOOGLE_SCRIPT_URL_FOR_PROD = os.getenv("GOOGLE_SCRIPT_URL_FOR_PROD", "")
+    TOKEN_FOR_PROD = os.getenv("TOKEN_FOR_PROD", "")
+
+    print(f"Config loaded - TEAM URL set: {bool(GOOGLE_SCRIPT_URL_FOR_TEAM)}")
+    print(f"Config loaded - PROD URL set: {bool(GOOGLE_SCRIPT_URL_FOR_PROD)}")
     
     # Agent Settings
     NUMBER_OF_BLOG_WORDS: int = 6  # FIX: must be int, cannot be "5-7"
