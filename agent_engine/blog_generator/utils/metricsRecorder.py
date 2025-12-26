@@ -19,12 +19,7 @@ class MetricsRecorder:
     """
     Records and reports metrics for blog post generation agent
     """
-    
-    GOOGLE_SCRIPT_URL_FOR_TEAM = settings.GOOGLE_SCRIPT_URL_FOR_TEAM
-    TOKEN_FOR_TEAM = settings.TOKEN_FOR_TEAM
 
-    GOOGLE_SCRIPT_URL_FOR_PROD = settings.GOOGLE_SCRIPT_URL_FOR_PROD
-    TOKEN_FOR_PROD = settings.TOKEN_FOR_PROD
     
     def __init__(
         self, 
@@ -45,6 +40,11 @@ class MetricsRecorder:
         self.agent_name = agent_name
         self.agent_owner = agent_owner
         self.job_type = job_type
+        self.GOOGLE_SCRIPT_URL_FOR_TEAM = settings.GOOGLE_SCRIPT_URL_FOR_TEAM
+        self.TOKEN_FOR_TEAM = settings.TOKEN_FOR_TEAM
+
+        self.GOOGLE_SCRIPT_URL_FOR_PROD = settings.GOOGLE_SCRIPT_URL_FOR_PROD
+        self.TOKEN_FOR_PROD = settings.TOKEN_FOR_PROD
         
         # Auto-detect environment if not specified
         if run_env is None:
