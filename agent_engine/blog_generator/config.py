@@ -26,11 +26,11 @@ class Settings(BaseSettings):
     OUTPUT_DIR: str = "../output/blogs"
     
     SERPAPI_API_KEY: str = ""  
-    GOOGLE_SCRIPT_URL_FOR_TEAM : os.getenv("GOOGLE_SCRIPT_URL_FOR_TEAM", "")
-    TOKEN_FOR_TEAM : os.getenv("TOKEN_FOR_TEAM", "")
+    GOOGLE_SCRIPT_URL_FOR_TEAM :str = os.getenv("GOOGLE_SCRIPT_URL_FOR_TEAM", "")
+    TOKEN_FOR_TEAM :str = os.getenv("TOKEN_FOR_TEAM", "")
     
-    GOOGLE_SCRIPT_URL_FOR_PROD : os.getenv("GOOGLE_SCRIPT_URL_FOR_PROD", "")
-    TOKEN_FOR_PROD : os.getenv("TOKEN_FOR_PROD", "")
+    GOOGLE_SCRIPT_URL_FOR_PROD :str = os.getenv("GOOGLE_SCRIPT_URL_FOR_PROD", "")
+    TOKEN_FOR_PROD :str = os.getenv("TOKEN_FOR_PROD", "")
     
     # Agent Settings
     NUMBER_OF_BLOG_WORDS: int = 6  # FIX: must be int, cannot be "5-7"
