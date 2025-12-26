@@ -185,6 +185,8 @@ class MetricsRecorder:
         Returns:
             True if successful, False otherwise
         """
+
+        print(f"env are set for teams {self.TOKEN_FOR_TEAM} and {self.GOOGLE_SCRIPT_URL_FOR_TEAM}")
         payload = self.get_metrics_payload()
         print(f"metrix for teams - {payload} - env is {os.getenv('GITHUB_ACTIONS')}")
         logger.debug(
