@@ -21,9 +21,6 @@ class Settings(BaseSettings):
     ASPOSE_LLM_MODEL: str = "gpt-oss"
     GIST_NAME: str = "mustafabutt"
     REPO_PAT: str = ""
-    # Paths
-    PRODUCTS_JSON_PATH: str = "../data/products.json"
-    OUTPUT_DIR: str = "../output/blogs"
     
     SERPAPI_API_KEY: str = ""  
     GOOGLE_SCRIPT_URL_FOR_TEAM :str = os.getenv("GOOGLE_SCRIPT_URL_FOR_TEAM", "")
@@ -35,10 +32,6 @@ class Settings(BaseSettings):
     # Agent Settings
     NUMBER_OF_BLOG_WORDS: int = 6  # FIX: must be int, cannot be "5-7"
     ENVIRONMENT: str = ""
-    KRA_DATA_DIR: str = "./src/data/samples"
-    KRA_OUTPUT_DIR: str = "./src/data/outputs"
-    TOP_CLUSTERS: int = 10
-    MAX_ROWS: int = 50000
     DEBUG: bool = False
     # Optional value which your helper method uses
     ALLOWED_ORIGINS: str = "*"
